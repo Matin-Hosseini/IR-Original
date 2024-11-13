@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="vendor/swiper/swiper.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <link rel="stylesheet" href="css/loan.css" />
+  </head>
+  <body>
+    <section class="my-5 loan-wrapper">
+      <div class="container">
+        <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
+          <div class="col-lg-6 col-xl-7">
+            <div class="loan-header">
+              <h3>مبلغ درخواستی وام</h3>
+              <div>
+                <span id="loan-price">100,000,000</span>
+                <span class="ps-1 fs-6">تومان</span>
+              </div>
+            </div>
+            <div class="">
+              <div class="d-flex align-items-center gap-3">
+                <span>10</span>
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  step="1"
+                  value="10"
+                  class="range-input flex-1"
+                />
+                <span>100</span>
+              </div>
+              <div>
+                <h3 class="my-4">مدت بازپرداخت وام:</h3>
+                <div class="loan-installments">
+                  <button>18 ماه</button>
+                  <button>18 ماه</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-5">
+            <div class="loan-details-header">
+              <div class="">
+                <img src="" alt="" />
+                <h2 class="fs-6">بانک ملی</h2>
+              </div>
+              <span class="loan-interest">23 درصد</span>
+            </div>
+            <div class="loan-details mb-3">
+              <div>
+                <span>مبلغ قسط نهایی</span>
+                <span class="price">1,250,000,000 تومان</span>
+              </div>
+              <div>
+                <span>مابه‌التفاوت خرید نقدی و قسطی</span>
+                <span class="price">1,250,000,000 تومان</span>
+              </div>
+              <div>
+                <span>مبلغ قسط نهایی</span>
+                <span class="price">1,250,000,000 تومان</span>
+              </div>
+            </div>
+            <div class="support-btn-wrapper">
+              <button class="support-btn">درخواست مشاوره</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="scripts/loan.js"></script>
+  </body>
+</html>
