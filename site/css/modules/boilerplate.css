@@ -19,6 +19,10 @@
   font-family: "shabnam";
   src: url("./../../assets/fonts/shabnam/Shabnam-Medium-FD.woff2");
 }
+@font-face {
+  font-family: "mikhak";
+  src: url("./../../assets/fonts/mikhak/Mikhak-VF.ttf");
+}
 
 *,
 *::before,

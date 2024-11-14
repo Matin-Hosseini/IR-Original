@@ -1,0 +1,86 @@
+@import "./modules/boilerplate.css";
+
+/* product box starts */
+.product-box {
+  padding: 1rem;
+  border-radius: 1rem;
+  position: relative;
+  border: 1px solid #b3acac;
+}
+
+.product-box__badge {
+  position: absolute;
+  font-size: 1.2rem;
+  rotate: -20deg;
+  background: -webkit-linear-gradient(45deg, #00d7ff, #ff00e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "mikhak";
+}
+
+.product-box__colors {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.product-box__colors span {
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background-color: green;
+  cursor: pointer;
+}
+
+.product-box__content {
+  text-align: center;
+}
+.product-box__title {
+  font-size: 1.5rem;
+}
+.product-box__subtitle {
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+.product-box__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product-box__details {
+  background-color: var(--main-color-one);
+  color: white;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid var(--main-color-one);
+}
+
+.product-box__details:hover {
+  background-color: white;
+  color: var(--main-color-one);
+}
+
+.product-box__details svg {
+  width: 1.5rem;
+}
+.product-box__price-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.product-box__price {
+  font-size: 1rem;
+  color: var(--main-color-one);
+  margin: 0 !important;
+}
+.product-box__price-currency {
+  rotate: -80deg;
+  font-family: "mikhak";
+  color: var(--gray);
+  font-size: 0.8rem;
+}
+/* product box ends */
