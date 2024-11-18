@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="swiper">
+      <div class="swiper products-swiper">
         <div class="swiper-wrapper products-swiper-wrapper py-5 px-3"></div>
         <div class="swiper-pagination"></div>
 
@@ -28,15 +28,64 @@
       </div>
     </div>
 
-    <div class="protal">
-      <div class="content">this is the modal content</div>
+    <div class="portal">
+      <div class="content">
+        <div class="row">
+          <div class="col-6">
+            <div class="swiper single-product-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="product-img">
+                    <img
+                      src="assets/images/apple/airpods_max_blue__fsfaleh1smuu_large.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="product-img">
+                    <img
+                      src="assets/images/apple/airtag__furx99ax8rm2_large.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="product-img">
+                    <img
+                      src="assets/images/apple/iphone_14__eso1fig4ci6a_xlarge.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="product-img">
+                    <img
+                      src="assets/images/apple/iphone_se__cuaa2bdndqeu_xlarge.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+
+            <div class="product-colors"></div>
+          </div>
+          <div class="col-6">
+            <div class="single-product-content"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="vendor/bootstrap/bootstrap.min.js"></script>
     <script src="vendor/swiper/swiper.min.js"></script>
 
     <script>
-      const swiper = new Swiper(".swiper", {
+      const singleProductSwiper = new Swiper(".products-swiper", {
         spaceBetween: 10,
 
         pagination: {
@@ -49,6 +98,19 @@
         },
 
         slidesPerView: 4,
+      });
+
+      const swiper = new Swiper(".single-product-swiper", {
+        pagination: {
+          el: ".swiper-pagination",
+        },
+
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+
+        slidesPerView: 1,
       });
     </script>
 

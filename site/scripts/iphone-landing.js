@@ -2,6 +2,9 @@ const productBoxColors = document.querySelectorAll(".product-box__colors");
 const productsSwiperWrapper = document.querySelector(
   ".products-swiper-wrapper"
 );
+const portal = document.querySelector(".portal");
+const productColorsElem = document.querySelector(".product-colors");
+const singleProductContent = document.querySelector(".single-product-content");
 
 const colors = [
   { id: 1, name: "Black Titanium", title: "مشکی ", code: "#4F4F4F" },
@@ -75,7 +78,7 @@ const products = [
     // price: 94_600_000_000,
   },
   {
-    id: 2,
+    id: 3,
     title: "آیفون 16 پرو مکس",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
@@ -98,7 +101,7 @@ const products = [
     // price: 94_600_000_000,
   },
   {
-    id: 2,
+    id: 4,
     title: "آیفون 15",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
@@ -118,7 +121,7 @@ const products = [
     img: "iphone-16-pro.png",
   },
   {
-    id: 2,
+    id: 5,
     title: "آیفون 15 پرو",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
@@ -134,7 +137,7 @@ const products = [
     img: "iphone-16-pro.png",
   },
   {
-    id: 2,
+    id: 6,
     title: "آیفون 15 پرو",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
@@ -190,8 +193,61 @@ const handlePrice = () => {
 handleColors();
 handlePrice();
 
+const showPortal = () => {
+  portal.classList.add("active");
+};
+const hidePortal = () => {
+  portal.classList.remove("active");
+};
+portal.addEventListener("click", (e) => {
+  e.target.classList.contains("portal") && hidePortal();
+});
+
 const showDetails = (id) => {
-  console.log("details", id);
+  showPortal();
+
+  const targetProduct = products.find((product) => product.id === id);
+
+  const changeProductColor = (id, index) => {
+    console.log("changing product color", id);
+
+    const productColorItems = document.querySelectorAll(".product-color");
+
+    productColorItems.forEach((item) => item.classList.remove("active"));
+    productColorItems[index].classList.add("active");
+  };
+
+  window.changeProductColor = changeProductColor;
+
+  productColorsElem.innerHTML = "";
+  productColorsElem.insertAdjacentHTML(
+    "beforeend",
+    `
+      <p>موجود در ${targetProduct.colors.length} رنگ</p>
+      <div class="product-colors-wrapper">
+        ${targetProduct.colors
+          .map(
+            (color, index) => `
+          <button 
+            class="product-color ${index === 0 ? "active" : ""}" 
+            onClick="changeProductColor(${color.id}, ${index})"
+            >
+              <span style="background: ${color.code};"></span>
+              ${color.title}
+          </button>
+          `
+          )
+          .join("")}
+      </div>
+    `
+  );
+
+  singleProductContent.insertAdjacentHTML(
+    "beforeend",
+    `
+      <h2>${targetProduct.title}</h2>
+    `
+  );
 };
 
 products.forEach((product) => {
