@@ -16,7 +16,7 @@
   <body>
     <div class="container">
       <div class="swiper">
-        <div class="swiper-wrapper products-swiper-wrapper py-5"></div>
+        <div class="swiper-wrapper products-swiper-wrapper py-5 px-3"></div>
         <div class="swiper-pagination"></div>
 
         <div class="swiper-button-prev"></div>
@@ -28,12 +28,16 @@
       </div>
     </div>
 
+    <div class="protal">
+      <div class="content">this is the modal content</div>
+    </div>
+
     <script src="vendor/bootstrap/bootstrap.min.js"></script>
     <script src="vendor/swiper/swiper.min.js"></script>
 
     <script>
       const swiper = new Swiper(".swiper", {
-        spaceBetween: 40,
+        spaceBetween: 10,
 
         pagination: {
           el: ".swiper-pagination",
