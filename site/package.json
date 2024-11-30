@@ -1,0 +1,13 @@
+{
+  "name": "iroriginal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sass:dev": "sass --watch ./scss:styles ",
+    "sass": "sass ./scss styles --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

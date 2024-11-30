@@ -1,0 +1,44 @@
+@import "./modules/boilerplate.css";
+p {
+  margin: 0;
+}
+
+.conditions {
+  /* display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; */
+}
+
+.condition-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-family: "mikhak";
+  justify-content: space-between;
+  border: 1px solid var(--gray);
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.condition-box button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--main-color-bg);
+  color: var(--main-color-one);
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.condition-box button svg {
+  width: 20px;
+}
+
+@media (max-width: 500px) {
+  .condition-box {
+    font-size: 0.9rem;
+  }
+}
