@@ -374,3 +374,54 @@ seeMoreButtons.forEach((button) => {
   };
 });
 
+/* --------- tabs starts --------- */
+
+//tab navigation horizontal scroll buttons
+const rightBtn = document.querySelector(".right-btn");
+const leftBtn = document.querySelector(".left-btn");
+const tabMenu = document.querySelector(".tab-menu");
+const tabNavBtns = document.querySelectorAll(".tab-navigation i");
+
+tabNavBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabMenu.scrollLeft += btn.id === "left" ? -100 : 100;
+  });
+});
+
+const iconVisibility = () => {
+  let scrollLeftValue = Math.ceil(tabMenu.scrollLeft);
+
+  let scrollableWidth = tabMenu.scrollWidth - tabMenu.clientWidth;
+
+  console.log(tabMenu.scrollWidth);
+
+  rightBtn.style.display = scrollLeftValue > 0 ? "none" : "flex";
+  leftBtn.style.display = scrollableWidth > scrollLeftValue ? "flex" : "none";
+};
+
+// rightBtn.addEventListener("click", () => {
+//   tabMenu.scrollLeft += 150;
+//   iconVisibility();
+// });
+// leftBtn.addEventListener("click", () => {
+//   tabMenu.scrollLeft -= 150;
+//   iconVisibility();
+// });
+
+let isDragging = false;
+
+tabMenu.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  tabMenu.classList.add("dragging");
+  tabMenu.scrollLeft -= e.movementX;
+});
+tabMenu.addEventListener("mousedown", () => {
+  isDragging = true;
+});
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+  tabMenu.classList.remove("dragging");
+});
+
+/* --------- tabs ends --------- */
