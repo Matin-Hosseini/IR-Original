@@ -380,48 +380,41 @@ seeMoreButtons.forEach((button) => {
 const rightBtn = document.querySelector(".right-btn");
 const leftBtn = document.querySelector(".left-btn");
 const tabMenu = document.querySelector(".tab-menu");
-const tabNavBtns = document.querySelectorAll(".tab-navigation i");
+const tabNavBtns = document.querySelectorAll(".tab-navigation i.arrow-icon");
+
+let isDragging = false;
+
+const handleIcons = () => {
+  const scrollVal = tabMenu.scrollLeft;
+
+  const maxScrollableWidth = tabMenu.scrollWidth - tabMenu.clientWidth;
+
+  tabNavBtns[0].style.display = scrollVal < 0 ? "flex" : "none";
+  tabNavBtns[1].style.display =
+    scrollVal === -maxScrollableWidth ? "none" : "flex";
+};
 
 tabNavBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     tabMenu.scrollLeft += btn.id === "left" ? -100 : 100;
+
+    setTimeout(() => handleIcons(), 50);
   });
 });
 
-const iconVisibility = () => {
-  let scrollLeftValue = Math.ceil(tabMenu.scrollLeft);
-
-  let scrollableWidth = tabMenu.scrollWidth - tabMenu.clientWidth;
-
-  console.log(tabMenu.scrollWidth);
-
-  rightBtn.style.display = scrollLeftValue > 0 ? "none" : "flex";
-  leftBtn.style.display = scrollableWidth > scrollLeftValue ? "flex" : "none";
-};
-
-// rightBtn.addEventListener("click", () => {
-//   tabMenu.scrollLeft += 150;
-//   iconVisibility();
-// });
-// leftBtn.addEventListener("click", () => {
-//   tabMenu.scrollLeft -= 150;
-//   iconVisibility();
-// });
-
-let isDragging = false;
-
-tabMenu.addEventListener("mousemove", (e) => {
+const dragTabMenu = (e) => {
   if (!isDragging) return;
 
   tabMenu.classList.add("dragging");
   tabMenu.scrollLeft -= e.movementX;
-});
-tabMenu.addEventListener("mousedown", () => {
-  isDragging = true;
-});
-document.addEventListener("mouseup", () => {
+};
+
+const dragStop = () => {
   isDragging = false;
   tabMenu.classList.remove("dragging");
-});
+};
 
+tabMenu.addEventListener("mousedown", () => (isDragging = true));
+tabMenu.addEventListener("mousemove", (e) => dragTabMenu);
+document.addEventListener("mouseup", dragStop);
 /* --------- tabs ends --------- */

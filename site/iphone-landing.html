@@ -23,7 +23,7 @@
     />
   </head>
   <body>
-    <div class="carousel">
+    <div class="carousel d-none">
       <div class="list">
         <div class="item">
           <img src="assets/images/apple/iphone_14__eso1fig4ci6a_xlarge.png" />
@@ -147,7 +147,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container d-none">
       <div class="swiper products-swiper">
         <div class="swiper-wrapper products-swiper-wrapper py-5 px-3"></div>
         <div class="swiper-pagination"></div>
@@ -157,7 +157,7 @@
       </div>
     </div>
 
-    <section class="p-4">
+    <section class="p-4 d-none">
       <div class="banners">
         <div class="banner">
           <img
@@ -289,10 +289,46 @@
     <section class="tabs my-5">
       <div class="tab-nav-bar">
         <div class="tab-navigation">
-          <i class="uil uil-angle-right right-btn" id="right"></i>
-          <i class="uil uil-angle-left left-btn" id="left"></i>
+          <button class="arrow-icon" id="left">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
+            </svg>
+          </button>
+          <button class="arrow-icon" id="right">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class=""
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </button>
           <ul class="tab-menu">
-            <li class="tab-btn active">چکی</li>
+            <li class="tab-btn active">خرید با چک</li>
+            <li class="tab-btn">خرید با سفته</li>
+            <li class="tab-btn">خرید با شرایط شرکت</li>
+            <li class="tab-btn">خرید با شرایط بانکی</li>
+            <li class="tab-btn">سفته</li>
+            <li class="tab-btn">شرایط شرکت</li>
+            <li class="tab-btn">چکی</li>
             <li class="tab-btn">سفته</li>
             <li class="tab-btn">شرایط شرکت</li>
             <li class="tab-btn">چکی</li>

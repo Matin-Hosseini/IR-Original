@@ -1,4 +1,11 @@
 @import "./modules/boilerplate.css";
+ul {
+  list-style: none;
+  padding: 0;
+}
+svg {
+  width: 1rem;
+}
 p {
   margin: 0;
 }
@@ -23,7 +30,7 @@ p {
   margin-bottom: 1rem;
 }
 
-.condition-box button {
+.condition-box .condition-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -41,4 +48,46 @@ p {
   .condition-box {
     font-size: 0.9rem;
   }
+}
+
+.condition-detail-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.condition-detail-modal__title {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.close-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-btn:hover {
+  background-color: #ccc;
+}
+
+.condition-detail-list {
+  border-top: 1px solid black;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-inline: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.condition-detail-list button {
+  border: 1px solid #9333ea;
+  background-color: #9233ea1c;
+  color: #9333ea;
+  padding: 0.5rem 0;
+  border-radius: 0.3rem;
 }

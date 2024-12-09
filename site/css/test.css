@@ -1,0 +1,60 @@
+@import "./modules/boilerplate.css";
+
+ul {
+  margin: 0;
+}
+
+.tab-navigation {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem 0;
+  position: relative;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.tab-navigation .arrow-icon {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.arrow-icon svg {
+  width: 2rem;
+}
+
+.tab-navigation .arrow-icon#right {
+  background-color: red;
+  right: 0;
+}
+.tab-navigation .arrow-icon#left {
+  background-color: red;
+  right: -100px;
+}
+
+.tab-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  overflow: hidden;
+  padding: 1rem;
+  scroll-behavior: smooth;
+}
+
+.tab-menu.dragging {
+  scroll-behavior: auto;
+}
+
+.tab-menu li {
+  white-space: nowrap;
+  list-style: none;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  user-select: none;
+}

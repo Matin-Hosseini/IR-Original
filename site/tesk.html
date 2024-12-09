@@ -14,7 +14,11 @@
       <div class="conditions">
         <div class="shadow condition-box">
           <p>جشنواره پاییزه (گرید AوB بدون ضامن) (گرید C با ضامن)</p>
-          <button class="">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -39,7 +43,11 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط چکی 6 ماهه</p>
-          <button class="">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -64,7 +72,7 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط فروش یک ساله</p>
-          <button class="">
+          <button class="condition-btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -89,7 +97,11 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط فروش یک سال و نیمه</p>
-          <button class="">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -114,7 +126,11 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط فروش 2 ساله</p>
-          <button class="">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -139,7 +155,11 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط فروش 2 ساله</p>
-          <button class="">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -164,7 +184,11 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط فروش 3 ساله</p>
-          <button class="">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -189,5 +213,113 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="modal fade"
+      id="condition-modal"
+      tabindex="-1"
+      aria-labelledby="condition-modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body condition-detail-modal">
+            <div class="condition-detail-modal__header">
+              <h2 class="condition-detail-modal__title">
+                جشنواره پاییزه (گرید AوB بدون ضامن) (گرید C با ضامن)
+              </h2>
+              <button class="close-btn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div class="condition-detail-list">
+              <button>شرایط 36 ماهه بانک ملی</button>
+              <button>شرایط 18 ماهه بلوبانک</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="condition-detail-modal"
+      tabindex="-1"
+      aria-labelledby="condition-detail-modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="fs-6 m-0">شرایط 36 ماهه بانک ملی</h3>
+              <button class="close-btn condition-detail-modal_back">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <ul>
+              <li>
+                <div>
+                  <h4>گرید اعتباری A,B</h4>
+                  <div>
+                    <span>پیش پرداخت: </span>
+                    <span>41,232,450 تومان</span>
+                  </div>
+                  <div>
+                    <span>تعداد اقساط: </span>
+                    <span>37</span>
+                  </div>
+                  <div>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="scripts/product-box.js"></script>
   </body>
 </html>
