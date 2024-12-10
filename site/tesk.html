@@ -72,7 +72,11 @@
         </div>
         <div class="shadow condition-box">
           <p>شرایط فروش یک ساله</p>
-          <button class="condition-btn">
+          <button
+            class="condition-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#condition-modal"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -228,7 +232,7 @@
               <h2 class="condition-detail-modal__title">
                 جشنواره پاییزه (گرید AوB بدون ضامن) (گرید C با ضامن)
               </h2>
-              <button class="close-btn">
+              <button class="close-btn" data-bs-dismiss="modal">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -262,11 +266,11 @@
       aria-labelledby="condition-detail-modalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h3 class="fs-6 m-0">شرایط 36 ماهه بانک ملی</h3>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="fs-4 m-0">شرایط 36 ماهه بانک ملی</h3>
               <button class="close-btn condition-detail-modal_back">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -286,7 +290,7 @@
             </div>
 
             <ul>
-              <li>
+              <li class="condition-detail__item condition-detail__item-green">
                 <div>
                   <h4>گرید اعتباری A,B</h4>
                   <div>
@@ -298,14 +302,84 @@
                     <span>37</span>
                   </div>
                   <div>
-                    <span></span>
-                    <span></span>
+                    <span>مبلغ قسط: </span>
+                    <span>41,232,450 تومان</span>
+                  </div>
+                  <div>
+                    <span>چک ضمانت</span>
+                    <span>دو فقره</span>
+                  </div>
+                </div>
+              </li>
+              <li class="condition-detail__item">
+                <div>
+                  <h4>گرید اعتباری C</h4>
+                  <div>
+                    <span>پیش پرداخت: </span>
+                    <span>41,232,450 تومان</span>
+                  </div>
+                  <div>
+                    <span>تعداد اقساط: </span>
+                    <span>37</span>
+                  </div>
+                  <div>
+                    <span>مبلغ قسط: </span>
+                    <span>41,232,450 تومان</span>
+                  </div>
+                  <div>
+                    <span>چک ضمانت</span>
+                    <span>سه فقره</span>
                   </div>
                 </div>
               </li>
             </ul>
+
+            <div class="mb-3 condition-detail-item">
+              <h3 class="fs-6">گرید اعتباری A,B</h3>
+              <div class="condition-detail-table-wrapper">
+                <table class="condition-detail-table">
+                  <tr>
+                    <th>پیش پرداخت</th>
+                    <th>تعداد اقساط</th>
+                    <th>مبلغ قسط</th>
+                    <th>چک ضمانت</th>
+                  </tr>
+                  <tr>
+                    <td>41,232,450 تومان</td>
+                    <td>37</td>
+                    <td>41,232,450 تومان</td>
+                    <td>2 فقره</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div>
+              <h3 class="fs-6">گرید اعتباری C</h3>
+              <div class="condition-detail-table-wrapper">
+                <table class="condition-detail-table">
+                  <tr>
+                    <th>پیش پرداخت</th>
+                    <th>تعداد اقساط</th>
+                    <th>مبلغ قسط</th>
+                    <th>چک ضمانت</th>
+                  </tr>
+                  <tr>
+                    <td>41,232,450 تومان</td>
+                    <td>37</td>
+                    <td>41,232,450 تومان</td>
+                    <td>1 فقره</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <button class="condition-detail-documents">
+                مشاهده مدارک لازم
+              </button>
+            </div>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -314,7 +388,7 @@
               Close
             </button>
             <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

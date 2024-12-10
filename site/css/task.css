@@ -78,7 +78,7 @@ p {
   border-top: 1px solid black;
   margin-top: 1rem;
   padding-top: 1rem;
-  padding-inline: 2rem;
+  /* padding-inline: 2rem; */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -90,4 +90,70 @@ p {
   color: #9333ea;
   padding: 0.5rem 0;
   border-radius: 0.3rem;
+}
+
+.condition-detail__item {
+  border: 1px solid #a16207;
+  color: #a16207;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #fefce8;
+}
+
+.condition-detail__item-green {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border-color: #15803d;
+}
+
+.condition-detail__item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.condition-detail-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.condition-detail-table th,
+.condition-detail-table td {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  white-space: nowrap;
+}
+
+.condition-detail-table tr:not(:last-child) {
+  border-bottom: 1px solid #9ca3af;
+}
+
+.condition-detail-table-wrapper {
+  /* padding: 1rem; */
+  border: 1px solid #9ca3af;
+  border-radius: 0.3rem;
+  overflow-x: auto;
+}
+
+@media (max-width: 400px) {
+  .condition-detail-table th,
+  .condition-detail-table td {
+    font-size: 0.8rem;
+  }
+}
+
+.condition-detail-documents {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 0.3rem;
+}
+
+/* condition-detail-item */
+.condition-detail-item {
+  padding: 0.5rem;
 }
