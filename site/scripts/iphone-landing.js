@@ -209,8 +209,6 @@ const showDetails = (id) => {
   const targetProduct = products.find((product) => product.id === id);
 
   const changeProductColor = (id, index) => {
-    console.log("changing product color", id);
-
     const productColorItems = document.querySelectorAll(".product-color");
 
     productColorItems.forEach((item) => item.classList.remove("active"));
@@ -258,8 +256,6 @@ products.forEach((product) => {
   product.targetPrice = targetPrice.amount;
 });
 
-console.log(products);
-
 products.forEach((product) => {
   productsSwiperWrapper.insertAdjacentHTML(
     "beforeend",
@@ -293,47 +289,68 @@ products.forEach((product) => {
                 <h2 class="product-box__title">${product.title}</h2>
                 <h3 class="product-box__subtitle">${product.subTitle}</h3>
               </div>
-              <div class="product-box__bottom">
-                <button class="product-box__details" onClick="showDetails(${
-                  product.id
-                })">
+              <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal"> 
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-1"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                    />
-                  </svg>
-                </button>
-                <div class="product-box__price-wrapper">
-                  <h4 class="product-box__price">${product.targetPrice.toLocaleString()}</h4>
-                  <span class="product-box__price-currency">تومان</span>
-                </div>
-              </div>
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-1"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+                مشاهده جزئیات
+              </button>
             </div>
           </div>
         `
   );
 });
 
-// const prevBtn = document.querySelector(".prev");
-// const item = document.querySelector(".item");
-
-// prevBtn.addEventListener("click", () => {
-//   item.classList.toggle("active");
-// });
+{
+  /* <div class="product-box__bottom">
+  <button
+    class="product-box__details"
+    onClick="showDetails(${
+                  product.id
+                })"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-1"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+      />
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+      />
+    </svg>
+  </button>
+  <div class="product-box__price-wrapper">
+    <h4 class="product-box__price">${product.targetPrice.toLocaleString()}</h4>
+    <span class="product-box__price-currency">تومان</span>
+  </div>
+</div>; */
+}
 
 let nextButton = document.getElementById("next");
 let prevButton = document.getElementById("prev");
@@ -381,6 +398,7 @@ const rightBtn = document.querySelector(".right-btn");
 const leftBtn = document.querySelector(".left-btn");
 const tabMenu = document.querySelector(".tab-menu");
 const tabNavBtns = document.querySelectorAll(".tab-navigation i.arrow-icon");
+const tabItems = document.querySelectorAll(".tab-btn");
 
 let isDragging = false;
 
@@ -417,4 +435,113 @@ const dragStop = () => {
 tabMenu.addEventListener("mousedown", () => (isDragging = true));
 tabMenu.addEventListener("mousemove", (e) => dragTabMenu);
 document.addEventListener("mouseup", dragStop);
+
+const tabCotents = document.querySelectorAll(".tab-content");
+
+tabItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    document.querySelector(".tab-btn.active").classList.remove("active");
+    item.classList.add("active");
+
+    tabCotents.forEach((content) => content.classList.remove("active"));
+    tabCotents[index].classList.add("active");
+  });
+});
+
 /* --------- tabs ends --------- */
+
+/* loan calculator starts  */
+
+const loanConditions = [
+  {
+    id: 1,
+    lender: "بلوبانک",
+    returnMonths: [{ id: 1, amount: 18 }],
+    maxPrice: 100,
+    interestRate: 23,
+  },
+  {
+    id: 2,
+    lender: "بانک ملی",
+    returnMonths: [{ id: 1, amount: 36 }],
+    maxPrice: 200,
+    interestRate: 23,
+  },
+  {
+    id: 2,
+    lender: "بانک آینده",
+    returnMonths: [
+      { id: 1, amount: 12 },
+      { id: 2, amount: 24 },
+      { id: 3, amount: 36 },
+    ],
+    maxPrice: 200,
+    interestRate: 23,
+  },
+];
+
+const rangeInput = document.querySelector(".range-input");
+const loanPrice = document.querySelector("#loan-price");
+const loanMin = document.querySelector(".loan-min");
+const loanMax = document.querySelector(".loan-max");
+const paymentMonthBtns = document.querySelectorAll(".loan-installments button");
+const monthlyReturnPriceElem = document.querySelector("#monthlyReturnPrice");
+const totalReturnPriceElem = document.querySelector("#totalReturnPrice");
+
+const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
+  const monthlyInterestRate = annualInterestRate / 12 / 100;
+
+  const monthlyPayment =
+    (loanPrice *
+      monthlyInterestRate *
+      Math.pow(1 + monthlyInterestRate, returnMonths)) /
+    (Math.pow(1 + monthlyInterestRate, returnMonths) - 1);
+
+  const totalPayment = monthlyPayment * returnMonths;
+  const totalInterest = totalPayment - loanPrice;
+
+  return {
+    monthlyPayment: +monthlyPayment.toFixed(2),
+    totalPayment: +totalPayment.toFixed(2),
+    totalInterest: +totalInterest.toFixed(2),
+  };
+};
+
+const loanPaymentHandler = () => {
+  const loanPrice = +rangeInput.value * 1_000_000;
+  const returnMonths = +document.querySelector(
+    ".loan-installments button.active"
+  ).dataset.value;
+
+  const result = calculateLoanPayment(loanPrice, 23, returnMonths);
+  monthlyReturnPriceElem.innerHTML = `${result.monthlyPayment.toLocaleString()} تومان`;
+  totalReturnPriceElem.innerHTML = `${result.totalPayment.toLocaleString()} تومان`;
+};
+
+rangeInput.addEventListener("input", (e) => {
+  loanPrice.innerHTML = (+e.target.value * 1000000).toLocaleString();
+
+  loanPaymentHandler();
+});
+
+const updateLoanPrice = (value) => {};
+
+paymentMonthBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document
+      .querySelector(".loan-installments button.active")
+      .classList.remove("active");
+    btn.classList.add("active");
+
+    loanConditions.forEach((loan) => {
+      if (loan.returnMonths === +btn.dataset.value) {
+        loanMax.innerHTML = loan.maxPrice;
+        rangeInput.max = loan.maxPrice;
+
+        loanPaymentHandler();
+      }
+    });
+  });
+});
+
+/* loan calculator ends  */

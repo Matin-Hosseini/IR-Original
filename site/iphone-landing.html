@@ -23,7 +23,7 @@
     />
   </head>
   <body>
-    <div class="carousel d-none">
+    <div class="carousel">
       <div class="list">
         <div class="item">
           <img src="assets/images/apple/iphone_14__eso1fig4ci6a_xlarge.png" />
@@ -147,13 +147,110 @@
       </div>
     </div>
 
-    <div class="container d-none">
+    <div class="container">
       <div class="swiper products-swiper">
         <div class="swiper-wrapper products-swiper-wrapper py-5 px-3"></div>
         <div class="swiper-pagination"></div>
 
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="product-details-modal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content p-3">
+            <div class="row d-">
+              <div class="col-lg-6">
+                <div class="swiper single-product-swiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <div class="product-img">
+                        <img
+                          src="assets/images/apple/airpods_max_blue__fsfaleh1smuu_large.png"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="product-img">
+                        <img
+                          src="assets/images/apple/airtag__furx99ax8rm2_large.jpg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="product-img">
+                        <img
+                          src="assets/images/apple/iphone_14__eso1fig4ci6a_xlarge.png"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div class="swiper-slide">
+                      <div class="product-img">
+                        <img
+                          src="assets/images/apple/iphone_se__cuaa2bdndqeu_xlarge.png"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
+
+                <div class="product-colors mb-4 mb-lg-0"></div>
+              </div>
+              <div class="col-lg-6">
+                <div class="single-product-content"></div>
+                <p class="single-product-subtitle">iPhone 16 Pro Max</p>
+
+                <ul class="product-featres-list">
+                  <li class="feature-item">
+                    <img
+                      src="assets/images/apple/features/camera-control.png"
+                      alt="a18 processor"
+                    />
+                    <p>دارای پردازنده a18 نسل جدید</p>
+                  </li>
+                  <li class="feature-item">
+                    <img
+                      src="assets/images/apple/features/a18.png"
+                      alt="a18 processor"
+                    />
+                    <p>دارای پردازنده a18 نسل جدید</p>
+                  </li>
+                  <li class="feature-item">
+                    <img
+                      src="assets/images/apple/features/a18.png"
+                      alt="a18 processor"
+                    />
+                    <p>دارای پردازنده a18 نسل جدید</p>
+                  </li>
+                  <li class="feature-item">
+                    <img
+                      src="assets/images/apple/features/a18.png"
+                      alt="a18 processor"
+                    />
+                    <p>دارای پردازنده a18 نسل جدید</p>
+                  </li>
+                </ul>
+                <button class="product-support-request-btn">
+                  <i class="fa-solid fa-headphones-simple"></i>
+                  درخواست مشاوره
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -287,63 +384,169 @@
     </div>
 
     <section class="tabs my-5">
-      <div class="tab-nav-bar">
-        <div class="tab-navigation">
-          <button class="arrow-icon" id="left">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 19.5 8.25 12l7.5-7.5"
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 align-self-center">
+            <h2 class="mb-4">مراحل درخواست وام از ایران اورجینال</h2>
+            <div class="tab-nav-bar">
+              <div class="tab-navigation">
+                <button class="arrow-icon d-none" id="left">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 19.5 8.25 12l7.5-7.5"
+                    />
+                  </svg>
+                </button>
+                <button class="arrow-icon" id="right">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class=""
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </button>
+                <ul class="tab-menu">
+                  <li class="tab-btn active">مرحله 1</li>
+                  <li class="tab-btn">مرحله 2</li>
+                  <li class="tab-btn">مرحله 3</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tab-contents">
+              <div class="tab-content active">
+                <h2>مرحله اول</h2>
+                <p>
+                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
+                  با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
+                  مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
+                  تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
+                  کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
+                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم
+                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
+                  طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
+                  صورت می توان امید داشت که تمام و دشواری موجود در ارائه
+                  راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل
+                  حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای
+                  موجود طراحی اساسا مورد استفاده قرار گیرد.
+                </p>
+              </div>
+              <div class="tab-content">
+                <h2>مرحله دوم</h2>
+                <p>
+                  با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
+                  مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
+                  تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
+                  کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
+                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم
+                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
+                  طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
+                </p>
+              </div>
+              <div class="tab-content">
+                <h2>مرحله سوم</h2>
+                <p>
+                  ل و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم
+                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
+                  طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div>
+              <img
+                src="./assets/images/iphone-landing/loan-illustration.avif"
+                alt=""
               />
-            </svg>
-          </button>
-          <button class="arrow-icon" id="right">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class=""
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-          <ul class="tab-menu">
-            <li class="tab-btn active">خرید با چک</li>
-            <li class="tab-btn">خرید با سفته</li>
-            <li class="tab-btn">خرید با شرایط شرکت</li>
-            <li class="tab-btn">خرید با شرایط بانکی</li>
-            <li class="tab-btn">سفته</li>
-            <li class="tab-btn">شرایط شرکت</li>
-            <li class="tab-btn">چکی</li>
-            <li class="tab-btn">سفته</li>
-            <li class="tab-btn">شرایط شرکت</li>
-            <li class="tab-btn">چکی</li>
-            <li class="tab-btn">سفته</li>
-            <li class="tab-btn">شرایط شرکت</li>
-            <li class="tab-btn">چکی</li>
-            <li class="tab-btn">سفته</li>
-            <li class="tab-btn">شرایط شرکت</li>
-            <li class="tab-btn">چکی</li>
-            <li class="tab-btn">سفته</li>
-            <li class="tab-btn">شرایط شرکت</li>
-            <li class="tab-btn">چکی</li>
-            <li class="tab-btn">سفته</li>
-            <li class="tab-btn">شرایط شرکت</li>
-          </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="my-5 loan-wrapper">
+      <div class="container">
+        <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
+          <div class="col-lg-6 col-xl-7">
+            <div class="loan-header">
+              <h3>مبلغ درخواستی وام</h3>
+              <div>
+                <span id="loan-price">10,000,000</span>
+                <span class="ps-1 fs-6">تومان</span>
+              </div>
+            </div>
+            <div class="">
+              <div class="d-flex align-items-center gap-3">
+                <span class="loan-min">10</span>
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  step="1"
+                  value="10"
+                  class="range-input flex-1"
+                />
+                <span class="loan-max">100</span>
+              </div>
+              <div>
+                <h3 class="my-4 fs-5">مدت بازپرداخت وام:</h3>
+                <div class="loan-installments">
+                  <button data-value="12" class="active">12 ماهه</button>
+                  <button data-value="18">18 ماهه</button>
+                  <button data-value="24">24 ماهه</button>
+                  <button data-value="36">36 ماهه</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-5">
+            <div class="loan-details-header">
+              <div class="">
+                <img src="" alt="" />
+                <h2 class="fs-6">بانک ملی</h2>
+              </div>
+              <span class="loan-interest">23 درصد</span>
+            </div>
+            <div class="loan-details mb-3">
+              <div>
+                <span>مبلغ قسط</span>
+                <span class="price" id="monthlyReturnPrice"
+                  >1,250,000,000 تومان</span
+                >
+              </div>
+              <div>
+                <span>مجموع بازپرداخت</span>
+                <span class="price" id="totalReturnPrice"
+                  >1,250,000,000 تومان</span
+                >
+              </div>
+              <!-- <div>
+                <span>مبلغ قسط نهایی</span>
+                <span class="price">1,250,000,000 تومان</span>
+              </div> -->
+            </div>
+            <div class="support-btn-wrapper">
+              <button class="support-btn">درخواست مشاوره</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
