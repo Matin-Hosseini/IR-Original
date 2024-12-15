@@ -464,11 +464,17 @@ const loanConditions = [
     id: 2,
     lender: "بانک ملی",
     returnMonths: [{ id: 1, amount: 36 }],
+    grades: [
+      {
+        id: 1,
+        value: "A,B",
+      },
+    ],
     maxPrice: 200,
     interestRate: 23,
   },
   {
-    id: 2,
+    id: 3,
     lender: "بانک آینده",
     returnMonths: [
       { id: 1, amount: 12 },
@@ -534,14 +540,41 @@ paymentMonthBtns.forEach((btn) => {
     btn.classList.add("active");
 
     loanConditions.forEach((loan) => {
-      if (loan.returnMonths === +btn.dataset.value) {
-        loanMax.innerHTML = loan.maxPrice;
-        rangeInput.max = loan.maxPrice;
+      loan.returnMonths.forEach((month) => {
+        if (month.amount === +btn.dataset.value) {
+          loanMax.innerHTML = loan.maxPrice;
+          rangeInput.max = loan.maxPrice;
 
-        loanPaymentHandler();
-      }
+          console.log(loan);
+
+          loanPaymentHandler();
+        }
+      });
     });
   });
 });
 
 /* loan calculator ends  */
+const select = document.querySelector(".select");
+const selected = document.querySelector(".selected");
+const selectMenu = document.querySelector(".select-menu");
+
+const seleectMenuItems = document.querySelectorAll(".select-menu li");
+
+let isSelectMenuOpen = false;
+
+const openSelectMenu = () => {
+  select.classList.add("open");
+  isSelectMenuOpen = true;
+};
+const closeSelectMenu = () => {
+  select.classList.remove("open");
+  isSelectMenuOpen = false;
+};
+seleectMenuItems.forEach((item) => {
+  item.addEventListener("click", () => {});
+});
+
+selected.addEventListener("click", () =>
+  isSelectMenuOpen ? closeSelectMenu() : openSelectMenu()
+);

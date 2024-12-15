@@ -254,43 +254,52 @@
       </div>
     </div>
 
-    <section class="p-4 d-none">
-      <div class="banners">
-        <div class="banner">
-          <img
-            src="assets/images/apple/banners/apple-intelligence.png"
-            alt=""
-            data-aos="fade-up"
-          />
-          <div class="banner-content-box">
-            <h3 data-aos="zoom-in">هوش مصنوعی مخصوص اپل</h3>
+    <section class="container">
+      <div class="banners row">
+        <!-- <div class="col-lg-3">
+          <div class="banner">
+            <img
+              src="assets/images/apple/banners/apple-intelligence.png"
+              alt=""
+            />
+            <div class="banner-content-box">
+              <h3 data-aos="zoom-in">هوش مصنوعی مخصوص اپل</h3>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-lg-6">
+          <div class="banner">
+            <img
+              src="assets/images/apple/banners/a18 pro.jpg"
+              alt=""
+              data-aos="fade-up"
+            />
+            <div class="banner-content-box">
+              <h3 data-aos="zoom-in">پردازنده a18pro</h3>
+            </div>
           </div>
         </div>
-
-        <div class="banner">
-          <img
-            src="assets/images/apple/banners/a18 pro.jpg"
-            alt=""
-            data-aos="fade-up"
-          />
-          <div class="banner-content-box">
-            <h3 data-aos="zoom-in">پردازنده a18pro</h3>
+        <div class="col-lg-6">
+          <div class="banner">
+            <img
+              src="assets/images/apple/banners/all-colors.png"
+              alt=""
+              data-aos="fade-up"
+              width="200"
+            />
+            <div class="banner-content-box">
+              <h3>رنگ صحرایی تیتانیوم</h3>
+            </div>
           </div>
         </div>
-
-        <div class="banner">
-          <img src="assets/images/apple/banners/all-colors.png" alt="" />
-          <div class="banner-content-box">
-            <h3>رنگ صحرایی تیتانیوم</h3>
+        <!-- <div class="col-lg-3">
+          <div class="banner">
+            <img src="assets/images/apple/banners/camera-control.jpg" alt="" />
+            <div class="banner-content-box">
+              <h3>مدیریت بهتر دوربین</h3>
+            </div>
           </div>
-        </div>
-
-        <div class="banner">
-          <img src="assets/images/apple/banners/camera-control.jpg" alt="" />
-          <div class="banner-content-box">
-            <h3>مدیریت بهتر دوربین</h3>
-          </div>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -519,9 +528,68 @@
           </div>
           <div class="col-lg-6 col-xl-5">
             <div class="loan-details-header">
-              <div class="">
-                <img src="" alt="" />
-                <h2 class="fs-6">بانک ملی</h2>
+              <div class="select shadow-sm">
+                <div class="selected">
+                  <div class="bank-item">
+                    <img
+                      src="assets/images/iphone-landing/banks/melli.png"
+                      alt=""
+                      class="bank-img"
+                    />
+                    <span>بانک ملی</span>
+                  </div>
+
+                  <div class="select-toggle-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <ul class="select-menu">
+                  <div class="shadow">
+                    <li data-bank="blu" class="selected-item">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/blu.svg"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بلوبانک</span>
+                      </div>
+                    </li>
+                    <li data-bank="ayandeh">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/ayandeh.png"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بانک آینده</span>
+                      </div>
+                    </li>
+                    <li data-bank="melli">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/melli.png"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بانک ملی</span>
+                      </div>
+                    </li>
+                  </div>
+                </ul>
               </div>
               <span class="loan-interest">23 درصد</span>
             </div>
@@ -538,10 +606,10 @@
                   >1,250,000,000 تومان</span
                 >
               </div>
-              <!-- <div>
-                <span>مبلغ قسط نهایی</span>
+              <div>
+                <span>اعتبار خرید نقدی</span>
                 <span class="price">1,250,000,000 تومان</span>
-              </div> -->
+              </div>
             </div>
             <div class="support-btn-wrapper">
               <button class="support-btn">درخواست مشاوره</button>
@@ -550,6 +618,55 @@
         </div>
       </div>
     </section>
+    <!-- 
+    <section class="container select-wrapper">
+      <div class="select shadow">
+        <div class="selected">
+          <div class="bank-item">
+            <img
+              src="assets/images/iphone-landing/banks/melli.png"
+              alt=""
+              class="bank-img"
+            />
+            <span>بانک ملی</span>
+          </div>
+        </div>
+        <ul class="select-menu">
+          <div class="shadow">
+            <li>
+              <div class="bank-item">
+                <img
+                  src="assets/images/iphone-landing/banks/blu.svg"
+                  alt=""
+                  class="bank-img"
+                />
+                <span>بلوبانک</span>
+              </div>
+            </li>
+            <li>
+              <div class="bank-item">
+                <img
+                  src="assets/images/iphone-landing/banks/ayandeh.png"
+                  alt=""
+                  class="bank-img"
+                />
+                <span>بانک آینده</span>
+              </div>
+            </li>
+            <li>
+              <div class="bank-item">
+                <img
+                  src="assets/images/iphone-landing/banks/melli.png"
+                  alt=""
+                  class="bank-img"
+                />
+                <span>بانک ملی</span>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </section> -->
 
     <script src="vendor/bootstrap/bootstrap.min.js"></script>
     <script src="vendor/swiper/swiper.min.js"></script>
@@ -562,6 +679,7 @@
 
         pagination: {
           el: ".swiper-pagination",
+          clickable: true,
         },
 
         navigation: {
@@ -569,7 +687,18 @@
           prevEl: ".swiper-button-prev",
         },
 
-        slidesPerView: 4,
+        slidesPerView: 1.5,
+        breakpoints: {
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          992: {
+            slidesPerView: 4,
+          },
+        },
       });
 
       const swiper = new Swiper(".single-product-swiper", {
