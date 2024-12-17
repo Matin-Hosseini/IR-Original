@@ -33,6 +33,7 @@ const products = [
   {
     id: 1,
     title: "آیفون 16",
+    enTitle: "iPhone 16",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [1, 4, 3, 6, 5],
@@ -51,12 +52,31 @@ const products = [
       { id: 12, capacity: 1, partNumber: 1, color: 4, amount: 57_600_000 },
       { id: 13, capacity: 1, partNumber: 1, color: 3, amount: 58_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A18 با پردازنده گرافیکی 5 هسته ای",
+        logo: "a18pro.png",
+      },
+      {
+        id: 2,
+        desc: "دکمه camera control",
+        logo: "camera-control.png",
+      },
+      {
+        id: 3,
+        desc: "سیستم دوربین دوگانه پیشرفته فیوژن 48 مگاپیکسلی",
+        logo: "dual-camera-new.png",
+      },
+      { id: 4, desc: "تا 27 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16.png",
     // price: 94_600_000_000,
   },
   {
     id: 2,
     title: "آیفون 16 پرو",
+    enTitle: "iPhone 16 Pro",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [1, 7, 2, 4],
@@ -74,12 +94,32 @@ const products = [
       { id: 11, capacity: 4, partNumber: 2, color: 7, amount: 116_100_000 },
       { id: 12, capacity: 4, partNumber: 2, color: 1, amount: 121_100_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A18 Pro با پردازنده گرافیکی 6 هسته ای",
+        logo: "a18pro.png",
+      },
+      {
+        id: 2,
+        desc: "دکمه camera control",
+        logo: "a18pro.png",
+      },
+      {
+        id: 3,
+        desc: "پیشرفته ترین دوربین فیوژن 48 مگاپیکسلی",
+        logo: "pro-camera-system.png",
+      },
+      { id: 4, desc: "تا 33 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
+
     // price: 94_600_000_000,
   },
   {
     id: 3,
     title: "آیفون 16 پرو مکس",
+    enTitle: "iPhone 16 Pro Max",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [1, 7, 2, 4],
@@ -97,12 +137,31 @@ const products = [
       { id: 11, capacity: 4, partNumber: 2, color: 1, amount: 125_600_000 },
       { id: 12, capacity: 4, partNumber: 2, color: 4, amount: 125_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A18 Pro با پردازنده گرافیکی 6 هسته ای",
+        logo: "a18pro.png",
+      },
+      {
+        id: 2,
+        desc: "دکمه camera control",
+        logo: "a18pro.png",
+      },
+      {
+        id: 3,
+        desc: "پیشرفته ترین دوربین فیوژن 48 مگاپیکسلی",
+        logo: "pro-camera-system.png",
+      },
+      { id: 4, desc: "تا 33 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
     // price: 94_600_000_000,
   },
   {
     id: 4,
     title: "آیفون 15",
+    enTitle: "iPhone 15",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [3, 5, 6],
@@ -118,11 +177,25 @@ const products = [
       { id: 9, capacity: 4, partNumber: 2, color: 4, amount: 97_100_000 },
       { id: 10, capacity: 2, partNumber: 1, color: 2, amount: 77_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A16 Bionic با پردازنده گرافیکی 5 هسته ای",
+        logo: "a16.png",
+      },
+      {
+        id: 2,
+        desc: "پیشرفته ترین دوربین فیوژن 48 مگاپیکسلی",
+        logo: "dual-camera-old.png",
+      },
+      { id: 3, desc: "تا 26 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
   },
   {
     id: 5,
     title: "آیفون 15 پرو",
+    enTitle: "iPhone 15 Pro",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [3, 5, 6],
@@ -134,11 +207,25 @@ const products = [
       { id: 5, capacity: 4, partNumber: 2, color: 4, amount: 97_100_000 },
       { id: 6, capacity: 2, partNumber: 1, color: 2, amount: 77_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A17 Pro با گرافیک 6 هسته ای",
+        logo: "a16.png",
+      },
+      {
+        id: 2,
+        desc: "دوربین سه گانه 48مگاپیکسلی تله فوتو 5 برابری",
+        logo: "pro-camera-system.png",
+      },
+      { id: 3, desc: "تا 29 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
   },
   {
     id: 6,
-    title: "آیفون 15 پرو",
+    title: "آیفون 15 پرو مکس",
+    enTitle: "iPhone 15 Pro Max",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [3, 5, 6],
@@ -149,6 +236,19 @@ const products = [
       { id: 4, capacity: 3, partNumber: 2, color: 1, amount: 88_600_000 },
       { id: 5, capacity: 4, partNumber: 2, color: 4, amount: 97_100_000 },
       { id: 6, capacity: 2, partNumber: 1, color: 2, amount: 77_600_000 },
+    ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A17 Pro با گرافیک 6 هسته ای",
+        logo: "a16.png",
+      },
+      {
+        id: 2,
+        desc: "دوربین سه گانه 48مگاپیکسلی تله فوتو 5 برابری",
+        logo: "pro-camera-system.png",
+      },
+      { id: 3, desc: "تا 29 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
     img: "iphone-16-pro.png",
   },
