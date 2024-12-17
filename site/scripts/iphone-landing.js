@@ -56,7 +56,7 @@ const products = [
       {
         id: 1,
         desc: "تراشه A18 با پردازنده گرافیکی 5 هسته ای",
-        logo: "a18pro.png",
+        logo: "a18.png",
       },
       {
         id: 2,
@@ -163,7 +163,7 @@ const products = [
     title: "آیفون 15",
     enTitle: "iPhone 15",
     subTitle: "زیبایی، عملکرد و قدرت",
-    isNew: true,
+    isNew: false,
     colors: [3, 5, 6],
     price: [
       { id: 1, capacity: 1, partNumber: 1, color: 3, amount: 51_300_000 },
@@ -197,7 +197,7 @@ const products = [
     title: "آیفون 15 پرو",
     enTitle: "iPhone 15 Pro",
     subTitle: "زیبایی، عملکرد و قدرت",
-    isNew: true,
+    isNew: false,
     colors: [3, 5, 6],
     price: [
       { id: 1, capacity: 2, partNumber: 2, color: 6, amount: 77_600_000 },
@@ -227,7 +227,7 @@ const products = [
     title: "آیفون 15 پرو مکس",
     enTitle: "iPhone 15 Pro Max",
     subTitle: "زیبایی، عملکرد و قدرت",
-    isNew: true,
+    isNew: false,
     colors: [3, 5, 6],
     price: [
       { id: 1, capacity: 2, partNumber: 2, color: 6, amount: 77_600_000 },
@@ -301,6 +301,61 @@ products.forEach((product) => {
   product.targetPrice = targetPrice.amount;
 });
 
+const productColorsContainer = document.querySelector(".product-colors");
+const productFeaturesContainer = document.querySelector(
+  ".product-featres-list"
+);
+const productTitleContainer = document.querySelector(
+  ".product-title-container"
+);
+
+const showProductInfo = (id) => {
+  const targetProduct = products.find((product) => product.id === id);
+  console.log(targetProduct);
+
+  //showing colors
+  productColorsContainer.innerHTML = `
+    <h3 class="fs-6 text-secondary">موجود در ${
+      targetProduct.colors.length
+    } رنگ:</h3>
+      <div class="colors flex-wrap">
+      ${targetProduct.colors
+        .map(
+          (color) => `
+          <div class="color">
+            <span style="background-color: ${color.code}"></span>
+            <h4>${color.title}</h4>
+          </div>`
+        )
+        .join("")}
+        
+      </div>
+  `;
+
+  //showing product title
+  productTitleContainer.innerHTML = `
+        <h3 class="fs-5">${targetProduct.title}</h3>
+        <p class="single-product-subtitle">${targetProduct.enTitle}</p>
+    `;
+
+  //showing features
+  productFeaturesContainer.innerHTML = `
+        ${targetProduct.features
+          .map(
+            (feature) => `
+          <li class="feature-item">
+            <img
+              src="assets/images/iphone-landing/features/${feature.logo}"
+              alt="${feature.desc}"
+            />
+            <p>${feature.desc}</p>
+          </li>
+          `
+          )
+          .join("")}
+  `;
+};
+
 products.forEach((product) => {
   productsSwiperWrapper.insertAdjacentHTML(
     "beforeend",
@@ -334,7 +389,9 @@ products.forEach((product) => {
                 <h2 class="product-box__title">${product.title}</h2>
                 <h3 class="product-box__subtitle">${product.subTitle}</h3>
               </div>
-              <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal"> 
+              <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal" onClick="showProductInfo(${
+                product.id
+              })"> 
                   <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
