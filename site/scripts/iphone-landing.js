@@ -193,61 +193,6 @@ const handlePrice = () => {
 handleColors();
 handlePrice();
 
-const showPortal = () => {
-  portal.classList.add("active");
-};
-const hidePortal = () => {
-  portal.classList.remove("active");
-};
-portal.addEventListener("click", (e) => {
-  e.target.classList.contains("portal") && hidePortal();
-});
-
-const showDetails = (id) => {
-  showPortal();
-
-  const targetProduct = products.find((product) => product.id === id);
-
-  const changeProductColor = (id, index) => {
-    const productColorItems = document.querySelectorAll(".product-color");
-
-    productColorItems.forEach((item) => item.classList.remove("active"));
-    productColorItems[index].classList.add("active");
-  };
-
-  window.changeProductColor = changeProductColor;
-
-  productColorsElem.innerHTML = "";
-  productColorsElem.insertAdjacentHTML(
-    "beforeend",
-    `
-      <p>موجود در ${targetProduct.colors.length} رنگ</p>
-      <div class="product-colors-wrapper">
-        ${targetProduct.colors
-          .map(
-            (color, index) => `
-          <button 
-            class="product-color ${index === 0 ? "active" : ""}" 
-            onClick="changeProductColor(${color.id}, ${index})"
-            >
-              <span style="background: ${color.code};"></span>
-              ${color.title}
-          </button>
-          `
-          )
-          .join("")}
-      </div>
-    `
-  );
-
-  singleProductContent.insertAdjacentHTML(
-    "beforeend",
-    `
-      <h2>${targetProduct.title}</h2>
-    `
-  );
-};
-
 products.forEach((product) => {
   const targetPrice = product.price.reduce((prev, current) =>
     prev.amount < current.amount ? prev : current
