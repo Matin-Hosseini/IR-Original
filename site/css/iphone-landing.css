@@ -454,3 +454,127 @@ ul li {
   }
 }
 /* support section ends */
+
+/* services starts */
+.services {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+@media (min-width: 576px) {
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .services {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.service {
+  padding: 1rem;
+  border-radius: 15px;
+  position: relative;
+}
+
+/*applying custom colors for each service box*/
+.service:nth-child(1) {
+  background-color: #ffedd5;
+}
+.service:nth-child(1) .service__icon {
+  background-color: #ffedd5;
+}
+
+.service:nth-child(2) {
+  background-color: #ecfccb;
+}
+.service:nth-child(2) .service__icon {
+  background-color: #ecfccb;
+}
+
+.service:nth-child(3) {
+  background-color: #ffe4e6;
+}
+.service:nth-child(3) .service__icon {
+  background-color: #ffe4e6;
+}
+
+.service:nth-child(4) {
+  background-color: #fae8ff;
+}
+.service:nth-child(4) .service__icon {
+  background-color: #fae8ff;
+}
+
+.service__icon-wrapper {
+  position: absolute;
+  background-color: #fff;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 15px;
+}
+
+.service__icon-wrapper::before,
+.service__icon-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.service__icon-wrapper:before {
+  top: 100%;
+  right: 0;
+  box-shadow: 15px -15px #fff;
+}
+
+.service__icon-wrapper:after {
+  top: 0;
+  right: 100%;
+  box-shadow: 15px -15px #fff;
+}
+
+.service__icon {
+  border-radius: 100%;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+.service__icon * {
+  width: 70%;
+}
+
+.service__header {
+  font-size: 0.8rem;
+  font-weight: light;
+  padding-right: 3rem;
+  margin-bottom: 27px;
+}
+.service__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.service__caption {
+  margin-bottom: 0;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+/* services ends */
