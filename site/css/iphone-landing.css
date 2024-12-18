@@ -349,7 +349,7 @@ ul li {
 }
 .tab-contents .tab-content {
   display: none;
-  height: 200px;
+  height: 120px;
   animation: to-right 0.2s;
 }
 
@@ -571,6 +571,7 @@ ul li {
 .service__title {
   font-size: 1.2rem;
   font-weight: bold;
+  margin-top: 3rem;
 }
 .service__caption {
   margin-bottom: 0;
@@ -578,3 +579,35 @@ ul li {
   font-size: 0.9rem;
 }
 /* services ends */
+
+/* document starts */
+.documents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2rem;
+  background-image: url("./../assets/images/iphone-landing/illustrations/violet-illustration.jpg");
+  color: #22209d;
+}
+.documents-desc p:nth-child(1) {
+  font-weight: bold;
+}
+.documents-desc p:nth-child(2) {
+  font-size: 0.9rem;
+}
+.see-documents-btn {
+  background-color: #6d28d9;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
+}
+
+.documents-list {
+  list-style: circle !important;
+  margin: 0;
+}
+
+.documents-list li {
+  list-style: disc;
+}
+/* document ends */

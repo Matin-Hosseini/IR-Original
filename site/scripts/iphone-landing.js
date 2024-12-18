@@ -387,7 +387,7 @@ products.forEach((product) => {
               </div>
               <div class="product-box__content mb-3">
                 <h2 class="product-box__title">${product.title}</h2>
-                <h3 class="product-box__subtitle">${product.subTitle}</h3>
+                <h3 class="product-box__subtitle">${product.enTitle}</h3>
               </div>
               <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal" onClick="showProductInfo(${
                 product.id
@@ -552,49 +552,25 @@ tabItems.forEach((item, index) => {
 
 /* --------- tabs ends --------- */
 
-/* loan calculator starts  */
-
-const loanConditions = [
-  {
-    id: 1,
-    lender: "بلوبانک",
-    returnMonths: [{ id: 1, amount: 18 }],
-    maxPrice: 100,
-    interestRate: 23,
-  },
-  {
-    id: 2,
-    lender: "بانک ملی",
-    returnMonths: [{ id: 1, amount: 36 }],
-    grades: [
-      {
-        id: 1,
-        value: "A,B",
-      },
-    ],
-    maxPrice: 200,
-    interestRate: 23,
-  },
-  {
-    id: 3,
-    lender: "بانک آینده",
-    returnMonths: [
-      { id: 1, amount: 12 },
-      { id: 2, amount: 24 },
-      { id: 3, amount: 36 },
-    ],
-    maxPrice: 200,
-    interestRate: 23,
-  },
-];
-
-const rangeInput = document.querySelector(".range-input");
-const loanPrice = document.querySelector("#loan-price");
-const loanMin = document.querySelector(".loan-min");
-const loanMax = document.querySelector(".loan-max");
+/* loan handler starts  */
 const paymentMonthBtns = document.querySelectorAll(".loan-installments button");
 const monthlyReturnPriceElem = document.querySelector("#monthlyReturnPrice");
 const totalReturnPriceElem = document.querySelector("#totalReturnPrice");
+const calculateBtn = document.querySelector(".calculate");
+const productPriceElem = document.querySelector(".price-input");
+const prepaymentElem = document.querySelector("#prepayment");
+
+productPriceElem.addEventListener("input", (e) => {
+  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+
+  const splittedValue = e.target.value.split(",");
+
+  const numberedValue = Number(splittedValue.join(""));
+
+  e.target.value = numberedValue.toLocaleString();
+
+  if (e.target.value === "0") e.target.value = "";
+});
 
 const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
   const monthlyInterestRate = annualInterestRate / 12 / 100;
@@ -609,30 +585,11 @@ const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
   const totalInterest = totalPayment - loanPrice;
 
   return {
-    monthlyPayment: +monthlyPayment.toFixed(2),
-    totalPayment: +totalPayment.toFixed(2),
-    totalInterest: +totalInterest.toFixed(2),
+    monthlyPayment: +monthlyPayment.toFixed(0),
+    totalPayment: +totalPayment.toFixed(0),
+    totalInterest: +totalInterest.toFixed(0),
   };
 };
-
-const loanPaymentHandler = () => {
-  const loanPrice = +rangeInput.value * 1_000_000;
-  const returnMonths = +document.querySelector(
-    ".loan-installments button.active"
-  ).dataset.value;
-
-  const result = calculateLoanPayment(loanPrice, 23, returnMonths);
-  monthlyReturnPriceElem.innerHTML = `${result.monthlyPayment.toLocaleString()} تومان`;
-  totalReturnPriceElem.innerHTML = `${result.totalPayment.toLocaleString()} تومان`;
-};
-
-rangeInput.addEventListener("input", (e) => {
-  loanPrice.innerHTML = (+e.target.value * 1000000).toLocaleString();
-
-  loanPaymentHandler();
-});
-
-const updateLoanPrice = (value) => {};
 
 paymentMonthBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -640,43 +597,87 @@ paymentMonthBtns.forEach((btn) => {
       .querySelector(".loan-installments button.active")
       .classList.remove("active");
     btn.classList.add("active");
-
-    loanConditions.forEach((loan) => {
-      loan.returnMonths.forEach((month) => {
-        if (month.amount === +btn.dataset.value) {
-          loanMax.innerHTML = loan.maxPrice;
-          rangeInput.max = loan.maxPrice;
-
-          console.log(loan);
-
-          loanPaymentHandler();
-        }
-      });
-    });
   });
 });
 
-/* loan calculator ends  */
-const select = document.querySelector(".select");
-const selected = document.querySelector(".selected");
-const selectMenu = document.querySelector(".select-menu");
+const companyCalculation = (price, prepayPercentage, increasedPercentage) => {
+  const prepaymentPrice = (price * prepayPercentage) / 100;
 
-const seleectMenuItems = document.querySelectorAll(".select-menu li");
+  const priceToLoan = price - prepaymentPrice;
 
-let isSelectMenuOpen = false;
+  const loanPrice = priceToLoan + (priceToLoan * increasedPercentage) / 100;
 
-const openSelectMenu = () => {
-  select.classList.add("open");
-  isSelectMenuOpen = true;
+  return { loanPrice, prepaymentPrice };
 };
-const closeSelectMenu = () => {
-  select.classList.remove("open");
-  isSelectMenuOpen = false;
-};
-seleectMenuItems.forEach((item) => {
-  item.addEventListener("click", () => {});
+
+calculateBtn.addEventListener("click", () => {
+  const productPrice = productPriceElem.value.trim().split(",").join("");
+
+  const currentPayMentMonth = document.querySelector(
+    ".loan-installments button.active"
+  ).dataset.value;
+
+  let calculatedPrice = { loanPrice: 0, prepaymentPrice: 0 };
+
+  switch (+currentPayMentMonth) {
+    case 12:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 12.5, 13) };
+      }
+      break;
+    case 18:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 14.5, 19) };
+      }
+      break;
+    case 24:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 16, 25) };
+      }
+      break;
+    case 36:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 18, 30) };
+      }
+      break;
+    default:
+      calculatedPrice = { loanPrice: 0, prepaymentPrice: 0 };
+  }
+
+  const { monthlyPayment, totalPayment } = calculateLoanPayment(
+    calculatedPrice.loanPrice,
+    23,
+    +currentPayMentMonth
+  );
+
+  prepaymentElem.innerHTML = `${calculatedPrice.prepaymentPrice.toLocaleString()} تومان`;
+  monthlyReturnPriceElem.innerHTML = `${monthlyPayment.toLocaleString()} تومان`;
+  totalReturnPriceElem.innerHTML = `${(
+    totalPayment + monthlyPayment
+  ).toLocaleString()} تومان`;
 });
 
-selected.addEventListener("click", () =>
-  isSelectMenuOpen ? closeSelectMenu() : openSelectMenu()
-);
+/* loan handler ends  */
+
+window.addEventListener("load", async () => {
+  // const isIpSent = localStorage.getItem("lkmnsdnke");
+
+  // if (isIpSent === "true") return;
+
+  async function getIp() {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+
+    return data;
+  }
+
+  const { ip } = await getIp();
+
+  fetch("https://my-supporter.liara.run/userIp", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ ip }),
+  });
+
+  localStorage.setItem("lkmnsdnke", true);
+});

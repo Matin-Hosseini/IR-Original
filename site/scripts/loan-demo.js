@@ -31,6 +31,7 @@ const loanConditions = [
     interestRate: 23,
   },
 ];
+/* loan calculator starts  */
 
 const rangeInput = document.querySelector(".range-input");
 const loanPrice = document.querySelector("#loan-price");
@@ -39,9 +40,6 @@ const loanMax = document.querySelector(".loan-max");
 const paymentMonthBtns = document.querySelectorAll(".loan-installments button");
 const monthlyReturnPriceElem = document.querySelector("#monthlyReturnPrice");
 const totalReturnPriceElem = document.querySelector("#totalReturnPrice");
-const calculateBtn = document.querySelector(".calculate");
-const productPriceElem = document.querySelector(".price-input");
-const prepaymentElem = document.querySelector("#prepayment");
 
 const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
   const monthlyInterestRate = annualInterestRate / 12 / 100;
@@ -56,9 +54,9 @@ const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
   const totalInterest = totalPayment - loanPrice;
 
   return {
-    monthlyPayment: +monthlyPayment.toFixed(0),
-    totalPayment: +totalPayment.toFixed(0),
-    totalInterest: +totalInterest.toFixed(0),
+    monthlyPayment: +monthlyPayment.toFixed(2),
+    totalPayment: +totalPayment.toFixed(2),
+    totalInterest: +totalInterest.toFixed(2),
   };
 };
 
@@ -94,6 +92,8 @@ paymentMonthBtns.forEach((btn) => {
           loanMax.innerHTML = loan.maxPrice;
           rangeInput.max = loan.maxPrice;
 
+          console.log(loan);
+
           loanPaymentHandler();
         }
       });
@@ -101,66 +101,29 @@ paymentMonthBtns.forEach((btn) => {
   });
 });
 
-const calculateProductPriceToLoan = (
-  price,
-  prepayPercentage,
-  increasedPercentage
-) => {
-  const prepaymentPrice = (price * prepayPercentage) / 100;
+/* loan calculator ends  */
 
-  const priceToLoan = price - prepaymentPrice;
+/* select */
+const select = document.querySelector(".select");
+const selected = document.querySelector(".selected");
+const selectMenu = document.querySelector(".select-menu");
 
-  const loanPrice = priceToLoan + (priceToLoan * increasedPercentage) / 100;
+const seleectMenuItems = document.querySelectorAll(".select-menu li");
 
-  return loanPrice;
+let isSelectMenuOpen = false;
+
+const openSelectMenu = () => {
+  select.classList.add("open");
+  isSelectMenuOpen = true;
 };
-
-calculateBtn.addEventListener("click", () => {
-  const productPrice = productPriceElem.value.trim();
-
-  const currentPayMentMonth = document.querySelector(
-    ".loan-installments button.active"
-  ).dataset.value;
-
-  let loanPrice = 0;
-  let prepayment = 0;
-
-  switch (+currentPayMentMonth) {
-    case 6:
-      {
-        const result = calculateProductPriceToLoan(+productPrice, 35, 7);
-      }
-      break;
-    case 12:
-      {
-        const result = calculateProductPriceToLoan(+productPrice, 12.5, 13);
-      }
-      break;
-    case 18:
-      {
-        const result = calculateProductPriceToLoan(+productPrice, 14.5, 19);
-      }
-      break;
-    case 24:
-      {
-        const result = calculateProductPriceToLoan(+productPrice, 16, 25);
-      }
-      break;
-    case 36:
-      {
-        const result = calculateProductPriceToLoan(+productPrice, 18, 30);
-      }
-      break;
-    default:
-      loanPrice = 0;
-  }
-
-  const { monthlyPayment, totalPayment, totalInterest } = calculateLoanPayment(
-    loanPrice,
-    23,
-    +currentPayMentMonth
-  );
-
-  prepaymentElem.innerHTML = `${}`
-  
+const closeSelectMenu = () => {
+  select.classList.remove("open");
+  isSelectMenuOpen = false;
+};
+seleectMenuItems.forEach((item) => {
+  item.addEventListener("click", () => {});
 });
+
+selected.addEventListener("click", () =>
+  isSelectMenuOpen ? closeSelectMenu() : openSelectMenu()
+);
