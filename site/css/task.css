@@ -100,6 +100,59 @@ p {
   background-color: #fefce8;
 }
 
+.condition-detail__info-table {
+  width: 100%;
+}
+
+/* new condition-detail styles starts */
+.condition-detail__item-1 {
+  border: 1px solid #15803d;
+  color: #15803d;
+  background-color: #f0fdf4;
+  border-radius: 0.5rem;
+}
+
+.condition-detail__item-1:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.condition-detail__item-1 h4 {
+  padding: 1rem 0;
+  margin: 0;
+  border-bottom: 1px solid #15803d;
+  font-weight: bold;
+}
+
+.condition-detail__info-table tr:not(:last-child) {
+  border-bottom: 1px solid #15803d;
+}
+
+.condition-detail__info-table th,
+.condition-detail__info-table td {
+  padding: 0.5rem;
+  text-align: center;
+  width: 50%;
+}
+
+.condition-detail__info-table th {
+  border-left: 1px solid #15803d;
+}
+
+/*style for the yellow one*/
+.condition-detail__item-1--yellow {
+  background-color: #fefce8;
+  border-color: #a16207;
+  color: #a16207;
+}
+
+.condition-detail__item-1--yellow .condition-detail__info-table th,
+.condition-detail__item-1 h4,
+.condition-detail__item-1--yellow .condition-detail__info-table tr {
+  border-color: #a16207;
+}
+
+/* new condition-detail styles starts */
+
 .condition-detail__item-green {
   background-color: #f0fdf4;
   color: #15803d;
