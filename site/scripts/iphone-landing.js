@@ -33,6 +33,7 @@ const products = [
   {
     id: 1,
     title: "آیفون 16",
+    enTitle: "iPhone 16",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [1, 4, 3, 6, 5],
@@ -51,12 +52,31 @@ const products = [
       { id: 12, capacity: 1, partNumber: 1, color: 4, amount: 57_600_000 },
       { id: 13, capacity: 1, partNumber: 1, color: 3, amount: 58_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A18 با پردازنده گرافیکی 5 هسته ای",
+        logo: "a18.png",
+      },
+      {
+        id: 2,
+        desc: "دکمه camera control",
+        logo: "camera-control.png",
+      },
+      {
+        id: 3,
+        desc: "سیستم دوربین دوگانه پیشرفته فیوژن 48 مگاپیکسلی",
+        logo: "dual-camera-new.png",
+      },
+      { id: 4, desc: "تا 27 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16.png",
     // price: 94_600_000_000,
   },
   {
     id: 2,
     title: "آیفون 16 پرو",
+    enTitle: "iPhone 16 Pro",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [1, 7, 2, 4],
@@ -74,12 +94,32 @@ const products = [
       { id: 11, capacity: 4, partNumber: 2, color: 7, amount: 116_100_000 },
       { id: 12, capacity: 4, partNumber: 2, color: 1, amount: 121_100_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A18 Pro با پردازنده گرافیکی 6 هسته ای",
+        logo: "a18pro.png",
+      },
+      {
+        id: 2,
+        desc: "دکمه camera control",
+        logo: "a18pro.png",
+      },
+      {
+        id: 3,
+        desc: "پیشرفته ترین دوربین فیوژن 48 مگاپیکسلی",
+        logo: "pro-camera-system.png",
+      },
+      { id: 4, desc: "تا 33 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
+
     // price: 94_600_000_000,
   },
   {
     id: 3,
     title: "آیفون 16 پرو مکس",
+    enTitle: "iPhone 16 Pro Max",
     subTitle: "زیبایی، عملکرد و قدرت",
     isNew: true,
     colors: [1, 7, 2, 4],
@@ -97,14 +137,33 @@ const products = [
       { id: 11, capacity: 4, partNumber: 2, color: 1, amount: 125_600_000 },
       { id: 12, capacity: 4, partNumber: 2, color: 4, amount: 125_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A18 Pro با پردازنده گرافیکی 6 هسته ای",
+        logo: "a18pro.png",
+      },
+      {
+        id: 2,
+        desc: "دکمه camera control",
+        logo: "a18pro.png",
+      },
+      {
+        id: 3,
+        desc: "پیشرفته ترین دوربین فیوژن 48 مگاپیکسلی",
+        logo: "pro-camera-system.png",
+      },
+      { id: 4, desc: "تا 33 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
     // price: 94_600_000_000,
   },
   {
     id: 4,
     title: "آیفون 15",
+    enTitle: "iPhone 15",
     subTitle: "زیبایی، عملکرد و قدرت",
-    isNew: true,
+    isNew: false,
     colors: [3, 5, 6],
     price: [
       { id: 1, capacity: 1, partNumber: 1, color: 3, amount: 51_300_000 },
@@ -118,13 +177,27 @@ const products = [
       { id: 9, capacity: 4, partNumber: 2, color: 4, amount: 97_100_000 },
       { id: 10, capacity: 2, partNumber: 1, color: 2, amount: 77_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A16 Bionic با پردازنده گرافیکی 5 هسته ای",
+        logo: "a16.png",
+      },
+      {
+        id: 2,
+        desc: "پیشرفته ترین دوربین فیوژن 48 مگاپیکسلی",
+        logo: "dual-camera-old.png",
+      },
+      { id: 3, desc: "تا 26 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
   },
   {
     id: 5,
     title: "آیفون 15 پرو",
+    enTitle: "iPhone 15 Pro",
     subTitle: "زیبایی، عملکرد و قدرت",
-    isNew: true,
+    isNew: false,
     colors: [3, 5, 6],
     price: [
       { id: 1, capacity: 2, partNumber: 2, color: 6, amount: 77_600_000 },
@@ -134,13 +207,27 @@ const products = [
       { id: 5, capacity: 4, partNumber: 2, color: 4, amount: 97_100_000 },
       { id: 6, capacity: 2, partNumber: 1, color: 2, amount: 77_600_000 },
     ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A17 Pro با گرافیک 6 هسته ای",
+        logo: "a16.png",
+      },
+      {
+        id: 2,
+        desc: "دوربین سه گانه 48مگاپیکسلی تله فوتو 5 برابری",
+        logo: "pro-camera-system.png",
+      },
+      { id: 3, desc: "تا 29 ساعت پخش ویدیو", logo: "battery-full.png" },
+    ],
     img: "iphone-16-pro.png",
   },
   {
     id: 6,
-    title: "آیفون 15 پرو",
+    title: "آیفون 15 پرو مکس",
+    enTitle: "iPhone 15 Pro Max",
     subTitle: "زیبایی، عملکرد و قدرت",
-    isNew: true,
+    isNew: false,
     colors: [3, 5, 6],
     price: [
       { id: 1, capacity: 2, partNumber: 2, color: 6, amount: 77_600_000 },
@@ -149,6 +236,19 @@ const products = [
       { id: 4, capacity: 3, partNumber: 2, color: 1, amount: 88_600_000 },
       { id: 5, capacity: 4, partNumber: 2, color: 4, amount: 97_100_000 },
       { id: 6, capacity: 2, partNumber: 1, color: 2, amount: 77_600_000 },
+    ],
+    features: [
+      {
+        id: 1,
+        desc: "تراشه A17 Pro با گرافیک 6 هسته ای",
+        logo: "a16.png",
+      },
+      {
+        id: 2,
+        desc: "دوربین سه گانه 48مگاپیکسلی تله فوتو 5 برابری",
+        logo: "pro-camera-system.png",
+      },
+      { id: 3, desc: "تا 29 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
     img: "iphone-16-pro.png",
   },
@@ -193,61 +293,6 @@ const handlePrice = () => {
 handleColors();
 handlePrice();
 
-const showPortal = () => {
-  portal.classList.add("active");
-};
-const hidePortal = () => {
-  portal.classList.remove("active");
-};
-portal.addEventListener("click", (e) => {
-  e.target.classList.contains("portal") && hidePortal();
-});
-
-const showDetails = (id) => {
-  showPortal();
-
-  const targetProduct = products.find((product) => product.id === id);
-
-  const changeProductColor = (id, index) => {
-    const productColorItems = document.querySelectorAll(".product-color");
-
-    productColorItems.forEach((item) => item.classList.remove("active"));
-    productColorItems[index].classList.add("active");
-  };
-
-  window.changeProductColor = changeProductColor;
-
-  productColorsElem.innerHTML = "";
-  productColorsElem.insertAdjacentHTML(
-    "beforeend",
-    `
-      <p>موجود در ${targetProduct.colors.length} رنگ</p>
-      <div class="product-colors-wrapper">
-        ${targetProduct.colors
-          .map(
-            (color, index) => `
-          <button 
-            class="product-color ${index === 0 ? "active" : ""}" 
-            onClick="changeProductColor(${color.id}, ${index})"
-            >
-              <span style="background: ${color.code};"></span>
-              ${color.title}
-          </button>
-          `
-          )
-          .join("")}
-      </div>
-    `
-  );
-
-  singleProductContent.insertAdjacentHTML(
-    "beforeend",
-    `
-      <h2>${targetProduct.title}</h2>
-    `
-  );
-};
-
 products.forEach((product) => {
   const targetPrice = product.price.reduce((prev, current) =>
     prev.amount < current.amount ? prev : current
@@ -255,6 +300,61 @@ products.forEach((product) => {
 
   product.targetPrice = targetPrice.amount;
 });
+
+const productColorsContainer = document.querySelector(".product-colors");
+const productFeaturesContainer = document.querySelector(
+  ".product-featres-list"
+);
+const productTitleContainer = document.querySelector(
+  ".product-title-container"
+);
+
+const showProductInfo = (id) => {
+  const targetProduct = products.find((product) => product.id === id);
+  console.log(targetProduct);
+
+  //showing colors
+  productColorsContainer.innerHTML = `
+    <h3 class="fs-6 text-secondary">موجود در ${
+      targetProduct.colors.length
+    } رنگ:</h3>
+      <div class="colors flex-wrap">
+      ${targetProduct.colors
+        .map(
+          (color) => `
+          <div class="color">
+            <span style="background-color: ${color.code}"></span>
+            <h4>${color.title}</h4>
+          </div>`
+        )
+        .join("")}
+        
+      </div>
+  `;
+
+  //showing product title
+  productTitleContainer.innerHTML = `
+        <h3 class="fs-5">${targetProduct.title}</h3>
+        <p class="single-product-subtitle">${targetProduct.enTitle}</p>
+    `;
+
+  //showing features
+  productFeaturesContainer.innerHTML = `
+        ${targetProduct.features
+          .map(
+            (feature) => `
+          <li class="feature-item">
+            <img
+              src="assets/images/iphone-landing/features/${feature.logo}"
+              alt="${feature.desc}"
+            />
+            <p>${feature.desc}</p>
+          </li>
+          `
+          )
+          .join("")}
+  `;
+};
 
 products.forEach((product) => {
   productsSwiperWrapper.insertAdjacentHTML(
@@ -287,9 +387,11 @@ products.forEach((product) => {
               </div>
               <div class="product-box__content mb-3">
                 <h2 class="product-box__title">${product.title}</h2>
-                <h3 class="product-box__subtitle">${product.subTitle}</h3>
+                <h3 class="product-box__subtitle">${product.enTitle}</h3>
               </div>
-              <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal"> 
+              <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal" onClick="showProductInfo(${
+                product.id
+              })"> 
                   <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -450,43 +552,25 @@ tabItems.forEach((item, index) => {
 
 /* --------- tabs ends --------- */
 
-/* loan calculator starts  */
-
-const loanConditions = [
-  {
-    id: 1,
-    lender: "بلوبانک",
-    returnMonths: [{ id: 1, amount: 18 }],
-    maxPrice: 100,
-    interestRate: 23,
-  },
-  {
-    id: 2,
-    lender: "بانک ملی",
-    returnMonths: [{ id: 1, amount: 36 }],
-    maxPrice: 200,
-    interestRate: 23,
-  },
-  {
-    id: 2,
-    lender: "بانک آینده",
-    returnMonths: [
-      { id: 1, amount: 12 },
-      { id: 2, amount: 24 },
-      { id: 3, amount: 36 },
-    ],
-    maxPrice: 200,
-    interestRate: 23,
-  },
-];
-
-const rangeInput = document.querySelector(".range-input");
-const loanPrice = document.querySelector("#loan-price");
-const loanMin = document.querySelector(".loan-min");
-const loanMax = document.querySelector(".loan-max");
+/* loan handler starts  */
 const paymentMonthBtns = document.querySelectorAll(".loan-installments button");
 const monthlyReturnPriceElem = document.querySelector("#monthlyReturnPrice");
 const totalReturnPriceElem = document.querySelector("#totalReturnPrice");
+const calculateBtn = document.querySelector(".calculate");
+const productPriceElem = document.querySelector(".price-input");
+const prepaymentElem = document.querySelector("#prepayment");
+
+productPriceElem.addEventListener("input", (e) => {
+  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+
+  const splittedValue = e.target.value.split(",");
+
+  const numberedValue = Number(splittedValue.join(""));
+
+  e.target.value = numberedValue.toLocaleString();
+
+  if (e.target.value === "0") e.target.value = "";
+});
 
 const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
   const monthlyInterestRate = annualInterestRate / 12 / 100;
@@ -501,30 +585,11 @@ const calculateLoanPayment = (loanPrice, annualInterestRate, returnMonths) => {
   const totalInterest = totalPayment - loanPrice;
 
   return {
-    monthlyPayment: +monthlyPayment.toFixed(2),
-    totalPayment: +totalPayment.toFixed(2),
-    totalInterest: +totalInterest.toFixed(2),
+    monthlyPayment: +monthlyPayment.toFixed(0),
+    totalPayment: +totalPayment.toFixed(0),
+    totalInterest: +totalInterest.toFixed(0),
   };
 };
-
-const loanPaymentHandler = () => {
-  const loanPrice = +rangeInput.value * 1_000_000;
-  const returnMonths = +document.querySelector(
-    ".loan-installments button.active"
-  ).dataset.value;
-
-  const result = calculateLoanPayment(loanPrice, 23, returnMonths);
-  monthlyReturnPriceElem.innerHTML = `${result.monthlyPayment.toLocaleString()} تومان`;
-  totalReturnPriceElem.innerHTML = `${result.totalPayment.toLocaleString()} تومان`;
-};
-
-rangeInput.addEventListener("input", (e) => {
-  loanPrice.innerHTML = (+e.target.value * 1000000).toLocaleString();
-
-  loanPaymentHandler();
-});
-
-const updateLoanPrice = (value) => {};
 
 paymentMonthBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -532,16 +597,87 @@ paymentMonthBtns.forEach((btn) => {
       .querySelector(".loan-installments button.active")
       .classList.remove("active");
     btn.classList.add("active");
-
-    loanConditions.forEach((loan) => {
-      if (loan.returnMonths === +btn.dataset.value) {
-        loanMax.innerHTML = loan.maxPrice;
-        rangeInput.max = loan.maxPrice;
-
-        loanPaymentHandler();
-      }
-    });
   });
 });
 
-/* loan calculator ends  */
+const companyCalculation = (price, prepayPercentage, increasedPercentage) => {
+  const prepaymentPrice = (price * prepayPercentage) / 100;
+
+  const priceToLoan = price - prepaymentPrice;
+
+  const loanPrice = priceToLoan + (priceToLoan * increasedPercentage) / 100;
+
+  return { loanPrice, prepaymentPrice };
+};
+
+calculateBtn.addEventListener("click", () => {
+  const productPrice = productPriceElem.value.trim().split(",").join("");
+
+  const currentPayMentMonth = document.querySelector(
+    ".loan-installments button.active"
+  ).dataset.value;
+
+  let calculatedPrice = { loanPrice: 0, prepaymentPrice: 0 };
+
+  switch (+currentPayMentMonth) {
+    case 12:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 12.5, 13) };
+      }
+      break;
+    case 18:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 14.5, 19) };
+      }
+      break;
+    case 24:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 16, 25) };
+      }
+      break;
+    case 36:
+      {
+        calculatedPrice = { ...companyCalculation(+productPrice, 18, 30) };
+      }
+      break;
+    default:
+      calculatedPrice = { loanPrice: 0, prepaymentPrice: 0 };
+  }
+
+  const { monthlyPayment, totalPayment } = calculateLoanPayment(
+    calculatedPrice.loanPrice,
+    23,
+    +currentPayMentMonth
+  );
+
+  prepaymentElem.innerHTML = `${calculatedPrice.prepaymentPrice.toLocaleString()} تومان`;
+  monthlyReturnPriceElem.innerHTML = `${monthlyPayment.toLocaleString()} تومان`;
+  totalReturnPriceElem.innerHTML = `${(
+    totalPayment + monthlyPayment
+  ).toLocaleString()} تومان`;
+});
+
+/* loan handler ends  */
+
+window.addEventListener("load", async () => {
+  // const isIpSent = localStorage.getItem("lkmnsdnke");
+
+  // if (isIpSent === "true") return;
+
+  async function getIp() {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+
+    return data;
+  }
+
+  const { ip } = await getIp();
+
+  fetch("https://my-supporter.liara.run/userIp", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ ip }),
+  });
+
+  localStorage.setItem("lkmnsdnke", true);
+});

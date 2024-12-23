@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="vendor/swiper/swiper.min.css" />
+    <link href="vendor/AOS/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/iphone-landing.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+  <body>
+    <section class="my-5 loan-wrapper">
+      <div class="container">
+        <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
+          <div class="col-lg-6 col-xl-7">
+            <div class="loan-header">
+              <h3>مبلغ درخواستی وام</h3>
+              <div>
+                <span id="loan-price">10,000,000</span>
+                <span class="ps-1 fs-6">تومان</span>
+              </div>
+            </div>
+            <div class="">
+              <div class="d-flex align-items-center gap-3">
+                <span class="loan-min">10</span>
+                <input
+                  type="range"
+                  min="10"
+                  max="100"
+                  step="1"
+                  value="10"
+                  class="range-input flex-1"
+                />
+                <span class="loan-max">100</span>
+              </div>
+              <div>
+                <h3 class="my-4 fs-5">مدت بازپرداخت وام:</h3>
+                <div class="loan-installments">
+                  <button data-value="12" class="active">12 ماهه</button>
+                  <button data-value="18">18 ماهه</button>
+                  <button data-value="24">24 ماهه</button>
+                  <button data-value="36">36 ماهه</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-5">
+            <div class="loan-details-header">
+              <div class="select shadow-sm">
+                <div class="selected">
+                  <div class="bank-item">
+                    <img
+                      src="assets/images/iphone-landing/banks/melli.png"
+                      alt=""
+                      class="bank-img"
+                    />
+                    <span>بانک ملی</span>
+                  </div>
+
+                  <div class="select-toggle-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <ul class="select-menu">
+                  <div class="shadow">
+                    <li data-bank="blu" class="selected-item">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/blu.svg"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بلوبانک</span>
+                      </div>
+                    </li>
+                    <li data-bank="ayandeh">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/ayandeh.png"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بانک آینده</span>
+                      </div>
+                    </li>
+                    <li data-bank="melli">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/melli.png"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بانک ملی</span>
+                      </div>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+              <span class="loan-interest">23 درصد</span>
+            </div>
+            <div class="loan-details mb-3">
+              <div>
+                <span>مبلغ قسط</span>
+                <span class="price" id="monthlyReturnPrice"
+                  >1,250,000,000 تومان</span
+                >
+              </div>
+              <div>
+                <span>مجموع بازپرداخت</span>
+                <span class="price" id="totalReturnPrice"
+                  >1,250,000,000 تومان</span
+                >
+              </div>
+              <!-- <div>
+                <span>اعتبار خرید نقدی</span>
+                <span class="price">1,250,000,000 تومان</span>
+              </div> -->
+            </div>
+            <div class="support-btn-wrapper">
+              <button class="support-btn">درخواست مشاوره</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="scripts/loan-demo.js"></script>
+  </body>
+</html>

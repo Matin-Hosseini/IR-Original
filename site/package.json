@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "sass:dev": "sass --watch ./scss:styles ",
+    "sass:dev": "sass --watch ./scss/pages:styles ",
     "sass": "sass ./scss styles --watch"
   },
   "keywords": [],
