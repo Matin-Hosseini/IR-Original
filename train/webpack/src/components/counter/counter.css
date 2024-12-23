@@ -2,3 +2,12 @@
   display: flex;
   background-color: red;
 }
+
+@font-face {
+  font-family: "vasir";
+  src: url("./../../assets/fonts/vasir/Vazir-Medium-FD-WOL.woff");
+}
+
+body {
+  font-family: "vasir";
+}
