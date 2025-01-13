@@ -1,0 +1,88 @@
+<div class="select shadow-sm">
+                <div class="selected">
+                  <div class="bank-item">
+                    <img
+                      src="assets/images/iphone-landing/banks/melli.png"
+                      alt=""
+                      class="bank-img"
+                    />
+                    <span>بانک ملی</span>
+                  </div>
+
+                  <div class="select-toggle-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <ul class="select-menu">
+                  <div class="shadow">
+                    <li data-bank="blu" class="selected-item">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/blu.svg"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بلوبانک</span>
+                      </div>
+                    </li>
+                    <li data-bank="ayandeh">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/ayandeh.png"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بانک آینده</span>
+                      </div>
+                    </li>
+                    <li data-bank="melli">
+                      <div class="bank-item">
+                        <img
+                          src="assets/images/iphone-landing/banks/melli.png"
+                          alt=""
+                          class="bank-img"
+                        />
+                        <span>بانک ملی</span>
+                      </div>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+              /* select */
+// const select = document.querySelector(".select");
+// const selected = document.querySelector(".selected");
+// const selectMenu = document.querySelector(".select-menu");
+
+// const seleectMenuItems = document.querySelectorAll(".select-menu li");
+
+// let isSelectMenuOpen = false;
+
+// const openSelectMenu = () => {
+//   select.classList.add("open");
+//   isSelectMenuOpen = true;
+// };
+// const closeSelectMenu = () => {
+//   select.classList.remove("open");
+//   isSelectMenuOpen = false;
+// };
+// seleectMenuItems.forEach((item) => {
+//   item.addEventListener("click", () => {});
+// });
+
+// selected.addEventListener("click", () =>
+//   isSelectMenuOpen ? closeSelectMenu() : openSelectMenu()
+// );
+/* select */

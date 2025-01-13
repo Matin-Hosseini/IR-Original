@@ -34,3 +34,22 @@ const dragStop = () => {
 tabsmenu.addEventListener("mousedown", () => (isDragging = true));
 tabsmenu.addEventListener("mousemove", dragTabs);
 document.addEventListener("mouseup", dragStop);
+
+const download = document.querySelector(".download");
+
+const generatePDF = () => {
+  const element = document.getElementById("content"); // عنصر HTML که می‌خواهید PDF شود
+  const options = {
+    margin: 1,
+    filename: "example.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "cm", format: "a4", orientation: "portrait" },
+  };
+
+  html2pdf().set(options).from(element).save();
+};
+
+download.addEventListener("click", () => {
+  generatePDF();
+});

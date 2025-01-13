@@ -16,6 +16,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/iphone-landing.css" />
+    <link rel="stylesheet" href="css/loan-demo.css" />
 
     <link
       rel="stylesheet"
@@ -28,126 +29,95 @@
         <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
           <div class="col-lg-6 col-xl-7">
             <div class="loan-header">
-              <h3>مبلغ درخواستی وام</h3>
-              <div>
-                <span id="loan-price">10,000,000</span>
-                <span class="ps-1 fs-6">تومان</span>
-              </div>
-            </div>
-            <div class="">
-              <div class="d-flex align-items-center gap-3">
-                <span class="loan-min">10</span>
+              <h3>مبلغ کالای درخواستی</h3>
+              <div class="">
                 <input
-                  type="range"
-                  min="10"
-                  max="100"
-                  step="1"
-                  value="10"
-                  class="range-input flex-1"
+                  type="text"
+                  class="price-input"
+                  placeholder="به تومان وارد کنید"
                 />
-                <span class="loan-max">100</span>
               </div>
-              <div>
+
+              <div class="mb-5">
                 <h3 class="my-4 fs-5">مدت بازپرداخت وام:</h3>
                 <div class="loan-installments">
-                  <button data-value="12" class="active">12 ماهه</button>
-                  <button data-value="18">18 ماهه</button>
-                  <button data-value="24">24 ماهه</button>
-                  <button data-value="36">36 ماهه</button>
+                  <button data-value="7" class="active">7 ماهه</button>
+
+                  <button data-value="13">13 ماهه</button>
+                  <button data-value="19">19 ماهه</button>
+                </div>
+              </div>
+              <div class="">
+                <div class="mb-3">
+                  <label for="garuntee">نوع ضمانت</label>
+
+                  <select name="garuntee" id="garuntee">
+                    <option value="promissory">سفته</option>
+                    <option value="check">چک</option>
+                  </select>
+                </div>
+                <div>
+                  <input type="checkbox" id="guarantor" name="guarantor" />
+                  <label for="guarantor">با ضامن</label>
+                  <input
+                    type="checkbox"
+                    id="withoutPrepaymentElem"
+                    name="withoutPrepayment"
+                  />
+                  <label for="withoutPrepaymentElem">بدون پیش پرداخت</label>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-xl-5">
-            <div class="loan-details-header">
-              <div class="select shadow-sm">
-                <div class="selected">
-                  <div class="bank-item">
-                    <img
-                      src="assets/images/iphone-landing/banks/melli.png"
-                      alt=""
-                      class="bank-img"
-                    />
-                    <span>بانک ملی</span>
-                  </div>
-
-                  <div class="select-toggle-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <ul class="select-menu">
-                  <div class="shadow">
-                    <li data-bank="blu" class="selected-item">
-                      <div class="bank-item">
-                        <img
-                          src="assets/images/iphone-landing/banks/blu.svg"
-                          alt=""
-                          class="bank-img"
-                        />
-                        <span>بلوبانک</span>
-                      </div>
-                    </li>
-                    <li data-bank="ayandeh">
-                      <div class="bank-item">
-                        <img
-                          src="assets/images/iphone-landing/banks/ayandeh.png"
-                          alt=""
-                          class="bank-img"
-                        />
-                        <span>بانک آینده</span>
-                      </div>
-                    </li>
-                    <li data-bank="melli">
-                      <div class="bank-item">
-                        <img
-                          src="assets/images/iphone-landing/banks/melli.png"
-                          alt=""
-                          class="bank-img"
-                        />
-                        <span>بانک ملی</span>
-                      </div>
-                    </li>
-                  </div>
-                </ul>
-              </div>
-              <span class="loan-interest">23 درصد</span>
-            </div>
             <div class="loan-details mb-3">
               <div>
-                <span>مبلغ قسط</span>
-                <span class="price" id="monthlyReturnPrice"
-                  >1,250,000,000 تومان</span
-                >
+                <span>پیش پرداخت</span>
+                <span class="price" id="prepaymentElem">0 تومان</span>
               </div>
               <div>
-                <span>مجموع بازپرداخت</span>
-                <span class="price" id="totalReturnPrice"
-                  >1,250,000,000 تومان</span
-                >
+                <span>مبلغ وام</span>
+                <span class="price" id="loanPriceElem">0 تومان</span>
               </div>
-              <!-- <div>
-                <span>اعتبار خرید نقدی</span>
-                <span class="price">1,250,000,000 تومان</span>
-              </div> -->
+              <div>
+                <span>مبلغ قسط</span>
+                <span class="price" id="monthlyReturnPriceElem">0 تومان</span>
+              </div>
             </div>
             <div class="support-btn-wrapper">
-              <button class="support-btn">درخواست مشاوره</button>
+              <button class="support-btn" id="calculate-btn">محاسبه</button>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="container mb-5">
+      <div class="condition-table-wrapper">
+        <section class="condition-table-header">
+          <h4 class="p-3 m-0">لیست شرایط بر اساس موارد انتخابی بالا</h4>
+        </section>
+        <section class="condition-table-body">
+          <table class="condition-table">
+            <thead>
+              <tr>
+                <th>تحویل</th>
+                <th>مبلغ کالا</th>
+                <th>ضمانت</th>
+                <th>ضامن</th>
+                <th>مدت اقساط</th>
+                <th>نرخ افزایش</th>
+                <th>مبلغ افزایش</th>
+                <th>پیش پرداخت</th>
+                <th>مبلغ پیش پرداخت</th>
+                <th>مبلغ تسهیلات</th>
+                <th>مبلغ قسط</th>
+                <th>مبلغ چک ضمانت</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
       </div>
     </section>
     <script src="scripts/loan-demo.js"></script>

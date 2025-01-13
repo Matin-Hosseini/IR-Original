@@ -46,14 +46,7 @@
           <div class="introduce">
             <div class="title">توضیح کوتاه</div>
             <div class="topic">متن اصلی</div>
-            <div class="des">
-              <!-- 20 lorem -->
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-              نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-              کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-            </div>
+            <div class="des"></div>
           </div>
         </div>
 
@@ -258,7 +251,7 @@
       </div>
     </section>
 
-    <div class="container">
+    <section class="container">
       <div class="swiper products-swiper">
         <div class="swiper-wrapper products-swiper-wrapper py-5 px-3"></div>
         <div class="swiper-pagination"></div>
@@ -271,8 +264,7 @@
         class="modal fade"
         id="product-details-modal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
+        aria-labelledby="product-details-modal"
       >
         <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content p-3">
@@ -394,7 +386,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <section class="container">
       <div class="banners row">
@@ -573,10 +565,10 @@
                 <div
                   class="loan-installments justify-content-center justify-content-sm-start"
                 >
-                  <button data-value="12" class="active">13 ماهه</button>
-                  <button data-value="18">19 ماهه</button>
-                  <button data-value="24">25 ماهه</button>
-                  <button data-value="36">37 ماهه</button>
+                  <button data-value="12" class="active">12 ماهه</button>
+                  <button data-value="18">18 ماهه</button>
+                  <button data-value="24">24 ماهه</button>
+                  <button data-value="36">36 ماهه</button>
                 </div>
               </div>
             </div>
@@ -764,34 +756,12 @@
     <script src="vendor/swiper/swiper.min.js"></script>
     <script src="vendor/AOS/aos.js"></script>
 
+    <!-- <script src="scripts/loan-calculator.js"></script> -->
+
+    <script type="module" src="scripts/iphone-landing.js"></script>
+
     <script>
       AOS.init();
-      const singleProductSwiper = new Swiper(".products-swiper", {
-        spaceBetween: 10,
-
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-
-        slidesPerView: 1.5,
-        breakpoints: {
-          576: {
-            slidesPerView: 2,
-          },
-          768: {
-            slidesPerView: 3,
-          },
-          992: {
-            slidesPerView: 4,
-          },
-        },
-      });
 
       const swiper = new Swiper(".single-product-swiper", {
         pagination: {
@@ -806,9 +776,5 @@
         slidesPerView: 1,
       });
     </script>
-
-    <!-- <script src="scripts/loan-calculator.js"></script> -->
-
-    <script type="module" src="scripts/iphone-landing.js"></script>
   </body>
 </html>
