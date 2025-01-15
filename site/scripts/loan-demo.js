@@ -401,3 +401,7 @@ const showAllPayment = (price) => {
 };
 
 showAllPayment(140_000_000);
+
+const doc = new jsPDF();
+doc.text("Hello world!", 10, 10);
+doc.save("a4.pdf");
