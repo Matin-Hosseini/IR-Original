@@ -29,6 +29,32 @@
         <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
           <div class="col-lg-6 col-xl-7">
             <div class="loan-header">
+              <div class="mb-4 condition-types">
+                <input
+                  type="radio"
+                  id="iphone"
+                  name="product"
+                  value="iphone"
+                  checked
+                />
+                <label for="iphone">آیفون</label>
+
+                <input
+                  type="radio"
+                  id="samsung"
+                  name="product"
+                  value="samsung"
+                />
+                <label for="samsung">سامسونگ</label>
+
+                <input
+                  type="radio"
+                  id="automobile"
+                  name="product"
+                  value="automobile"
+                />
+                <label for="automobile">خودرو</label>
+              </div>
               <h3>مبلغ کالای درخواستی</h3>
               <div class="">
                 <input
@@ -40,12 +66,7 @@
 
               <div class="mb-5">
                 <h3 class="my-4 fs-5">مدت بازپرداخت وام:</h3>
-                <div class="loan-installments">
-                  <button data-value="7" class="active">7 ماهه</button>
-
-                  <button data-value="13">13 ماهه</button>
-                  <button data-value="19">19 ماهه</button>
-                </div>
+                <div class="loan-installments"></div>
               </div>
               <div class="">
                 <div class="mb-3">
@@ -95,14 +116,12 @@
     <section class="container mb-5">
       <div class="condition-table-wrapper">
         <section class="condition-table-header">
-          <h4 class="p-3 m-0">لیست شرایط بر اساس موارد انتخابی بالا</h4>
+          <h4 class="p-3 m-0">لیست کامل شرایط بر اساس قیمت انتخابی</h4>
         </section>
         <section class="condition-table-body">
           <table class="condition-table">
             <thead>
               <tr>
-                <th>تحویل</th>
-                <th>مبلغ کالا</th>
                 <th>ضمانت</th>
                 <th>ضامن</th>
                 <th>مدت اقساط</th>
@@ -112,7 +131,8 @@
                 <th>مبلغ پیش پرداخت</th>
                 <th>مبلغ تسهیلات</th>
                 <th>مبلغ قسط</th>
-                <th>مبلغ چک ضمانت</th>
+                <th>مبلغ چک/سفته ضمانت</th>
+                <th>تحویل</th>
               </tr>
             </thead>
             <tbody></tbody>
