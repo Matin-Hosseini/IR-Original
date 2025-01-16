@@ -432,6 +432,30 @@ const loanCalculation = (loanPrice, annualInterestRate, returnMonths) => {
   };
 };
 
+const calculateGuaranteePrice = (price, guaranteeType) => {
+  let guaranteePrice = null;
+
+  switch (guaranteeType) {
+    case "promissory":
+      {
+        guaranteePrice = price + (price * 50) / 100;
+      }
+      break;
+    case "check":
+      {
+        guaranteePrice = price + (price * 25) / 100;
+      }
+      break;
+    default: {
+      guaranteePrice = price + (price * 25) / 100;
+    }
+  }
+
+  guaranteePrice = Math.ceil(guaranteePrice);
+
+  return guaranteePrice;
+};
+
 const companyCalculation = (productPrice, condition) => {
   const initialIncrease =
     productPrice + (productPrice * condition.initialIncrease) / 100;
@@ -440,7 +464,7 @@ const companyCalculation = (productPrice, condition) => {
 
   const loanPrice = initialIncrease - prePayment;
 
-  return { loanPrice, prePayment };
+  return { initialIncrease, loanPrice, prePayment };
 };
 
 const priceCalculationHandler = () => {
@@ -484,8 +508,48 @@ const priceCalculationHandler = () => {
     targetCondition.conditionMonths - 1
   );
 
-  console.log(monthlyPayment);
-  showAllPayment(productPrice, targetConditions);
+  const rows = targetConditions.map((condition) => {
+    const { initialIncrease, loanPrice, prePayment } = companyCalculation(
+      productPrice,
+      condition
+    );
+
+    const { monthlyPayment, totalPayment } = loanCalculation(
+      loanPrice,
+      23,
+      condition.conditionMonths - 1
+    );
+
+    const guaranteePrice = calculateGuaranteePrice(
+      totalPayment,
+      condition.guaranteeType
+    );
+
+    //title variables
+    const guaranteeTypeTitle =
+      condition.guaranteeType === "check" ? "چک" : "سفته";
+
+    const hasGuarantorTitle = condition.hasGuarantor ? "با ضامن" : "بدون ضامن";
+
+    const deliveryTitle =
+      condition.delivery === 0 ? "فوری" : `${condition.delivery} روزه`;
+
+    return {
+      ...condition,
+      initialIncreasePrice: initialIncrease,
+      prePaymentPrice: prePayment,
+      loanPrice,
+      monthlyPayment,
+      guaranteePrice,
+      guaranteeTypeTitle,
+      hasGuarantorTitle,
+      deliveryTitle,
+    };
+  });
+
+  // console.log(rows);
+
+  showAllPayment(rows);
 };
 
 paymentMonthBtns.forEach((btn) => {
@@ -503,66 +567,103 @@ calculateBtn.addEventListener("click", priceCalculationHandler);
 //condition table
 const allConditionsElem = document.querySelector(".condition-table tbody");
 
-const showAllPayment = (price, conditions) => {
-  allConditionsElem.innerHTML = conditions
-    .map((condition) => {
-      const initialIncrease = price + (price * condition.initialIncrease) / 100;
-
-      const prePayment = (initialIncrease * condition.prePayment) / 100;
-
-      const loanPrice = initialIncrease - prePayment;
-
-      const { monthlyPayment, totalPayment } = loanCalculation(
-        loanPrice,
-        23,
-        condition.conditionMonths - 1
-      );
-
-      let guaranteePrice = null;
-
-      switch (condition.guaranteeType) {
-        case "promissory":
-          {
-            guaranteePrice = totalPayment + (totalPayment * 50) / 100;
-          }
-          break;
-        case "check":
-          {
-            guaranteePrice = totalPayment + (totalPayment * 25) / 100;
-          }
-          break;
-        default: {
-          guaranteePrice = totalPayment + (totalPayment * 25) / 100;
-        }
-      }
-
-      guaranteePrice = Math.ceil(guaranteePrice);
-
+const showAllPayment = (rows) => {
+  allConditionsElem.innerHTML = rows
+    .map((row) => {
       return `
         <tr>
-          <td>${condition.guaranteeType === "check" ? "چک" : "سفته"}</td>
+          <td>${row.guaranteeTypeTitle}</td>
           <td>
-            <span 
-              class=" 
-              ${condition.hasGuarantor ? "withGuarantor" : "withoutGuarantor"}"
+            <span
+              class="
+              ${row.hasGuarantor ? "withGuarantor" : "withoutGuarantor"}"
             >
-                ${condition.hasGuarantor ? "با ضامن" : "بدون ضامن"}
+                ${row.hasGuarantorTitle}
             </span>
           </td>
-          <td>${condition.conditionMonths} ماهه</td>
-          <td>${condition.initialIncrease}%</td>
-          <td>${initialIncrease.toLocaleString()} تومان</td>
-          <td>${condition.prePayment}%</td>
-          <td>${prePayment.toLocaleString()} تومان</td>
-          <td>${loanPrice.toLocaleString()} تومان</td>
-          <td>${monthlyPayment.toLocaleString()} تومان</td> 
-          <td>${guaranteePrice.toLocaleString()} تومان</td>
-          <td>
-            ${condition.delivery === 0 ? "فوری" : `${condition.delivery} روزه`}
-          </td>
+          <td>${row.conditionMonths} ماهه</td>
+          <td>${row.initialIncrease}%</td>
+          <td>${row.initialIncreasePrice.toLocaleString()} تومان</td>
+          <td>${row.prePayment}%</td>
+          <td>${row.prePaymentPrice.toLocaleString()} تومان</td>
+          <td>${row.loanPrice.toLocaleString()} تومان</td>
+          <td>${row.monthlyPayment.toLocaleString()} تومان</td>
+          <td>${row.guaranteePrice.toLocaleString()} تومان</td>
+          <td>${row.deliveryTitle}</td>
 
         </tr>
       `;
     })
     .join("");
 };
+
+//pdf download
+const downloadPDFBtn = document.querySelector(".download-pdf");
+
+downloadPDFBtn.addEventListener("click", () => {
+  const { jsPDF } = window.jspdf;
+
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4",
+    lang: "fa",
+  });
+
+  pdf.addFileToVFS("Vazir.ttf", vazirFont);
+  pdf.addFont("Vazir.ttf", "Vazir", "normal");
+  pdf.setFont("Vazir", "normal");
+
+  const tableHeaders = [
+    "ضمانت",
+    "ضامن",
+    "مدت اقساط",
+    "مبلغ پیش پرداخت",
+    "مبلغ قسط",
+    "مبلغ چک/سفته ضمان",
+    "تحویل",
+  ].reverse();
+  const tableRows = [
+    [
+      "سفته",
+      "با ضامن",
+      "ماهه 17",
+      "15,000,000",
+      "6,620,000",
+      "150,000,000",
+      "فوری",
+    ].reverse(),
+  ];
+
+  pdf.autoTable({
+    head: [tableHeaders],
+    body: tableRows,
+
+    margin: { top: 10, left: 10, right: 10, bottom: 10 },
+    styles: {
+      font: "Vazir", // فونت فارسی
+      halign: "center",
+      valign: "middle",
+      fontSize: 8, // اندازه فونت
+      cellPadding: { top: 3, bottom: 3 }, // فاصله داخلی سلول‌ها
+      whiteSpace: "nowrap",
+      dir: "rtl",
+    },
+    theme: "grid",
+    headStyles: {
+      fontSize: 8, // اندازه فونت هدر
+      textColor: [255, 255, 255],
+      fillColor: [25, 25, 25],
+      halign: "center",
+      valign: "middle",
+    },
+    bodyStyles: {
+      halign: "center", // راست‌چین برای داده‌ها
+      cellPadding: { top: 2, bottom: 2 },
+      dir: "rtl",
+    },
+  });
+
+  // ذخیره فایل PDF
+  pdf.save("جدول.pdf");
+});

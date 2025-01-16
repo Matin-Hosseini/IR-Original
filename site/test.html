@@ -317,6 +317,8 @@
           [...row.querySelectorAll("td")].map((td) => td.innerText).reverse()
         );
 
+        console.log(headers, rows);
+
         // افزودن جدول به PDF
         pdf.autoTable({
           head: [headers],
