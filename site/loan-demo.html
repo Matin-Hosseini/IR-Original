@@ -55,8 +55,8 @@
                 />
                 <label for="automobile">خودرو</label>
               </div>
-              <h3>مبلغ کالای درخواستی</h3>
               <div class="">
+                <label>مبلغ کالای درخواستی</label>
                 <input
                   type="text"
                   class="price-input"
@@ -65,7 +65,7 @@
               </div>
 
               <div class="mb-5">
-                <h3 class="my-4 fs-5">مدت بازپرداخت وام:</h3>
+                <h3 class="my-4 fs-5">مدت بازپرداخت:</h3>
                 <div class="loan-installments"></div>
               </div>
               <div class="">
@@ -73,8 +73,8 @@
                   <label for="garuntee">نوع ضمانت</label>
 
                   <select name="garuntee" id="garuntee">
-                    <option value="promissory">سفته</option>
                     <option value="check">چک</option>
+                    <option value="promissory">سفته</option>
                   </select>
                 </div>
                 <div>
@@ -87,10 +87,21 @@
                   />
                   <label for="withoutPrepaymentElem">بدون پیش پرداخت</label>
                 </div>
+                <div>
+                  <input
+                  type="text"
+                  class="custom-prepayment"
+                  placeholder="به تومان وارد کنید"
+                />
+                </div>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-xl-5">
+            <div class="condition-name">
+              <h6>نام شرایط انتخابی شما:</h6>
+              <p>انتخاب نشده</p>
+            </div>
             <div class="loan-details mb-3">
               <div>
                 <span>پیش پرداخت</span>
@@ -99,6 +110,10 @@
               <div>
                 <span>مبلغ وام</span>
                 <span class="price" id="loanPriceElem">0 تومان</span>
+              </div>
+              <div id="guaranteeElem">
+                <span>مبلغ چک/سفته ضمانت</span>
+                <span class="price" id="guaranteePriceElem">0 تومان</span>
               </div>
               <div>
                 <span>مبلغ قسط</span>
@@ -114,9 +129,10 @@
     </section>
 
     <section class="container mb-5">
+      <button class="download-pdf" disabled>دانلود نسخه PDF</button>
       <div class="condition-table-wrapper">
         <section class="condition-table-header">
-          <h4 class="p-3 m-0">لیست کامل شرایط بر اساس قیمت انتخابی</h4>
+          <h4 class="p-3 m-0">لیست کامل شرایط بر اساس قیمت و محصول انتخابی</h4>
         </section>
         <section class="condition-table-body">
           <table class="condition-table">
@@ -137,8 +153,6 @@
             </thead>
             <tbody></tbody>
           </table>
-
-          <button class="download-pdf">دانلود نسخه PDF</button>
         </section>
       </div>
     </section>

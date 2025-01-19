@@ -1,8 +1,6 @@
 .condition-table-wrapper {
-  background-color: rgba(103, 69, 255, 0.333);
-
   backdrop-filter: blur(7px);
-  box-shadow: 0 0.4rem 0.8rem #0005;
+
   border-radius: 0.8rem;
 
   overflow: hidden;
@@ -42,6 +40,8 @@
 .condition-table {
   width: 100%;
   font-size: 0.8rem;
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  /* border: 1px solid black; */
 }
 
 .condition-table tr:not(:last-child) {
@@ -61,7 +61,8 @@
   position: sticky;
   top: 0;
   right: 0;
-  background-color: #d5d1defe;
+  background-color: #e2e8f0;
+  color: #020617;
   cursor: pointer;
 }
 
@@ -95,4 +96,28 @@ tbody tr:hover {
 .condition-table tbody tr .withGuarantor {
   background-color: #fef2f2;
   color: #dc2626;
+}
+
+.download-pdf {
+  padding: 0.5rem 1.5rem;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.download-pdf:disabled {
+  opacity: 0.5;
+}
+
+.download-pdf:not(:disabled):hover {
+  background-color: #f5f3ff;
+}
+
+.condition-name p {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  border-radius: 0.5rem;
 }

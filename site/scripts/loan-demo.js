@@ -357,6 +357,7 @@ const conditions = {
 
 const productPriceElem = document.querySelector(".price-input");
 const calculateBtn = document.querySelector("#calculate-btn");
+const downloadPDFBtn = document.querySelector(".download-pdf");
 const paymentMonthsElem = document.querySelector(".loan-installments");
 const paymentMonthBtns = document.querySelectorAll(".loan-installments button");
 
@@ -467,6 +468,8 @@ const companyCalculation = (productPrice, condition) => {
   return { initialIncrease, loanPrice, prePayment };
 };
 
+let allTableRows = [];
+
 const priceCalculationHandler = () => {
   const conditionType = document.querySelector(
     ".condition-types input[type='radio']:checked"
@@ -502,13 +505,44 @@ const priceCalculationHandler = () => {
     targetCondition
   );
 
-  const { monthlyPayment } = loanCalculation(
+  const { monthlyPayment, totalPayment } = loanCalculation(
     loanPrice,
     23,
     targetCondition.conditionMonths - 1
   );
 
-  const rows = targetConditions.map((condition) => {
+  const guaranteePrice = calculateGuaranteePrice(
+    totalPayment,
+    targetCondition.guaranteeType
+  );
+
+  document.querySelector(".condition-name").innerHTML = `
+    <h6>نام شرایط انتخابی شما:</h6>
+    <p>${targetCondition.title}</p>  
+  `;
+
+  document.querySelector(".loan-details").innerHTML = `
+    <div>
+      <span>پیش پرداخت</span>
+      <span class="price" id="prepaymentElem">${prePayment.toLocaleString()} تومان</span>
+    </div>
+    <div>
+      <span>مبلغ وام</span>
+      <span class="price" id="loanPriceElem">${loanPrice.toLocaleString()} تومان</span>
+    </div>
+    <div id="guaranteeElem">
+      <span>
+        مبلغ ${targetCondition.guaranteeType === "check" ? "چک" : "سفته"} ضمانت
+      </span>
+      <span class="price" id="guaranteePriceElem">${guaranteePrice.toLocaleString()} تومان</span>
+    </div>
+    <div>
+      <span>مبلغ قسط</span>
+      <span class="price" id="monthlyReturnPriceElem">${monthlyPayment.toLocaleString()} تومان</span>
+    </div>
+  `;
+
+  const tableRows = targetConditions.map((condition) => {
     const { initialIncrease, loanPrice, prePayment } = companyCalculation(
       productPrice,
       condition
@@ -547,9 +581,10 @@ const priceCalculationHandler = () => {
     };
   });
 
-  // console.log(rows);
+  allTableRows = tableRows;
 
-  showAllPayment(rows);
+  showAllPayment(tableRows);
+  downloadPDFBtn.removeAttribute("disabled");
 };
 
 paymentMonthBtns.forEach((btn) => {
@@ -568,6 +603,7 @@ calculateBtn.addEventListener("click", priceCalculationHandler);
 const allConditionsElem = document.querySelector(".condition-table tbody");
 
 const showAllPayment = (rows) => {
+  console.log(rows);
   allConditionsElem.innerHTML = rows
     .map((row) => {
       return `
@@ -598,7 +634,6 @@ const showAllPayment = (rows) => {
 };
 
 //pdf download
-const downloadPDFBtn = document.querySelector(".download-pdf");
 
 downloadPDFBtn.addEventListener("click", () => {
   const { jsPDF } = window.jspdf;
@@ -620,49 +655,59 @@ downloadPDFBtn.addEventListener("click", () => {
     "مدت اقساط",
     "مبلغ پیش پرداخت",
     "مبلغ قسط",
-    "مبلغ چک/سفته ضمان",
+    "مبلغ چک/سفته ضمانت",
     "تحویل",
   ].reverse();
-  const tableRows = [
+
+  const neatTableRows = allTableRows.map((row) =>
     [
-      "سفته",
-      "با ضامن",
-      "ماهه 17",
-      "15,000,000",
-      "6,620,000",
-      "150,000,000",
-      "فوری",
-    ].reverse(),
-  ];
+      row.guaranteeTypeTitle,
+      row.hasGuarantorTitle,
+      row.conditionMonths,
+      `${row.prePaymentPrice.toLocaleString()} تومان`,
+      `${row.monthlyPayment.toLocaleString()} تومان`,
+      `تومان ${row.guaranteePrice.toLocaleString()} `,
+      `${row.guaranteePrice.toLocaleString()} تومان`,
+    ].reverse()
+  );
 
-  pdf.autoTable({
-    head: [tableHeaders],
-    body: tableRows,
+  console.log(neatTableRows);
 
-    margin: { top: 10, left: 10, right: 10, bottom: 10 },
-    styles: {
-      font: "Vazir", // فونت فارسی
-      halign: "center",
-      valign: "middle",
-      fontSize: 8, // اندازه فونت
-      cellPadding: { top: 3, bottom: 3 }, // فاصله داخلی سلول‌ها
-      whiteSpace: "nowrap",
-      dir: "rtl",
-    },
-    theme: "grid",
-    headStyles: {
-      fontSize: 8, // اندازه فونت هدر
-      textColor: [255, 255, 255],
-      fillColor: [25, 25, 25],
-      halign: "center",
-      valign: "middle",
-    },
-    bodyStyles: {
-      halign: "center", // راست‌چین برای داده‌ها
-      cellPadding: { top: 2, bottom: 2 },
-      dir: "rtl",
-    },
-  });
+  const tableRows = neatTableRows;
+
+  const reverseText = (text) => text.split("").reverse().join("");
+  const text = reverseText("تومان 9,567,562");
+
+  // تنظیم متن
+  pdf.text(text, 100, 50, { align: "right" });
+  // pdf.autoTable({
+  //   head: [tableHeaders],
+  //   body: tableRows,
+
+  //   margin: { top: 10, left: 10, right: 10, bottom: 10 },
+  //   styles: {
+  //     font: "Vazir",
+  //     halign: "center",
+  //     valign: "middle",
+  //     fontSize: 8,
+  //     cellPadding: { top: 3, bottom: 3 },
+  //     whiteSpace: "nowrap",
+  //     dir: "rtl",
+  //   },
+  //   theme: "grid",
+  //   headStyles: {
+  //     fontSize: 8,
+  //     textColor: [255, 255, 255],
+  //     fillColor: [25, 25, 25],
+  //     halign: "center",
+  //     valign: "middle",
+  //   },
+  //   bodyStyles: {
+  //     halign: "center",
+  //     cellPadding: { top: 2, bottom: 2 },
+  //     dir: "rtl",
+  //   },
+  // });
 
   // ذخیره فایل PDF
   pdf.save("جدول.pdf");
