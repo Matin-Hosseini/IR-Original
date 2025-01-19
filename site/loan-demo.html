@@ -29,7 +29,7 @@
         <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
           <div class="col-lg-6 col-xl-7">
             <div class="loan-header">
-              <div class="mb-4 condition-types">
+              <div class="condition-types">
                 <input
                   type="radio"
                   id="iphone"
@@ -56,20 +56,34 @@
                 <label for="automobile">خودرو</label>
               </div>
               <div class="">
-                <label>مبلغ کالای درخواستی</label>
+                <label for="price-input" class="d-block"
+                  >مبلغ کالای درخواستی</label
+                >
                 <input
                   type="text"
+                  id="price-input"
                   class="price-input"
                   placeholder="به تومان وارد کنید"
                 />
               </div>
+              <div>
+                <label for="custom-prepayment" class="d-block"
+                  >پیش پرداخت دلخواه</label
+                >
+                <input
+                  type="text"
+                  id="custom-prepayment"
+                  class="custom-prepayment price-input"
+                  placeholder="به تومان وارد کنید"
+                />
+              </div>
 
-              <div class="mb-5">
-                <h3 class="my-4 fs-5">مدت بازپرداخت:</h3>
+              <div class="">
+                <h3 class="fs-5">مدت بازپرداخت:</h3>
                 <div class="loan-installments"></div>
               </div>
               <div class="">
-                <div class="mb-3">
+                <div class="">
                   <label for="garuntee">نوع ضمانت</label>
 
                   <select name="garuntee" id="garuntee">
@@ -77,23 +91,16 @@
                     <option value="promissory">سفته</option>
                   </select>
                 </div>
-                <div>
-                  <input type="checkbox" id="guarantor" name="guarantor" />
-                  <label for="guarantor">با ضامن</label>
-                  <input
-                    type="checkbox"
-                    id="withoutPrepaymentElem"
-                    name="withoutPrepayment"
-                  />
-                  <label for="withoutPrepaymentElem">بدون پیش پرداخت</label>
-                </div>
-                <div>
-                  <input
-                  type="text"
-                  class="custom-prepayment"
-                  placeholder="به تومان وارد کنید"
+              </div>
+              <div class="">
+                <input type="checkbox" id="guarantor" name="guarantor" />
+                <label for="guarantor">با ضامن</label>
+                <input
+                  type="checkbox"
+                  id="withoutPrepaymentElem"
+                  name="withoutPrepayment"
                 />
-                </div>
+                <label for="withoutPrepaymentElem">بدون پیش پرداخت</label>
               </div>
             </div>
           </div>

@@ -1,3 +1,10 @@
+.loan-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .condition-table-wrapper {
   backdrop-filter: blur(7px);
 

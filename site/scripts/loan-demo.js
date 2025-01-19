@@ -355,7 +355,8 @@ const conditions = {
   ],
 };
 
-const productPriceElem = document.querySelector(".price-input");
+const productPriceElem = document.querySelector("#price-input");
+const customPaymentElem = document.querySelector("#custom-prepayment");
 const calculateBtn = document.querySelector("#calculate-btn");
 const downloadPDFBtn = document.querySelector(".download-pdf");
 const paymentMonthsElem = document.querySelector(".loan-installments");
@@ -399,17 +400,25 @@ const showPaymentMonths = () => {
 showPaymentMonths();
 
 /* ********* handle price input separation starts ********* */
-productPriceElem.addEventListener("input", (e) => {
-  e.target.value = e.target.value.replace(/[^0-9]/g, "");
+const separateNumberInput = (input) => {
+  input.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
 
-  const splittedValue = e.target.value.split(",");
+    const splittedValue = e.target.value.split(",");
 
-  const numberedValue = Number(splittedValue.join(""));
+    const numberedValue = Number(splittedValue.join(""));
 
-  e.target.value = numberedValue.toLocaleString();
+    e.target.value = numberedValue.toLocaleString();
 
-  if (e.target.value === "0") e.target.value = "";
-});
+    if (e.target.value === "0") e.target.value = "";
+  });
+};
+
+const getNumberSeparatedInputValue = (input) =>
+  +input.value.trim().split(",").join("");
+
+separateNumberInput(productPriceElem);
+separateNumberInput(customPaymentElem);
 /* ********* handle price input separation ends ********* */
 
 /* loan calculator starts  */
@@ -457,11 +466,17 @@ const calculateGuaranteePrice = (price, guaranteeType) => {
   return guaranteePrice;
 };
 
-const companyCalculation = (productPrice, condition) => {
+const companyCalculation = (productPrice, condition, customPrepayment) => {
   const initialIncrease =
     productPrice + (productPrice * condition.initialIncrease) / 100;
 
-  const prePayment = (initialIncrease * condition.prePayment) / 100;
+  let prePayment = 0;
+
+  if (customPrepayment) {
+    prePayment = customPrepayment;
+  } else {
+    prePayment = (initialIncrease * condition.prePayment) / 100;
+  }
 
   const loanPrice = initialIncrease - prePayment;
 
@@ -477,7 +492,9 @@ const priceCalculationHandler = () => {
 
   const targetConditions = conditions[conditionType];
 
-  const productPrice = +productPriceElem.value.trim().split(",").join("");
+  const productPrice = getNumberSeparatedInputValue(productPriceElem);
+  const customPrepaymentPrice = getNumberSeparatedInputValue(customPaymentElem);
+
   const conditionMonths = +document.querySelector(
     ".loan-installments button.active"
   ).dataset.value;
@@ -502,7 +519,8 @@ const priceCalculationHandler = () => {
 
   const { loanPrice, prePayment } = companyCalculation(
     productPrice,
-    targetCondition
+    targetCondition,
+    customPrepaymentPrice
   );
 
   const { monthlyPayment, totalPayment } = loanCalculation(
@@ -545,7 +563,8 @@ const priceCalculationHandler = () => {
   const tableRows = targetConditions.map((condition) => {
     const { initialIncrease, loanPrice, prePayment } = companyCalculation(
       productPrice,
-      condition
+      condition,
+      customPrepaymentPrice
     );
 
     const { monthlyPayment, totalPayment } = loanCalculation(
