@@ -1,5 +1,6 @@
 import { shabnamFont, logoImage } from "./utils/binary-strings.js";
 import textReverser from "./utils/funcs/textReverser.js";
+import jalaliDate from "./utils/funcs/currentDate.js";
 
 const conditions = {
   iphone: [
@@ -302,7 +303,7 @@ const conditions = {
       initialIncrease: 5,
       withoutPrepayment: false,
       prePayment: 70,
-      delivery: 0,
+      delivery:3,
       description: "72 ساعت پس از تایید وام و واریز",
     },
     {
@@ -314,7 +315,7 @@ const conditions = {
       initialIncrease: 5,
       withoutPrepayment: false,
       prePayment: 70,
-      delivery: 0,
+      delivery: 3,
       description: "72 ساعت پس از تایید وام و واریز",
     },
     {
@@ -756,8 +757,6 @@ downloadPDFBtn.addEventListener("click", () => {
     ].reverse();
   });
 
-  console.log(...pdfTableRows);
-
   const docDefinition = {
     info: {
       title: "لیست جدول اقساط ایران اورجینال",
@@ -769,8 +768,9 @@ downloadPDFBtn.addEventListener("click", () => {
       {
         image: logoImage,
         alignment: "center",
-        width: 50,
-        height: 33,
+        width: 70,
+        height: 50,
+        margin: [0, 0, 0, 5],
       },
       {
         text: textReverser("هما توسعه و تجارت فروش اکسیر کاوش"),
@@ -778,14 +778,13 @@ downloadPDFBtn.addEventListener("click", () => {
         alignment: "center",
       },
       {
-        text: "قیمت نقد کالا: 110,000,000".split(" ").reverse().join(" "),
+        text: textReverser(
+          `قیمت نقد کالا: ${getNumberSeparatedInputValue(
+            productPriceElem
+          ).toLocaleString()} تومان`
+        ),
         fontSize: 14,
-      },
-
-      {
-        text: "جدول پیشرفته با استایل دلخواه",
-        style: "header",
-        alignment: "center",
+        margin: [0, 20, 0, 5],
       },
       {
         table: {
@@ -794,21 +793,28 @@ downloadPDFBtn.addEventListener("click", () => {
         },
         layout: {
           fillColor: function (rowIndex) {
-            return rowIndex % 2 === 0 ? "#e9ecef" : null; // رنگ پس‌زمینه برای ردیف‌های زوج
+            return rowIndex % 2 === 0 ? "#e9ecef" : null;
           },
           hLineWidth: function () {
-            return 0.5; // ضخامت خطوط افقی
+            return 0.5;
           },
           vLineWidth: function () {
-            return 0.5; // ضخامت خطوط عمودی
+            return 0.5;
           },
           hLineColor: function () {
-            return "#000"; // رنگ خطوط افقی
+            return "#000";
           },
           vLineColor: function () {
-            return "#000"; // رنگ خطوط عمودی
+            return "#000";
           },
         },
+      },
+      {
+        text: `${jalaliDate.year}/${jalaliDate.month}/${jalaliDate.day - 1}`,
+        style: "header",
+        alignment: "left",
+        margin: [0, 10, 0, 5],
+        fontsize: 10,
       },
     ],
     defaultStyle: {
@@ -827,10 +833,17 @@ downloadPDFBtn.addEventListener("click", () => {
       tableContent: {
         fontSize: 7,
         alignment: "center",
+        margin: [0, 3, 0, 3],
       },
     },
   };
 
   // ایجاد و دانلود فایل PDF
-  pdfMake.createPdf(docDefinition).download("1403-24-10");
+  pdfMake
+    .createPdf(docDefinition)
+    .download(
+      `${jalaliDate.year}/${jalaliDate.month}/${
+        jalaliDate.day - 1
+      } لیست شرایط اقساطی ایران اورجینال`
+    );
 });
