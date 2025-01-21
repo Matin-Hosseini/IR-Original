@@ -656,7 +656,6 @@ calculateBtn.addEventListener("click", priceCalculationHandler);
 const allConditionsElem = document.querySelector(".condition-table tbody");
 
 const showAllPayment = (rows) => {
-  console.log(rows);
   allConditionsElem.innerHTML = rows
     .map((row) => {
       return `
@@ -699,69 +698,65 @@ downloadPDFBtn.addEventListener("click", () => {
 
   const tableHeader = [
     {
-      text: "ضمانت",
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      text: textReverser("ضمانت"),
+      style: "tableHeader",
     },
     {
-      text: "ضامن",
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      text: textReverser("ضامن"),
+      style: "tableHeader",
     },
     {
       text: textReverser("مدت اقساط"),
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      style: "tableHeader",
     },
     {
       text: textReverser("مبلغ پیش پرداخت"),
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      style: "tableHeader",
     },
     {
       text: textReverser("مبلغ قسط"),
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      style: "tableHeader",
     },
     {
       text: textReverser("مبلغ چک ضمانت"),
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      style: "tableHeader",
     },
     {
-      text: "تحویل",
-      alignment: "center",
-      fontSize: 6,
-      fillColor: "#000",
-      color: "#fff",
+      text: textReverser("تحویل"),
+      style: "tableHeader",
     },
   ];
 
   const pdfTableRows = allTableRows.map((row) => {
     return [
-      row.guaranteeTypeTitle,
-      row.hasGuarantorTitle,
-      `${row.conditionMonths} ماهه`,
-      `${row.prePaymentPrice.toLocaleString()} تومان`,
-      `${row.monthlyPayment.toLocaleString()} تومان`,
-      `${row.guaranteePrice.toLocaleString()} تومان`,
-      `${row.delivery === 0 ? "فوری" : `${row.delivery} روزه`}`,
-    ];
+      { text: textReverser(row.guaranteeTypeTitle), style: "tableContent" },
+      { text: textReverser(row.hasGuarantorTitle), style: "tableContent" },
+      {
+        text: textReverser(`${row.conditionMonths} ماهه`),
+        style: "tableContent",
+      },
+      {
+        text: textReverser(`${row.prePaymentPrice.toLocaleString()} تومان`),
+        style: "tableContent",
+      },
+      {
+        text: textReverser(`${row.monthlyPayment.toLocaleString()} تومان`),
+        style: "tableContent",
+      },
+      {
+        text: textReverser(`${row.guaranteePrice.toLocaleString()} تومان`),
+        style: "tableContent",
+      },
+      {
+        text: textReverser(
+          `${row.delivery === 0 ? "فوری" : `${row.delivery} روزه`}`
+        ),
+        style: "tableContent",
+      },
+    ].reverse();
   });
 
-  console.log(pdfTableRows);
+  console.log(...pdfTableRows);
 
   const docDefinition = {
     info: {
@@ -783,7 +778,7 @@ downloadPDFBtn.addEventListener("click", () => {
         alignment: "center",
       },
       {
-        text: "قیمت نقد کالا: 110,000,000".split(" ").reverse().join("  "),
+        text: "قیمت نقد کالا: 110,000,000".split(" ").reverse().join(" "),
         fontSize: 14,
       },
 
@@ -794,91 +789,8 @@ downloadPDFBtn.addEventListener("click", () => {
       },
       {
         table: {
-          widths: Array(7).fill("*"),
-          body: [
-            [...tableHeader].reverse(),
-            [
-              "چک",
-              "با ضامن",
-              "25 ماهه",
-              "195,206.375 تومان",
-              "92,013 تومان",
-              "2,760,374 تومان",
-              "فوری",
-            ],
-            [
-              "چک",
-              "با ضامن",
-              "13 ماهه",
-              "176,466.563 تومان",
-              "149,412 تومان",
-              "2,241,180 تومان",
-              "فوری",
-            ],
-            [
-              "چک",
-              "بدون ضامن",
-              "37 ماهه",
-              "737,099.272 تومان",
-              "42,800 تومان",
-              "1,925,973 تومان",
-              "فوری",
-            ],
-            [
-              "چک",
-              "بدون ضامن",
-              "19 ماهه",
-              "548,139.501 تومان",
-              "84,688 تومان",
-              "1,905,474 تومان",
-              "فوری",
-            ],
-            [
-              "چک",
-              "بدون ضامن",
-              "13 ماهه",
-              "433,358.153 تومان",
-              "122,307 تومان",
-              "1,834,594 تومان",
-              "فوری",
-            ],
-            [
-              "چک",
-              "بدون ضامن",
-              "7 ماهه",
-              "334,193.314 تومان",
-              "237,978 تومان",
-              "1,784,834 تومان",
-              "فوری",
-            ],
-            [
-              "سفته",
-              "بدون ضامن",
-              "19 ماهه",
-              "836,264.111 تومان",
-              "67,678 تومان",
-              "1,827,300 تومان",
-              "فوری",
-            ],
-            [
-              "سفته",
-              "بدون ضامن",
-              "13 ماهه",
-              "705,866.252 تومان",
-              "99,608 تومان",
-              "1,792,944 تومان",
-              "فوری",
-            ],
-            [
-              "سفته",
-              "بدون ضامن",
-              "7 ماهه",
-              "601,235.635 تومان",
-              "198,779 تومان",
-              "1,789,005 تومان",
-              "فوری",
-            ],
-          ],
+          widths: [40, "*", "*", "*", 40, 40, 40],
+          body: [[...tableHeader].reverse(), ...pdfTableRows],
         },
         layout: {
           fillColor: function (rowIndex) {
@@ -904,46 +816,21 @@ downloadPDFBtn.addEventListener("click", () => {
       font: "Shabnam", // استفاده از فونت فارسی
       color: "#000",
     },
-  };
-
-  const docDefinition2 = {
-    content: [
-      {
-        table: {
-          headerRows: 1,
-          widths: ["*", "*", "*"],
-          body: [
-            // هدر جدول
-            [
-              { text: "ستون اول", style: "header" },
-              { text: "ستون دوم", style: "header" },
-              { text: "ستون سوم", style: "header" },
-            ],
-            // داده‌های جدول
-            [{ text: "داده 1", style: "tableContent" }, "داده 2", "داده 3"],
-            ["داده 4", "داده 5", "داده 6"],
-          ],
-        },
-        layout: "lightHorizontalLines", // استایل خطوط جدول
-      },
-    ],
-    defaultStyle: {
-      alignment: "right",
-      font: "Shabnam", // استفاده از فونت فارسی
-      color: "#000",
-    },
     styles: {
-      header: {
-        fontSize: 6,
+      tableHeader: {
+        fontSize: 8,
         alignment: "center",
+        fillColor: "#000",
+        color: "#fff",
+        margin: [0, 5, 0, 5],
       },
       tableContent: {
-        fontSize: 5,
-        fillColor: "red",
+        fontSize: 7,
+        alignment: "center",
       },
     },
   };
 
   // ایجاد و دانلود فایل PDF
-  pdfMake.createPdf(docDefinition2).download("1403-24-10");
+  pdfMake.createPdf(docDefinition).download("1403-24-10");
 });
