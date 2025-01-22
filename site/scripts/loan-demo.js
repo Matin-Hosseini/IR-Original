@@ -301,7 +301,7 @@ const conditions = {
       hasGuarantor: false,
       conditionMonths: 19,
       initialIncrease: 5,
-      secondaryIncrease: 19,
+      secondaryIncrease: 22,
       withoutPrepayment: false,
       prePayment: 70,
       delivery: 3,
@@ -722,6 +722,70 @@ const showAllPayment = (rows) => {
     .join("");
 };
 
+const createDataTable = (title, header, rows) =>
+  rows && rows.length
+    ? [
+        {
+          text: textReverser(title),
+          fontSize: 10,
+          alignment: "right",
+          margin: [0, 5, 0, 5],
+        },
+        {
+          table: {
+            widths: [40, "*", "*", "*", 40],
+            body: [[...header].reverse(), ...rows],
+          },
+          layout: {
+            fillColor: function (rowIndex) {
+              return rowIndex % 2 === 0 ? "#e9ecef" : null;
+            },
+            hLineWidth: function (i, node) {
+              return 0.5;
+            },
+            vLineWidth: function () {
+              return 0.5;
+            },
+            hLineColor: function () {
+              return "#000";
+            },
+            vLineColor: function () {
+              return "#000";
+            },
+          },
+        },
+      ]
+    : undefined;
+
+const createTableRow = (data) =>
+  data.length
+    ? data.map((row) => {
+        return [
+          {
+            text: textReverser(`${row.conditionMonths} ماهه`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(`${row.prePaymentPrice.toLocaleString()} تومان`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(`${row.monthlyPayment.toLocaleString()} تومان`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(`${row.guaranteePrice.toLocaleString()} تومان`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(
+              `${row.delivery === 0 ? "فوری" : `${row.delivery} روزه`}`
+            ),
+            style: "tableContent",
+          },
+        ].reverse();
+      })
+    : undefined;
 //pdf download
 
 downloadPDFBtn.addEventListener("click", () => {
@@ -729,19 +793,37 @@ downloadPDFBtn.addEventListener("click", () => {
 
   pdfMake.fonts = {
     Shabnam: {
-      normal: "Shabnam.ttf", // فونت پیش‌فرض
+      normal: "Shabnam.ttf",
     },
   };
 
+  const promissoryWithoutGuarantor = allTableRows.filter(
+    (row) => row.guaranteeTypeTitle === "سفته" && !row.hasGuarantor
+  );
+
+  const promissoryWithoutGuarantorRows = createTableRow(
+    promissoryWithoutGuarantor
+  );
+
+  const promissoryWithGuarantor = allTableRows.filter(
+    (row) => row.guaranteeTypeTitle === "سفته" && row.hasGuarantor
+  );
+
+  const promissoryWithGuarantorRows = createTableRow(promissoryWithGuarantor);
+
+  const checkWithGuarantor = allTableRows.filter(
+    (row) => row.guaranteeTypeTitle === "چک" && row.hasGuarantor
+  );
+
+  const checkWithGuarantorRows = createTableRow(checkWithGuarantor);
+
+  const checkWithoutGuarantor = allTableRows.filter(
+    (row) => row.guaranteeTypeTitle === "چک" && !row.hasGuarantor
+  );
+
+  const checkWithoutGuarantorRows = createTableRow(checkWithoutGuarantor);
+
   const tableHeader = [
-    {
-      text: textReverser("ضمانت"),
-      style: "tableHeader",
-    },
-    {
-      text: textReverser("ضامن"),
-      style: "tableHeader",
-    },
     {
       text: textReverser("مدت اقساط"),
       style: "tableHeader",
@@ -763,35 +845,6 @@ downloadPDFBtn.addEventListener("click", () => {
       style: "tableHeader",
     },
   ];
-
-  const pdfTableRows = allTableRows.map((row) => {
-    return [
-      { text: textReverser(row.guaranteeTypeTitle), style: "tableContent" },
-      { text: textReverser(row.hasGuarantorTitle), style: "tableContent" },
-      {
-        text: textReverser(`${row.conditionMonths} ماهه`),
-        style: "tableContent",
-      },
-      {
-        text: textReverser(`${row.prePaymentPrice.toLocaleString()} تومان`),
-        style: "tableContent",
-      },
-      {
-        text: textReverser(`${row.monthlyPayment.toLocaleString()} تومان`),
-        style: "tableContent",
-      },
-      {
-        text: textReverser(`${row.guaranteePrice.toLocaleString()} تومان`),
-        style: "tableContent",
-      },
-      {
-        text: textReverser(
-          `${row.delivery === 0 ? "فوری" : `${row.delivery} روزه`}`
-        ),
-        style: "tableContent",
-      },
-    ].reverse();
-  });
 
   const docDefinition = {
     info: {
@@ -815,6 +868,17 @@ downloadPDFBtn.addEventListener("click", () => {
       },
       {
         text: textReverser(
+          `جدول اقساط ${
+            document.querySelector(
+              ".condition-types input[type='radio']:checked"
+            ).nextElementSibling.innerHTML
+          }`
+        ),
+        fontSize: 14,
+        margin: [0, 20, 0, 5],
+      },
+      {
+        text: textReverser(
           `قیمت نقد کالا: ${getNumberSeparatedInputValue(
             productPriceElem
           ).toLocaleString()} تومان`
@@ -822,29 +886,110 @@ downloadPDFBtn.addEventListener("click", () => {
         fontSize: 14,
         margin: [0, 20, 0, 5],
       },
-      {
-        table: {
-          widths: [40, "*", "*", "*", 40, 40, 40],
-          body: [[...tableHeader].reverse(), ...pdfTableRows],
-        },
-        layout: {
-          fillColor: function (rowIndex) {
-            return rowIndex % 2 === 0 ? "#e9ecef" : null;
+      createDataTable(
+        "خرید با سفته بدون ضامن",
+        [
+          {
+            text: textReverser("مدت اقساط"),
+            style: "tableHeader",
           },
-          hLineWidth: function () {
-            return 0.5;
+          {
+            text: textReverser("مبلغ پیش پرداخت"),
+            style: "tableHeader",
           },
-          vLineWidth: function () {
-            return 0.5;
+          {
+            text: textReverser("مبلغ قسط"),
+            style: "tableHeader",
           },
-          hLineColor: function () {
-            return "#000";
+          {
+            text: textReverser("مبلغ چک ضمانت"),
+            style: "tableHeader",
           },
-          vLineColor: function () {
-            return "#000";
+          {
+            text: textReverser("تحویل"),
+            style: "tableHeader",
           },
-        },
-      },
+        ],
+        promissoryWithoutGuarantorRows
+      ),
+      createDataTable(
+        "خرید با سفته با ضامن",
+        [
+          {
+            text: textReverser("مدت اقساط"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ پیش پرداخت"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ قسط"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ چک ضمانت"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("تحویل"),
+            style: "tableHeader",
+          },
+        ],
+        promissoryWithGuarantorRows
+      ),
+      createDataTable(
+        "خرید با چک بدون ضامن",
+        [
+          {
+            text: textReverser("مدت اقساط"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ پیش پرداخت"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ قسط"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ چک ضمانت"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("تحویل"),
+            style: "tableHeader",
+          },
+        ],
+        checkWithoutGuarantorRows
+      ),
+      createDataTable(
+        "خرید با چک با ضامن",
+        [
+          {
+            text: textReverser("مدت اقساط"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ پیش پرداخت"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ قسط"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("مبلغ چک ضمانت"),
+            style: "tableHeader",
+          },
+          {
+            text: textReverser("تحویل"),
+            style: "tableHeader",
+          },
+        ],
+        checkWithGuarantorRows
+      ),
       {
         text: `${jalaliDate.year}/${jalaliDate.month}/${jalaliDate.day - 1}`,
         style: "header",
@@ -855,7 +1000,7 @@ downloadPDFBtn.addEventListener("click", () => {
     ],
     defaultStyle: {
       alignment: "right",
-      font: "Shabnam", // استفاده از فونت فارسی
+      font: "Shabnam",
       color: "#000",
     },
     styles: {
@@ -880,6 +1025,9 @@ downloadPDFBtn.addEventListener("click", () => {
     .download(
       `${jalaliDate.year}/${jalaliDate.month}/${
         jalaliDate.day - 1
-      } لیست شرایط اقساطی ایران اورجینال`
+      } لیست شرایط اقساطی ${
+        document.querySelector(".condition-types input[type='radio']:checked")
+          .nextElementSibling.innerHTML
+      } ایران اورجینال`
     );
 });
