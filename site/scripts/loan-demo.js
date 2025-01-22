@@ -296,23 +296,25 @@ const conditions = {
   automobile: [
     {
       id: 1,
-      title: "تحویل فوری",
+      title: "تحویل 72 ساعت پس از تایید وام و واریز",
       guaranteeType: "check",
       hasGuarantor: false,
       conditionMonths: 19,
       initialIncrease: 5,
+      secondaryIncrease: 19,
       withoutPrepayment: false,
       prePayment: 70,
-      delivery:3,
+      delivery: 3,
       description: "72 ساعت پس از تایید وام و واریز",
     },
     {
       id: 2,
-      title: "تحویل فوری",
+      title: "تحویل 72 ساعت پس از واریز وام و تایید",
       guaranteeType: "check",
       hasGuarantor: false,
       conditionMonths: 37,
       initialIncrease: 5,
+      secondaryIncrease: 30,
       withoutPrepayment: false,
       prePayment: 70,
       delivery: 3,
@@ -325,6 +327,7 @@ const conditions = {
       hasGuarantor: false,
       conditionMonths: 37,
       initialIncrease: 5,
+      secondaryIncrease: 30,
       withoutPrepayment: false,
       prePayment: 42,
       delivery: 21,
@@ -337,6 +340,7 @@ const conditions = {
       hasGuarantor: false,
       conditionMonths: 37,
       initialIncrease: 5,
+      secondaryIncrease: 30,
       withoutPrepayment: false,
       prePayment: 30,
       delivery: 90,
@@ -350,6 +354,7 @@ const conditions = {
       hasGuarantor: false,
       conditionMonths: 37,
       initialIncrease: 5,
+      secondaryIncrease: 30,
       withoutPrepayment: false,
       prePayment: 35,
       delivery: 60,
@@ -475,6 +480,8 @@ const companyCalculation = (productPrice, condition, customPrepayment) => {
     productPrice + (productPrice * condition.initialIncrease) / 100;
 
   let prePayment = 0;
+  let loanPrice = 0;
+  let remainPrice = 0;
 
   if (customPrepayment) {
     prePayment = customPrepayment;
@@ -482,7 +489,13 @@ const companyCalculation = (productPrice, condition, customPrepayment) => {
     prePayment = (initialIncrease * condition.prePayment) / 100;
   }
 
-  const loanPrice = initialIncrease - prePayment;
+  remainPrice = initialIncrease - prePayment;
+
+  if (condition.secondaryIncrease) {
+    loanPrice = remainPrice + (remainPrice * condition.secondaryIncrease) / 100;
+  } else {
+    loanPrice = initialIncrease - prePayment;
+  }
 
   return { initialIncrease, loanPrice, prePayment };
 };
@@ -655,8 +668,30 @@ calculateBtn.addEventListener("click", priceCalculationHandler);
 
 //condition table
 const allConditionsElem = document.querySelector(".condition-table tbody");
+const allConditionsTableHeader = document.querySelector(
+  ".condition-table thead"
+);
 
 const showAllPayment = (rows) => {
+  const hasSecondaryIncrease = rows.some((row) => row.secondaryIncrease);
+
+  allConditionsTableHeader.innerHTML = `
+    <tr>
+      <th>ضمانت</th>
+      <th>ضامن</th>
+      <th>مدت اقساط</th>
+      <th>نرخ افزایش</th>
+      <th>مبلغ افزایش</th>
+      <th>پیش پرداخت</th>
+      <th>مبلغ پیش پرداخت</th>
+      ${hasSecondaryIncrease ? "<th>درصد افزایش ثانویه</th>" : ""}
+      <th>مبلغ تسهیلات</th>
+      <th>مبلغ قسط</th>
+      <th>مبلغ چک/سفته ضمانت</th>
+      <th>تحویل</th>
+    </tr>
+  `;
+
   allConditionsElem.innerHTML = rows
     .map((row) => {
       return `
@@ -675,6 +710,7 @@ const showAllPayment = (rows) => {
           <td>${row.initialIncreasePrice.toLocaleString()} تومان</td>
           <td>${row.prePayment}%</td>
           <td>${row.prePaymentPrice.toLocaleString()} تومان</td>
+          ${hasSecondaryIncrease ? `<td>${row.secondaryIncrease}%</td>` : ""}
           <td>${row.loanPrice.toLocaleString()} تومان</td>
           <td>${row.monthlyPayment.toLocaleString()} تومان</td>
           <td>${row.guaranteePrice.toLocaleString()} تومان</td>
