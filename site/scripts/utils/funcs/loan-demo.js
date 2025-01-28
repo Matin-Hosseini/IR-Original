@@ -54,6 +54,7 @@ export const showPaymentMonths = (conditions) => {
       `
     )
     .join("");
+
   document.querySelectorAll(".loan-installments button").forEach((btn) => {
     btn.addEventListener("click", () => {
       document
@@ -118,4 +119,59 @@ export const companyCalculation = (
   }
 
   return { initialIncrease, loanPrice, prePayment };
+};
+
+export const showAllPayment = (rows) => {
+  const allConditionsElem = document.querySelector(".condition-table tbody");
+  const allConditionsTableHeader = document.querySelector(
+    ".condition-table thead"
+  );
+
+  const hasSecondaryIncrease = rows.some((row) => row.secondaryIncrease);
+
+  allConditionsTableHeader.innerHTML = `
+    <tr>
+      <th>ضمانت</th>
+      <th>ضامن</th>
+      <th>مدت اقساط</th>
+      <th>نرخ افزایش</th>
+      <th>مبلغ افزایش</th>
+      <th>پیش پرداخت</th>
+      <th>مبلغ پیش پرداخت</th>
+      ${hasSecondaryIncrease ? "<th>درصد افزایش ثانویه</th>" : ""}
+      <th>مبلغ تسهیلات</th>
+      <th>مبلغ قسط</th>
+      <th>مبلغ چک/سفته ضمانت</th>
+      <th>تحویل</th>
+    </tr>
+  `;
+
+  allConditionsElem.innerHTML = rows
+    .map((row) => {
+      return `
+        <tr>
+          <td>${row.guaranteeTypeTitle}</td>
+          <td>
+            <span
+              class="
+              ${row.hasGuarantor ? "withGuarantor" : "withoutGuarantor"}"
+            >
+                ${row.hasGuarantorTitle}
+            </span>
+          </td>
+          <td>${row.conditionMonths} ماهه</td>
+          <td>${row.initialIncrease}%</td>
+          <td>${row.initialIncreasePrice.toLocaleString()} تومان</td>
+          <td>${row.prePayment}%</td>
+          <td>${row.prePaymentPrice.toLocaleString()} تومان</td>
+          ${hasSecondaryIncrease ? `<td>${row.secondaryIncrease}%</td>` : ""}
+          <td>${row.loanPrice.toLocaleString()} تومان</td>
+          <td>${row.monthlyPayment.toLocaleString()} تومان</td>
+          <td>${row.guaranteePrice.toLocaleString()} تومان</td>
+          <td>${row.deliveryTitle}</td>
+
+        </tr>
+      `;
+    })
+    .join("");
 };

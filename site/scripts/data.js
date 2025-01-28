@@ -341,6 +341,12 @@ export const conditions = {
       prePayment: 30,
       delivery: 90,
       prepaymentPartitions: 4,
+      prepaymentParts: [
+        { title: "پیش پرداخت اول", percent: 10, days: 30 },
+        { title: "پیش پرداخت دوم", percent: 10, days: 60 },
+        { title: "پیش پرداخت سوم", percent: 10, days: 90 },
+        { title: "پیش پرداخت چهارم", percent: 10, days: 90 },
+      ],
       description:
         "مبلغ پیش پرداخت در چهار قسط مساوی دریافت می شود:یک چهارم زمان امضا قرارداد/یک چهارم چک یک ماهه/یک چهارم چک دو ماهه/یک چهارم چک سه ماهه ",
     },
@@ -356,6 +362,11 @@ export const conditions = {
       prePayment: 35,
       delivery: 60,
       prepaymentPartitions: 3,
+      prepaymentParts: [
+        { title: "پیش پرداخت اول", percent: 10, days: 30 },
+        { title: "پیش پرداخت دوم", percent: 10, days: 60 },
+        { title: "پیش پرداخت سوم", percent: 10, days: 90 },
+      ],
       description:
         "مبلغ پیش پرداخت در سه قسط مساوی دریافت می شود:یک سوم زمان امضا قرارداد/یک سوم چک یک ماهه/یک سوم چک دو ماهه",
     },

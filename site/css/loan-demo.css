@@ -1,4 +1,7 @@
-.loan-header{
+@import "./modules/boilerplate.css";
+@import "./modules/loan-calculator.css";
+
+.loan-header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

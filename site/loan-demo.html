@@ -6,22 +6,7 @@
     <title>محاسبه گر اقساط ایران اورجینال</title>
 
     <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="vendor/swiper/swiper.min.css" />
-    <link href="vendor/AOS/aos.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="css/iphone-landing.css" />
     <link rel="stylesheet" href="css/loan-demo.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
-    />
   </head>
   <body>
     <section class="mb-5 loan-wrapper">
@@ -55,7 +40,7 @@
                 />
                 <label for="automobile">خودرو</label>
               </div>
-              <div class="">
+              <div>
                 <label for="price-input" class="d-block"
                   >مبلغ کالای درخواستی</label
                 >
@@ -78,12 +63,12 @@
                 />
               </div>
 
-              <div class="">
+              <div>
                 <h3 class="fs-5">مدت بازپرداخت:</h3>
                 <div class="loan-installments"></div>
               </div>
-              <div class="">
-                <div class="">
+              <div>
+                <div>
                   <label for="garuntee">نوع ضمانت</label>
 
                   <select name="garuntee" id="garuntee">
@@ -92,7 +77,7 @@
                   </select>
                 </div>
               </div>
-              <div class="">
+              <div>
                 <input type="checkbox" id="guarantor" name="guarantor" />
                 <label for="guarantor">با ضامن</label>
                 <input
@@ -164,16 +149,9 @@
       </div>
     </section>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"
-      integrity="sha512-axXaF5grZBaYl7qiM6OMHgsgVXdSLxqq0w7F4CQxuFyrcPmn0JfnqsOtYHUun80g6mRRdvJDrTCyL8LQqBOt/Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
+    <script src="vendor/PDFMake/pdfmake.js"></script>
+    <script src="vendor/PDFMake/vfsfonts.js"></script>
+    <script src="vendor/SweetAlert/sweetalert.js"></script>
     <script src="scripts/loan-demo.js" type="module"></script>
   </body>
 </html>

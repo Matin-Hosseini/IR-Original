@@ -11,13 +11,13 @@ import {
   getNumberSeparatedInputValue,
   calculateGuaranteePrice,
   companyCalculation,
+  showAllPayment,
 } from "./utils/funcs/loan-demo.js";
 
 const productPriceElem = document.querySelector("#price-input");
 const customPaymentElem = document.querySelector("#custom-prepayment");
 const calculateBtn = document.querySelector("#calculate-btn");
 const downloadPDFBtn = document.querySelector(".download-pdf");
-const paymentMonthBtns = document.querySelectorAll(".loan-installments button");
 
 showPaymentMonths(conditions);
 
@@ -178,73 +178,9 @@ const priceCalculationHandler = () => {
   downloadPDFBtn.removeAttribute("disabled");
 };
 
-paymentMonthBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document
-      .querySelector(".loan-installments button.active")
-      .classList.remove("active");
-    btn.classList.add("active");
-  });
-});
-/* loan calculator ends */
-
 calculateBtn.addEventListener("click", priceCalculationHandler);
 
-//condition table
-const allConditionsElem = document.querySelector(".condition-table tbody");
-const allConditionsTableHeader = document.querySelector(
-  ".condition-table thead"
-);
-
-const showAllPayment = (rows) => {
-  const hasSecondaryIncrease = rows.some((row) => row.secondaryIncrease);
-
-  allConditionsTableHeader.innerHTML = `
-    <tr>
-      <th>ضمانت</th>
-      <th>ضامن</th>
-      <th>مدت اقساط</th>
-      <th>نرخ افزایش</th>
-      <th>مبلغ افزایش</th>
-      <th>پیش پرداخت</th>
-      <th>مبلغ پیش پرداخت</th>
-      ${hasSecondaryIncrease ? "<th>درصد افزایش ثانویه</th>" : ""}
-      <th>مبلغ تسهیلات</th>
-      <th>مبلغ قسط</th>
-      <th>مبلغ چک/سفته ضمانت</th>
-      <th>تحویل</th>
-    </tr>
-  `;
-
-  allConditionsElem.innerHTML = rows
-    .map((row) => {
-      return `
-        <tr>
-          <td>${row.guaranteeTypeTitle}</td>
-          <td>
-            <span
-              class="
-              ${row.hasGuarantor ? "withGuarantor" : "withoutGuarantor"}"
-            >
-                ${row.hasGuarantorTitle}
-            </span>
-          </td>
-          <td>${row.conditionMonths} ماهه</td>
-          <td>${row.initialIncrease}%</td>
-          <td>${row.initialIncreasePrice.toLocaleString()} تومان</td>
-          <td>${row.prePayment}%</td>
-          <td>${row.prePaymentPrice.toLocaleString()} تومان</td>
-          ${hasSecondaryIncrease ? `<td>${row.secondaryIncrease}%</td>` : ""}
-          <td>${row.loanPrice.toLocaleString()} تومان</td>
-          <td>${row.monthlyPayment.toLocaleString()} تومان</td>
-          <td>${row.guaranteePrice.toLocaleString()} تومان</td>
-          <td>${row.deliveryTitle}</td>
-
-        </tr>
-      `;
-    })
-    .join("");
-};
+//conditions table logic
 
 const createDataTable = (title, header, rows) =>
   rows && rows.length
@@ -304,22 +240,22 @@ const createTableRow = (data) => {
           style: "tableContent",
         },
 
-        {
-          text: textReverser(`متن تستی`),
-          style: "tableContent",
-        },
-        {
-          text: textReverser(`متن تستی`),
-          style: "tableContent",
-        },
-        {
-          text: textReverser(`متن تستی`),
-          style: "tableContent",
-        },
-        {
-          text: textReverser(`متن تستی`),
-          style: "tableContent",
-        },
+        // {
+        //   text: textReverser(`متن تستی`),
+        //   style: "tableContent",
+        // },
+        // {
+        //   text: textReverser(`متن تستی`),
+        //   style: "tableContent",
+        // },
+        // {
+        //   text: textReverser(`متن تستی`),
+        //   style: "tableContent",
+        // },
+        // {
+        //   text: textReverser(`متن تستی`),
+        //   style: "tableContent",
+        // },
         {
           text: textReverser(`${row.monthlyPayment.toLocaleString()} تومان`),
           style: "tableContent",
@@ -340,7 +276,7 @@ const createTableRow = (data) => {
 };
 //pdf download
 
-downloadPDFBtn.addEventListener("click", () => {
+const createPDF = () => {
   pdfMake.vfs["Shabnam.ttf"] = shabnamFont;
 
   pdfMake.fonts = {
@@ -378,29 +314,6 @@ downloadPDFBtn.addEventListener("click", () => {
   );
 
   const checkWithoutGuarantorRows = createTableRow(checkWithoutGuarantor);
-
-  const tableHeader = [
-    {
-      text: textReverser("مدت اقساط"),
-      style: "tableHeader",
-    },
-    {
-      text: textReverser("مبلغ پیش پرداخت"),
-      style: "tableHeader",
-    },
-    {
-      text: textReverser("مبلغ قسط"),
-      style: "tableHeader",
-    },
-    {
-      text: textReverser("مبلغ چک ضمانت"),
-      style: "tableHeader",
-    },
-    {
-      text: textReverser("تحویل"),
-      style: "tableHeader",
-    },
-  ];
 
   const createTableHeader = () => {
     const conditionTypeValue = document.querySelector(
@@ -567,6 +480,11 @@ downloadPDFBtn.addEventListener("click", () => {
         margin: [0, 10, 0, 5],
         fontsize: 10,
       },
+      {
+        text: textReverser(
+          "این متن تستی جهت نمایش به منظور ناخوانایی متن در pdf به وجود آمده می باشد. در صورتی که متن وارد شده از یک حجم مشخص بیشتر باشد و لازم باشد که ادامه آن در سطربعدی نمایش داده شود باعث می شود که متن از پایین به بالا قابل خواندن باشد و متون انگلیسی نیز به همین ترتیب برعکس خواهند شد به طور مثال اطلاعات تلفن همراه iPhone 16 Pro Max 256 ZA/A Black."
+        ),
+      },
     ],
     defaultStyle: {
       alignment: "right",
@@ -597,4 +515,6 @@ downloadPDFBtn.addEventListener("click", () => {
         jalaliDate.day - 1
       } لیست شرایط اقساطی ${conditionType} ایران اورجینال`
     );
-});
+};
+
+downloadPDFBtn.addEventListener("click", createPDF);
