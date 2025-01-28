@@ -10,24 +10,32 @@ p {
   margin: 0;
 }
 
-.conditions {
-  /* display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap; */
-}
-
 .condition-box {
   display: flex;
   align-items: center;
   gap: 1.5rem;
   padding: 1rem;
   border-radius: 0.5rem;
-  font-family: "mikhak";
+  /* font-family: "mikhak"; */
   justify-content: space-between;
   border: 1px solid var(--gray);
   flex: 1;
   margin-bottom: 1rem;
+}
+
+/* @media (max-width: 768px) {
+  .condition-box {
+    flex-direction: column;
+  }
+} */
+
+.condition-box__option {
+  color: green;
+  font-size: 0.9rem;
+}
+
+.condition-box .warranty-icon {
+  width: 1.5rem;
 }
 
 .condition-box .condition-btn {

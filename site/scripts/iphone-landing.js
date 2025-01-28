@@ -70,7 +70,8 @@ const products = [
       },
       { id: 4, desc: "تا 27 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
-    img: "iphone-16.png",
+    imgaes: [{ id: 1, src: "", color: 1 }],
+    cover: "iphone-16.png",
     // price: 94_600_000_000,
   },
   {
@@ -112,7 +113,7 @@ const products = [
       },
       { id: 4, desc: "تا 33 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
-    img: "iphone-16-pro.png",
+    cover: "iphone-16-pro.png",
 
     // price: 94_600_000_000,
   },
@@ -155,7 +156,7 @@ const products = [
       },
       { id: 4, desc: "تا 33 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
-    img: "iphone-16-pro.png",
+    cover: "iphone-16-pro.png",
     // price: 94_600_000_000,
   },
   {
@@ -190,7 +191,7 @@ const products = [
       },
       { id: 3, desc: "تا 26 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
-    img: "iphone-16-pro.png",
+    cover: "iphone-16-pro.png",
   },
   {
     id: 5,
@@ -220,7 +221,7 @@ const products = [
       },
       { id: 3, desc: "تا 29 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
-    img: "iphone-16-pro.png",
+    cover: "iphone-16-pro.png",
   },
   {
     id: 6,
@@ -250,7 +251,7 @@ const products = [
       },
       { id: 3, desc: "تا 29 ساعت پخش ویدیو", logo: "battery-full.png" },
     ],
-    img: "iphone-16-pro.png",
+    cover: "iphone-16-pro.png",
   },
 ];
 
@@ -309,10 +310,18 @@ const productTitleContainer = document.querySelector(
   ".product-title-container"
 );
 
+const productDetailsModal = new bootstrap.Modal("#product-details-modal");
+
 const showProductInfo = (id) => {
   const targetProduct = products.find((product) => product.id === id);
   console.log(targetProduct);
 
+  productDetailsModal.show();
+
+  const changeImageSlider = (id) => {
+    console.log(id);
+  };
+  window.changeImageSlider = changeImageSlider;
   //showing colors
   productColorsContainer.innerHTML = `
     <h3 class="fs-6 text-secondary">موجود در ${
@@ -322,13 +331,13 @@ const showProductInfo = (id) => {
       ${targetProduct.colors
         .map(
           (color) => `
-          <div class="color">
+          <div class="color" onClick="changeImageSlider(${color.id})">
             <span style="background-color: ${color.code}"></span>
             <h4>${color.title}</h4>
           </div>`
         )
         .join("")}
-        
+
       </div>
   `;
 
@@ -356,6 +365,8 @@ const showProductInfo = (id) => {
   `;
 };
 
+window.showProductInfo = showProductInfo;
+
 products.forEach((product) => {
   productsSwiperWrapper.insertAdjacentHTML(
     "beforeend",
@@ -369,8 +380,8 @@ products.forEach((product) => {
               }
               <div class="product-box__img text-center">
                 <img
-                  src="assets/images/apple/${product.img}"
-                  alt=""
+                  src="assets/images/apple/${product.cover}"
+                  alt="${product.title}"
                 />
               </div>
               <div class="product-box__colors my-4">
@@ -389,7 +400,7 @@ products.forEach((product) => {
                 <h2 class="product-box__title">${product.title}</h2>
                 <h3 class="product-box__subtitle">${product.enTitle}</h3>
               </div>
-              <button class="product-box__details-btn" data-bs-toggle="modal" data-bs-target="#product-details-modal" onClick="showProductInfo(${
+              <button class="product-box__details-btn" onClick="showProductInfo(${
                 product.id
               })"> 
                   <svg
@@ -417,6 +428,33 @@ products.forEach((product) => {
           </div>
         `
   );
+});
+
+const singleProductSwiper = new Swiper(".products-swiper", {
+  spaceBetween: 10,
+
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  slidesPerView: 1.5,
+  breakpoints: {
+    576: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 3,
+    },
+    992: {
+      slidesPerView: 4,
+    },
+  },
 });
 
 {
@@ -454,6 +492,7 @@ products.forEach((product) => {
 </div>; */
 }
 
+/* --------- carousel starts --------- */
 let nextButton = document.getElementById("next");
 let prevButton = document.getElementById("prev");
 let carousel = document.querySelector(".carousel");
@@ -492,6 +531,7 @@ seeMoreButtons.forEach((button) => {
     carousel.classList.add("showDetail");
   };
 });
+/* --------- carousel starts --------- */
 
 /* --------- tabs starts --------- */
 
@@ -673,7 +713,7 @@ window.addEventListener("load", async () => {
 
   const { ip } = await getIp();
 
-  fetch("https://my-supporter.liara.run/userIp", {
+  fetch("http://localhost:3000/userIp", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ ip }),
