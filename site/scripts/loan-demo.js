@@ -182,53 +182,133 @@ calculateBtn.addEventListener("click", priceCalculationHandler);
 
 //conditions table logic
 
-const createDataTable = (title, header, rows) =>
-  rows && rows.length
-    ? [
-        {
-          text: textReverser(title),
-          fontSize: 10,
-          alignment: "right",
-          margin: [0, 5, 0, 5],
+const createDataTable = (title, header, rows) => {
+  console.log(rows);
+  if (rows && rows.length) {
+    return [
+      {
+        text: textReverser(title),
+        fontSize: 10,
+        alignment: "right",
+        margin: [0, 5, 0, 5],
+      },
+      {
+        table: {
+          widths: header.widths,
+          body: [[...header.content].reverse(), ...rows],
         },
-        {
-          table: {
-            widths: header.widths,
-            body: [[...header.content].reverse(), ...rows],
+        layout: {
+          fillColor: function (rowIndex) {
+            return rowIndex % 2 === 0 ? "#e9ecef" : null;
           },
-          layout: {
-            fillColor: function (rowIndex) {
-              return rowIndex % 2 === 0 ? "#e9ecef" : null;
-            },
-            hLineWidth: function (i, node) {
-              return 0.5;
-            },
-            vLineWidth: function () {
-              return 0.5;
-            },
-            hLineColor: function () {
-              return "#000";
-            },
-            vLineColor: function () {
-              return "#000";
-            },
+          hLineWidth: function (i, node) {
+            return 0.5;
+          },
+          vLineWidth: function () {
+            return 0.5;
+          },
+          hLineColor: function () {
+            return "#000";
+          },
+          vLineColor: function () {
+            return "#000";
           },
         },
-      ]
-    : undefined;
+      },
+    ];
+  }
+};
 
 const createTableRow = (data) => {
   const conditionTypeValue = document.querySelector(
     ".condition-types input[type='radio']:checked"
   ).value;
 
-  const prepaymentCounts = data.map((row) =>
-    row.prepaymentPartitions ? row.prepaymentPartitions : 0
-  );
+  let prepaymentPartsCounts = [];
+  data.forEach((item) => {
+    if (item.prepaymentParts) {
+      prepaymentPartsCounts.push(item.prepaymentParts.length);
+    }
+  });
 
-  const maxPrepaymentPartition = Math.max(...prepaymentCounts);
+  const maxPrepaymentPartsCount = Math.max(...prepaymentPartsCounts);
+
+  const createMultipleValues = (amount, value) => {
+    return Array.from({ length: amount }, () => value);
+  };
+
+  const fillArray = (data, defaultValue, size) => {
+    return Array.from({ length: size }, (_, i) =>
+      data[i] !== undefined ? data[i] : defaultValue
+    );
+  };
+
+  const generateDefaultValue = () => {
+    return {
+      text: "=======",
+      style: "tableContent",
+    };
+  };
+
+  const createprepaymentPartsValues = (condition) => {
+    const { prePaymentPrice } = condition;
+
+    if (condition.prepaymentParts) {
+      const prepaymentPartColumn = condition.prepaymentParts.map((item) => {
+        const prepaymentPartPrice = (prePaymentPrice * item.percent) / 100;
+
+        return {
+          text: textReverser(`${prepaymentPartPrice.toLocaleString()} تومان`),
+          style: "tableContent",
+        };
+      });
+
+      const generatedArray = fillArray(
+        prepaymentPartColumn,
+        generateDefaultValue(),
+        maxPrepaymentPartsCount
+      );
+
+      return generatedArray;
+    }
+
+    return createMultipleValues(
+      maxPrepaymentPartsCount,
+      generateDefaultValue()
+    );
+  };
 
   if (!!data.length) {
+    if (conditionTypeValue === "automobile") {
+      return data.map((row) => {
+        return [
+          {
+            text: textReverser(`${row.conditionMonths} ماهه`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(`${row.prePaymentPrice.toLocaleString()} تومان`),
+            style: "tableContent",
+          },
+          ...createprepaymentPartsValues(row),
+          {
+            text: textReverser(`${row.monthlyPayment.toLocaleString()} تومان`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(`${row.guaranteePrice.toLocaleString()} تومان`),
+            style: "tableContent",
+          },
+          {
+            text: textReverser(
+              `${row.delivery === 0 ? "فوری" : `${row.delivery} روزه`}`
+            ),
+            style: "tableContent",
+          },
+        ].reverse();
+      });
+    }
+
     return data.map((row) => {
       return [
         {
@@ -239,23 +319,6 @@ const createTableRow = (data) => {
           text: textReverser(`${row.prePaymentPrice.toLocaleString()} تومان`),
           style: "tableContent",
         },
-
-        // {
-        //   text: textReverser(`متن تستی`),
-        //   style: "tableContent",
-        // },
-        // {
-        //   text: textReverser(`متن تستی`),
-        //   style: "tableContent",
-        // },
-        // {
-        //   text: textReverser(`متن تستی`),
-        //   style: "tableContent",
-        // },
-        // {
-        //   text: textReverser(`متن تستی`),
-        //   style: "tableContent",
-        // },
         {
           text: textReverser(`${row.monthlyPayment.toLocaleString()} تومان`),
           style: "tableContent",
@@ -403,14 +466,6 @@ const createPDF = () => {
       ],
     };
   };
-
-  console.log(
-    createDataTable(
-      "خرید با چک بدون ضامن",
-      createTableHeader(),
-      checkWithoutGuarantorRows
-    )
-  );
 
   const docDefinition = {
     pageOrientation: conditionType === "خودرو" ? "landscape" : "portrait",

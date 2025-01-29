@@ -327,6 +327,11 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 42,
       delivery: 21,
+      prepaymentPartitions: 2,
+      prepaymentParts: [
+        { title: "پیش پرداخت اول", percent: 40, days: 30 },
+        { title: "پیش پرداخت دوم", percent: 30, days: 60 },
+      ],
       description: "21 روز پس از تایید وام و واریز",
     },
     {
@@ -342,10 +347,10 @@ export const conditions = {
       delivery: 90,
       prepaymentPartitions: 4,
       prepaymentParts: [
-        { title: "پیش پرداخت اول", percent: 10, days: 30 },
-        { title: "پیش پرداخت دوم", percent: 10, days: 60 },
-        { title: "پیش پرداخت سوم", percent: 10, days: 90 },
-        { title: "پیش پرداخت چهارم", percent: 10, days: 90 },
+        { title: "پیش پرداخت اول", percent: 40, days: 30 },
+        { title: "پیش پرداخت دوم", percent: 30, days: 60 },
+        { title: "پیش پرداخت سوم", percent: 15, days: 90 },
+        { title: "پیش پرداخت چهارم", percent: 15, days: 90 },
       ],
       description:
         "مبلغ پیش پرداخت در چهار قسط مساوی دریافت می شود:یک چهارم زمان امضا قرارداد/یک چهارم چک یک ماهه/یک چهارم چک دو ماهه/یک چهارم چک سه ماهه ",
