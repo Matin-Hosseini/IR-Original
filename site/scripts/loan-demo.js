@@ -544,11 +544,11 @@ const createPDF = () => {
         margin: [0, 10, 0, 5],
         fontsize: 10,
       },
-      {
-        text: textReverser(
-          "این متن تستی جهت نمایش به منظور ناخوانایی متن در pdf به وجود آمده می باشد. در صورتی که متن وارد شده از یک حجم مشخص بیشتر باشد و لازم باشد که ادامه آن در سطربعدی نمایش داده شود باعث می شود که متن از پایین به بالا قابل خواندن باشد و متون انگلیسی نیز به همین ترتیب برعکس خواهند شد به طور مثال اطلاعات تلفن همراه iPhone 16 Pro Max 256 ZA/A Black."
-        ),
-      },
+      // {
+      //   text: textReverser(
+      //     "این متن تستی جهت نمایش به منظور ناخوانایی متن در pdf به وجود آمده می باشد. در صورتی که متن وارد شده از یک حجم مشخص بیشتر باشد و لازم باشد که ادامه آن در سطربعدی نمایش داده شود باعث می شود که متن از پایین به بالا قابل خواندن باشد و متون انگلیسی نیز به همین ترتیب برعکس خواهند شد به طور مثال اطلاعات تلفن همراه iPhone 16 Pro Max 256 ZA/A Black."
+      //   ),
+      // },
     ],
     defaultStyle: {
       alignment: "right",
@@ -571,10 +571,11 @@ const createPDF = () => {
     },
   };
 
-  // ایجاد و دانلود فایل PDF
   pdfMake
     .createPdf(docDefinition)
-    .download(` لیست شرایط اقساطی ${conditionType} ایران اورجینال`);
+    .download(
+      ` لیست شرایط اقساطی ${conditionType} ایران اورجینال ${currentDate.dayWeek} ${currentDate.day}/${currentDate.month}/${currentDate.year} `
+    );
 };
 
 downloadPDFBtn.addEventListener("click", createPDF);
