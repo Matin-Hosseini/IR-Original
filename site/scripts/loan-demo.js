@@ -1,8 +1,8 @@
 import { conditions } from "./data.js";
 
 import { shabnamFont, logoImage } from "./utils/binary-strings.js";
-import textReverser from "./utils/funcs/textReverser.js";
-import jalaliDate from "./utils/funcs/currentDate.js";
+import textReverser, { charReverser } from "./utils/funcs/textReverser.js";
+import { getDate, addDays } from "./utils/funcs/date.js";
 
 import {
   loanCalculation,
@@ -25,6 +25,8 @@ separateNumberInput(productPriceElem);
 separateNumberInput(customPaymentElem);
 
 let allTableRows = [];
+
+const currentDate = getDate(Date.now());
 
 const priceCalculationHandler = () => {
   const conditionType = document.querySelector(
@@ -257,9 +259,14 @@ const createTableRow = (data) => {
       const prepaymentPartColumn = condition.prepaymentParts.map((item) => {
         const prepaymentPartPrice = (prePaymentPrice * item.percent) / 100;
 
+        const { year, month, day } = getDate(addDays(Date.now(), item.days));
+
         return {
-          text: textReverser(`${prepaymentPartPrice.toLocaleString()} تومان`),
+          text: ` تومان  ${Math.ceil(
+            prepaymentPartPrice
+          ).toLocaleString()}  \n ${charReverser(`${year}/${month}/${day}`)}`,
           style: "tableContent",
+          fontSize: 7,
         };
       });
 
@@ -529,7 +536,9 @@ const createPDF = () => {
         checkWithGuarantorRows
       ),
       {
-        text: `${jalaliDate.year}/${jalaliDate.month}/${jalaliDate.day - 1}`,
+        text: `${charReverser(
+          `${currentDate.year}/${currentDate.month}/${currentDate.day}`
+        )}  ${currentDate.dayWeek}`,
         style: "header",
         alignment: "left",
         margin: [0, 10, 0, 5],
@@ -565,11 +574,7 @@ const createPDF = () => {
   // ایجاد و دانلود فایل PDF
   pdfMake
     .createPdf(docDefinition)
-    .download(
-      `${jalaliDate.year}/${jalaliDate.month}/${
-        jalaliDate.day - 1
-      } لیست شرایط اقساطی ${conditionType} ایران اورجینال`
-    );
+    .download(` لیست شرایط اقساطی ${conditionType} ایران اورجینال`);
 };
 
 downloadPDFBtn.addEventListener("click", createPDF);

@@ -327,11 +327,6 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 42,
       delivery: 21,
-      prepaymentPartitions: 2,
-      prepaymentParts: [
-        { title: "پیش پرداخت اول", percent: 40, days: 30 },
-        { title: "پیش پرداخت دوم", percent: 30, days: 60 },
-      ],
       description: "21 روز پس از تایید وام و واریز",
     },
     {

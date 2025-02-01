@@ -9,4 +9,6 @@ const textReverser = (text) => {
   return text.split(" ").reverse().join(" ");
 };
 
+export const charReverser = (text) => text.split("").reverse().join("");
+
 export default textReverser;
