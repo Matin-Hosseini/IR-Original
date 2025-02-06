@@ -17,5 +17,8 @@ export const getDate = (date) => {
     monthTitle: formatDate(date, { month: "long" }),
     year: formatDate(date, { year: "numeric" }),
     dayWeek: formatDate(date, { weekday: "long" }),
+    getCompleteFormat() {
+      return `${this.year}/${this.month}/${this.day}`;
+    },
   };
 };

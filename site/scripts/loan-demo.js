@@ -99,7 +99,7 @@ const priceCalculationHandler = () => {
 
   const { monthlyPayment, totalPayment } = loanCalculation(
     loanPrice,
-    23,
+    targetCondition.laonInterest,
     targetCondition.conditionMonths - 1
   );
 
@@ -185,7 +185,6 @@ calculateBtn.addEventListener("click", priceCalculationHandler);
 //conditions table logic
 
 const createDataTable = (title, header, rows) => {
-  console.log(rows);
   if (rows && rows.length) {
     return [
       {
@@ -396,6 +395,11 @@ const createPDF = () => {
       { number: 3, title: "سوم" },
       { number: 4, title: "چهارم" },
       { number: 5, title: "پنحم" },
+      { number: 6, title: "ششم" },
+      { number: 7, title: "هفتم" },
+      { number: 8, title: "هشتم" },
+      { number: 9, title: "نهم" },
+      { number: 10, title: "دهم" },
     ];
 
     if (conditionTypeValue === "automobile") {
@@ -407,7 +411,7 @@ const createPDF = () => {
 
       const prepaymentPartitionTitles = countCharTitles
         .filter((count) => count.number <= maxPrepaymentPartition)
-        .map((item) => item.title);
+        .map((item) => item.number);
 
       return {
         widths: [
@@ -424,11 +428,11 @@ const createPDF = () => {
             style: "tableHeader",
           },
           {
-            text: textReverser("مبلغ پیش پرداخت"),
+            text: textReverser("پیش پرداخت"),
             style: "tableHeader",
           },
           ...prepaymentPartitionTitles.map((title) => ({
-            text: textReverser(`پیش پرداخت ${title}`),
+            text: textReverser(`پیش ${title}`),
             style: "tableHeader",
           })),
           {
@@ -473,6 +477,145 @@ const createPDF = () => {
       ],
     };
   };
+
+  if (conditionType === "خودرو") {
+    console.log(allTableRows);
+
+    const createCarTables = () => {
+      const createTableCell = (content) => {
+        return {
+          text: textReverser(content),
+          style: "tableHeader",
+        };
+      };
+
+      const carTables = allTableRows.map((row) => {
+        const tableLayout = [
+          {
+            text: textReverser(
+              `خرید با ${row.guaranteeTypeTitle} ${row.hasGuarantorTitle} تحویل ${row.deliveryTitle}`
+            ),
+            fontSize: 10,
+            alignment: "right",
+            margin: [0, 5, 0, 5],
+          },
+          {
+            table: {
+              widths: ["*", "*", "*", "*"],
+              body: [
+                [
+                  createTableCell("عنوان"),
+                  createTableCell("تاریخ پرداخت"),
+                  createTableCell("نحوه پرداخت"),
+                  createTableCell("مبلغ"),
+                ].reverse(),
+              ],
+            },
+            layout: {
+              fillColor: function (rowIndex) {
+                return rowIndex % 2 === 0 ? "#e9ecef" : null;
+              },
+              hLineWidth: function (i, node) {
+                return 0.5;
+              },
+              vLineWidth: function () {
+                return 0.5;
+              },
+              hLineColor: function () {
+                return "#000";
+              },
+              vLineColor: function () {
+                return "#000";
+              },
+            },
+          },
+        ];
+
+        return tableLayout;
+      });
+
+      return carTables;
+    };
+
+    console.log(createCarTables());
+
+    const docDefinition = {
+      pageOrientation: "portrait",
+      info: {
+        title: "لیست جدول اقساط ایران اورجینال",
+      },
+      content: [
+        {
+          image: logoImage,
+          alignment: "center",
+          width: 70,
+          height: 50,
+          margin: [0, 0, 0, 5],
+        },
+        {
+          text: textReverser("هما توسعه و تجارت فروش اکسیر کاوش"),
+          fontSize: 10,
+          alignment: "center",
+        },
+        {
+          text: textReverser(
+            `جدول اقساط ${
+              document.querySelector(
+                ".condition-types input[type='radio']:checked"
+              ).nextElementSibling.innerHTML
+            }`
+          ),
+          fontSize: 14,
+          margin: [0, 20, 0, 5],
+        },
+        {
+          text: textReverser(
+            `قیمت نقد کالا: ${getNumberSeparatedInputValue(
+              productPriceElem
+            ).toLocaleString()} تومان`
+          ),
+          fontSize: 14,
+          margin: [0, 20, 0, 5],
+        },
+
+        {
+          text: `${charReverser(
+            `${currentDate.year}/${currentDate.month}/${currentDate.day}`
+          )}  ${currentDate.dayWeek}`,
+          style: "header",
+          alignment: "left",
+          margin: [0, 10, 0, 5],
+          fontsize: 10,
+        },
+      ],
+      defaultStyle: {
+        alignment: "right",
+        font: "Shabnam",
+        color: "#000",
+      },
+      styles: {
+        tableHeader: {
+          fontSize: 8,
+          alignment: "center",
+          fillColor: "#000",
+          color: "#fff",
+          margin: [0, 5, 0, 5],
+        },
+        tableContent: {
+          fontSize: 7,
+          alignment: "center",
+          margin: [0, 1, 0, 1],
+        },
+      },
+    };
+    pdfMake
+      .createPdf(docDefinition)
+      .download(
+        ` لیست شرایط اقساطی ${conditionType} ایران اورجینال ${currentDate.dayWeek} ${currentDate.day}/${currentDate.month}/${currentDate.year} `
+      );
+
+    return;
+  }
 
   const docDefinition = {
     pageOrientation: conditionType === "خودرو" ? "landscape" : "portrait",
@@ -544,11 +687,6 @@ const createPDF = () => {
         margin: [0, 10, 0, 5],
         fontsize: 10,
       },
-      // {
-      //   text: textReverser(
-      //     "این متن تستی جهت نمایش به منظور ناخوانایی متن در pdf به وجود آمده می باشد. در صورتی که متن وارد شده از یک حجم مشخص بیشتر باشد و لازم باشد که ادامه آن در سطربعدی نمایش داده شود باعث می شود که متن از پایین به بالا قابل خواندن باشد و متون انگلیسی نیز به همین ترتیب برعکس خواهند شد به طور مثال اطلاعات تلفن همراه iPhone 16 Pro Max 256 ZA/A Black."
-      //   ),
-      // },
     ],
     defaultStyle: {
       alignment: "right",
@@ -566,7 +704,7 @@ const createPDF = () => {
       tableContent: {
         fontSize: 7,
         alignment: "center",
-        margin: [0, 3, 0, 3],
+        margin: [0, 1, 0, 1],
       },
     },
   };

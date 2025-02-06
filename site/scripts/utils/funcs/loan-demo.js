@@ -1,3 +1,5 @@
+import { addDays, getDate } from "./date.js";
+
 export const loanCalculation = (
   loanPrice,
   annualInterestRate,
@@ -100,9 +102,40 @@ export const companyCalculation = (
   const initialIncrease =
     productPrice + (productPrice * condition.initialIncrease) / 100;
 
+  const conditionTypeValue = document.querySelector(
+    ".condition-types input[type='radio']:checked"
+  ).value;
+
   let prePayment = 0;
   let loanPrice = 0;
   let remainPrice = 0;
+
+  if (conditionTypeValue === "automobile") {
+    if (condition.prepaymentParts) {
+      const prepayments = condition.prepaymentParts.map((part) => {
+        const prepaymentPrice = Math.ceil(
+          (initialIncrease * part.percent) / 100
+        );
+
+        part.prepaymentPrice = prepaymentPrice;
+
+        return prepaymentPrice;
+      });
+
+      const prepaymentsSum = prepayments.reduce((a, b) => a + b);
+
+      const remainPrice = initialIncrease - prepaymentsSum;
+
+      const loanPrice =
+        remainPrice + (remainPrice * condition.secondaryIncrease) / 100;
+
+      return {
+        loanPrice,
+        initialIncrease,
+        prePayment: prepaymentsSum,
+      };
+    }
+  }
 
   if (customPrepayment) {
     prePayment = customPrepayment;
@@ -129,6 +162,11 @@ export const showAllPayment = (rows) => {
 
   const hasSecondaryIncrease = rows.some((row) => row.secondaryIncrease);
 
+  const rowConditionCounts = rows.map((row) =>
+    row.prepaymentParts ? row.prepaymentParts.length : 0
+  );
+  const maxConditionCounts = Math.max(...rowConditionCounts);
+
   allConditionsTableHeader.innerHTML = `
     <tr>
       <th>ضمانت</th>
@@ -138,6 +176,13 @@ export const showAllPayment = (rows) => {
       <th>مبلغ افزایش</th>
       <th>پیش پرداخت</th>
       <th>مبلغ پیش پرداخت</th>
+      ${
+        maxConditionCounts > 0
+          ? [...Array(maxConditionCounts).keys()]
+              .map((item) => `<th>پیش پرداخت ${item + 1}</th>`)
+              .join("")
+          : ""
+      }
       ${hasSecondaryIncrease ? "<th>درصد افزایش ثانویه</th>" : ""}
       <th>مبلغ تسهیلات</th>
       <th>مبلغ قسط</th>
@@ -164,6 +209,33 @@ export const showAllPayment = (rows) => {
           <td>${row.initialIncreasePrice.toLocaleString()} تومان</td>
           <td>${row.prePayment}%</td>
           <td>${row.prePaymentPrice.toLocaleString()} تومان</td>
+           ${
+             maxConditionCounts > 0
+               ? [...Array(maxConditionCounts).keys()]
+                   .map((item) =>
+                     row.prepaymentParts
+                       ? row.prepaymentParts[item]
+                         ? `
+                          <td>
+                            ${row.prepaymentParts[item].percent}% 
+                            <br/>
+                            ${row.prepaymentParts[
+                              item
+                            ].prepaymentPrice.toLocaleString()} تومان 
+                            <br/>
+                            ${getDate(
+                              addDays(
+                                Date.now(),
+                                row.prepaymentParts[item].days
+                              )
+                            ).getCompleteFormat()}
+                          </td>`
+                         : "<td>--------</td>"
+                       : "<td>--------</td>"
+                   )
+                   .join("")
+               : ""
+           }
           ${hasSecondaryIncrease ? `<td>${row.secondaryIncrease}%</td>` : ""}
           <td>${row.loanPrice.toLocaleString()} تومان</td>
           <td>${row.monthlyPayment.toLocaleString()} تومان</td>

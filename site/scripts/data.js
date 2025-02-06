@@ -10,6 +10,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 35,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 2,
@@ -21,6 +22,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 40,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 3,
@@ -32,6 +34,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 45,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 4,
@@ -43,6 +46,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 20,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 5,
@@ -54,6 +58,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 25,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 6,
@@ -65,6 +70,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 30,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 7,
@@ -76,6 +82,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 40,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 8,
@@ -87,6 +94,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 10,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 9,
@@ -98,6 +106,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 10,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 10,
@@ -109,6 +118,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 10,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 11,
@@ -120,6 +130,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 12,
@@ -131,6 +142,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 13,
@@ -142,6 +154,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 14,
@@ -153,6 +166,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 15,
@@ -164,6 +178,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 16,
@@ -175,6 +190,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
   ],
   samsung: [
@@ -188,6 +204,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 35,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 2,
@@ -199,6 +216,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 40,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 3,
@@ -210,6 +228,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 45,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 4,
@@ -221,6 +240,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 50,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 5,
@@ -232,6 +252,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 30,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 6,
@@ -243,6 +264,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 30,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 7,
@@ -254,6 +276,7 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 30,
       delivery: 0,
+      bankInterest: 23,
     },
     {
       id: 8,
@@ -265,6 +288,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 9,
@@ -276,6 +300,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
     {
       id: 10,
@@ -287,6 +312,7 @@ export const conditions = {
       withoutPrepayment: true,
       prePayment: 4,
       delivery: 25,
+      bankInterest: 23,
     },
   ],
   automobile: [
@@ -302,6 +328,7 @@ export const conditions = {
       prePayment: 70,
       delivery: 3,
       description: "72 ساعت پس از تایید وام و واریز",
+      bankInterest: 23,
     },
     {
       id: 2,
@@ -315,6 +342,7 @@ export const conditions = {
       prePayment: 70,
       delivery: 3,
       description: "72 ساعت پس از تایید وام و واریز",
+      bankInterest: 23,
     },
     {
       id: 3,
@@ -328,6 +356,7 @@ export const conditions = {
       prePayment: 42,
       delivery: 21,
       description: "21 روز پس از تایید وام و واریز",
+      bankInterest: 23,
     },
     {
       id: 4,
@@ -340,15 +369,21 @@ export const conditions = {
       withoutPrepayment: false,
       prePayment: 30,
       delivery: 90,
-      prepaymentPartitions: 4,
+      prepaymentPartitions: 9,
       prepaymentParts: [
-        { title: "پیش پرداخت اول", percent: 40, days: 30 },
-        { title: "پیش پرداخت دوم", percent: 30, days: 60 },
-        { title: "پیش پرداخت سوم", percent: 15, days: 90 },
-        { title: "پیش پرداخت چهارم", percent: 15, days: 90 },
+        { title: "پیش پرداخت اول", percent: 10, days: 30 },
+        { title: "پیش پرداخت دوم", percent: 5, days: 60 },
+        { title: "پیش پرداخت سوم", percent: 2, days: 90 },
+        { title: "پیش پرداخت چهارم", percent: 2, days: 120 },
+        { title: "پیش پرداخت پنجم", percent: 2, days: 150 },
+        { title: "پیش پرداخت ششم", percent: 2, days: 180 },
+        { title: "پیش پرداخت هفتم", percent: 2, days: 90 },
+        { title: "پیش پرداخت هشتم", percent: 2, days: 90 },
+        { title: "پیش پرداخت نهم", percent: 2, days: 90 },
       ],
       description:
         "مبلغ پیش پرداخت در چهار قسط مساوی دریافت می شود:یک چهارم زمان امضا قرارداد/یک چهارم چک یک ماهه/یک چهارم چک دو ماهه/یک چهارم چک سه ماهه ",
+      bankInterest: 23,
     },
     {
       id: 5,
@@ -369,6 +404,7 @@ export const conditions = {
       ],
       description:
         "مبلغ پیش پرداخت در سه قسط مساوی دریافت می شود:یک سوم زمان امضا قرارداد/یک سوم چک یک ماهه/یک سوم چک دو ماهه",
+      bankInterest: 23,
     },
   ],
 };
