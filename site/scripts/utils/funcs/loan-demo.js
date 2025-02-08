@@ -111,30 +111,30 @@ export const companyCalculation = (
   let remainPrice = 0;
 
   if (conditionTypeValue === "automobile") {
-    if (condition.prepaymentParts) {
-      const prepayments = condition.prepaymentParts.map((part) => {
-        const prepaymentPrice = Math.ceil(
-          (initialIncrease * part.percent) / 100
-        );
+    if (condition.prePayments) {
+      const prePayments = condition.prePayments.map((prePayment) => {
+        const prePaymentPrice = (initialIncrease * prePayment.percent) / 100;
+        prePayment.prepaymentPrice = prePaymentPrice;
 
-        part.prepaymentPrice = prepaymentPrice;
-
-        return prepaymentPrice;
+        return prePaymentPrice;
       });
 
-      const prepaymentsSum = prepayments.reduce((a, b) => a + b);
-
-      const remainPrice = initialIncrease - prepaymentsSum;
-
+      const prePaymentsSum = prePayments.reduce((a, b) => a + b);
+      const remainingPrice = initialIncrease - prePaymentsSum;
       const loanPrice =
-        remainPrice + (remainPrice * condition.secondaryIncrease) / 100;
+        remainingPrice + (remainingPrice * condition.secondaryIncrease) / 100;
 
-      return {
-        loanPrice,
-        initialIncrease,
-        prePayment: prepaymentsSum,
-      };
+      return { initialIncrease, loanPrice, prePayment: prePaymentsSum };
     }
+
+    const prePayment = (initialIncrease * condition.prePayment) / 100;
+
+    const remainingPrice = initialIncrease - prePayment;
+
+    const loanPrice =
+      remainingPrice + (remainingPrice * condition.secondaryIncrease) / 100;
+
+    return { initialIncrease, loanPrice, prePayment };
   }
 
   if (customPrepayment) {

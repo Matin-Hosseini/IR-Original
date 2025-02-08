@@ -99,7 +99,7 @@ const priceCalculationHandler = () => {
 
   const { monthlyPayment, totalPayment } = loanCalculation(
     loanPrice,
-    targetCondition.laonInterest,
+    targetCondition.bankInterest,
     targetCondition.conditionMonths - 1
   );
 
@@ -140,10 +140,9 @@ const priceCalculationHandler = () => {
       condition,
       customPrepaymentPrice
     );
-
     const { monthlyPayment, totalPayment } = loanCalculation(
       loanPrice,
-      23,
+      condition.bankInterest,
       condition.conditionMonths - 1
     );
 
@@ -385,72 +384,6 @@ const createPDF = () => {
   const checkWithoutGuarantorRows = createTableRow(checkWithoutGuarantor);
 
   const createTableHeader = () => {
-    const conditionTypeValue = document.querySelector(
-      ".condition-types input[type='radio']:checked"
-    ).value;
-
-    const countCharTitles = [
-      { number: 1, title: "اول" },
-      { number: 2, title: "دوم" },
-      { number: 3, title: "سوم" },
-      { number: 4, title: "چهارم" },
-      { number: 5, title: "پنحم" },
-      { number: 6, title: "ششم" },
-      { number: 7, title: "هفتم" },
-      { number: 8, title: "هشتم" },
-      { number: 9, title: "نهم" },
-      { number: 10, title: "دهم" },
-    ];
-
-    if (conditionTypeValue === "automobile") {
-      const prepaymentCounts = allTableRows.map((row) =>
-        row.prepaymentPartitions ? row.prepaymentPartitions : 0
-      );
-
-      const maxPrepaymentPartition = Math.max(...prepaymentCounts);
-
-      const prepaymentPartitionTitles = countCharTitles
-        .filter((count) => count.number <= maxPrepaymentPartition)
-        .map((item) => item.number);
-
-      return {
-        widths: [
-          40,
-          "*",
-          ...prepaymentPartitionTitles.map(() => "*"),
-          "*",
-          "*",
-          40,
-        ],
-        content: [
-          {
-            text: textReverser("مدت اقساط"),
-            style: "tableHeader",
-          },
-          {
-            text: textReverser("پیش پرداخت"),
-            style: "tableHeader",
-          },
-          ...prepaymentPartitionTitles.map((title) => ({
-            text: textReverser(`پیش ${title}`),
-            style: "tableHeader",
-          })),
-          {
-            text: textReverser("مبلغ قسط"),
-            style: "tableHeader",
-          },
-          {
-            text: textReverser("مبلغ چک ضمانت"),
-            style: "tableHeader",
-          },
-          {
-            text: textReverser("تحویل"),
-            style: "tableHeader",
-          },
-        ],
-      };
-    }
-
     return {
       widths: [40, "*", "*", "*", 40],
       content: [
@@ -536,8 +469,6 @@ const createPDF = () => {
 
       return carTables;
     };
-
-    console.log(createCarTables());
 
     const docDefinition = {
       pageOrientation: "portrait",
