@@ -406,7 +406,21 @@ export const conditions = {
       initialIncrease: 5,
       secondaryIncrease: 22,
       withoutPrepayment: false,
-      prePayments: [{ title: "", percent: 0, days: 0, comment: "" }],
+      prePayments: [
+        { title: "پیش پرداخت اول", percent: 10, days: 0, comment: "فیش نقدی" },
+        {
+          title: "پیش پرداخت دوم",
+          percent: 10,
+          days: 30,
+          comment: "یک فقره چک صیادی به تاریخ",
+        },
+        {
+          title: "پیش پرداخت سوم",
+          percent: 15,
+          days: 60,
+          comment: "یک فقره چک صیادی به تاریخ",
+        },
+      ],
       delivery: 60,
       bankInterest: 23,
     },
@@ -457,7 +471,7 @@ export const conditions = {
           title: "پیش پرداخت اول",
           percent: 6,
           days: 0,
-          comment: "همزمان با امضای قرارداد",
+          comment: "فیش نقدی",
         },
         {
           title: "پیش پرداخت دوم",
@@ -489,7 +503,7 @@ export const conditions = {
           title: "پیش پرداخت اول",
           percent: 5,
           days: 0,
-          comment: "همزمان با امضای قرارداد",
+          comment: "فیش نقدی",
         },
         {
           title: "پیش پرداخت دوم",
@@ -527,7 +541,7 @@ export const conditions = {
           title: "پیش پرداخت اول",
           percent: 4,
           days: 0,
-          comment: "همزمان با امضای قرارداد",
+          comment: "فیش نقدی",
         },
         {
           title: "پیش پرداخت دوم",

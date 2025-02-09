@@ -2,7 +2,7 @@ import { conditions } from "./data.js";
 
 import { shabnamFont, logoImage } from "./utils/binary-strings.js";
 import textReverser, { charReverser } from "./utils/funcs/textReverser.js";
-import { getDate, addDays } from "./utils/funcs/date.js";
+import { getDate, addDays, addMonths } from "./utils/funcs/date.js";
 
 import {
   loanCalculation,
@@ -12,14 +12,29 @@ import {
   calculateGuaranteePrice,
   companyCalculation,
   showAllPayment,
+  createPdfTableHeader,
+  createPdfTableBody,
 } from "./utils/funcs/loan-demo.js";
+import { pdfTableLayout } from "./utils/constants/loan-demo.js";
+import { createPrePaymentPartsTable } from "./utils/funcs/pdfTableCreation.js";
 
 const productPriceElem = document.querySelector("#price-input");
 const customPaymentElem = document.querySelector("#custom-prepayment");
 const calculateBtn = document.querySelector("#calculate-btn");
 const downloadPDFBtn = document.querySelector(".download-pdf");
 
-showPaymentMonths(conditions);
+const categoryRadios = document.querySelectorAll(".category-radio");
+
+showPaymentMonths(
+  conditions,
+  document.querySelector(".category-radio.active").value
+);
+
+categoryRadios.forEach((category) => {
+  category.addEventListener("input", (e) => {
+    showPaymentMonths(conditions, e.target.value);
+  });
+});
 
 separateNumberInput(productPriceElem);
 separateNumberInput(customPaymentElem);
@@ -197,23 +212,7 @@ const createDataTable = (title, header, rows) => {
           widths: header.widths,
           body: [[...header.content].reverse(), ...rows],
         },
-        layout: {
-          fillColor: function (rowIndex) {
-            return rowIndex % 2 === 0 ? "#e9ecef" : null;
-          },
-          hLineWidth: function (i, node) {
-            return 0.5;
-          },
-          vLineWidth: function () {
-            return 0.5;
-          },
-          hLineColor: function () {
-            return "#000";
-          },
-          vLineColor: function () {
-            return "#000";
-          },
-        },
+        layout: pdfTableLayout,
       },
     ];
   }
@@ -412,69 +411,25 @@ const createPDF = () => {
   };
 
   if (conditionType === "خودرو") {
-    console.log(allTableRows);
+    const checkWithoutGuarantorCars = allTableRows.filter(
+      (item) => !item.hasGuarantor && item.guaranteeType === "check"
+    );
 
-    const createCarTables = () => {
-      const createTableCell = (content) => {
-        return {
-          text: textReverser(content),
-          style: "tableHeader",
-        };
-      };
+    
+    const customTable = checkWithoutGuarantorCars.map((item) => {
+      return createPrePaymentPartsTable(item);
+    });
 
-      const carTables = allTableRows.map((row) => {
-        const tableLayout = [
-          {
-            text: textReverser(
-              `خرید با ${row.guaranteeTypeTitle} ${row.hasGuarantorTitle} تحویل ${row.deliveryTitle}`
-            ),
-            fontSize: 10,
-            alignment: "right",
-            margin: [0, 5, 0, 5],
-          },
-          {
-            table: {
-              widths: ["*", "*", "*", "*"],
-              body: [
-                [
-                  createTableCell("عنوان"),
-                  createTableCell("تاریخ پرداخت"),
-                  createTableCell("نحوه پرداخت"),
-                  createTableCell("مبلغ"),
-                ].reverse(),
-              ],
-            },
-            layout: {
-              fillColor: function (rowIndex) {
-                return rowIndex % 2 === 0 ? "#e9ecef" : null;
-              },
-              hLineWidth: function (i, node) {
-                return 0.5;
-              },
-              vLineWidth: function () {
-                return 0.5;
-              },
-              hLineColor: function () {
-                return "#000";
-              },
-              vLineColor: function () {
-                return "#000";
-              },
-            },
-          },
-        ];
-
-        return tableLayout;
-      });
-
-      return carTables;
-    };
+    const conditionTypeTitle = document.querySelector(
+      ".condition-types input[type='radio']:checked"
+    ).nextElementSibling.innerHTML;
 
     const docDefinition = {
       pageOrientation: "portrait",
       info: {
         title: "لیست جدول اقساط ایران اورجینال",
       },
+      pageMargins: [30, 15, 30, 15],
       content: [
         {
           image: logoImage,
@@ -484,20 +439,17 @@ const createPDF = () => {
           margin: [0, 0, 0, 5],
         },
         {
-          text: textReverser("هما توسعه و تجارت فروش اکسیر کاوش"),
+          text: textReverser("ایران اورجینال"),
           fontSize: 10,
           alignment: "center",
         },
         {
           text: textReverser(
-            `جدول اقساط ${
-              document.querySelector(
-                ".condition-types input[type='radio']:checked"
-              ).nextElementSibling.innerHTML
-            }`
+            `شرایط خرید اقساطی ${conditionTypeTitle} به شرح زیر می باشد.`
           ),
-          fontSize: 14,
-          margin: [0, 20, 0, 5],
+          fontSize: 10,
+          alignment: "right",
+          margin: [0, 10, 0, 10],
         },
         {
           text: textReverser(
@@ -505,10 +457,9 @@ const createPDF = () => {
               productPriceElem
             ).toLocaleString()} تومان`
           ),
-          fontSize: 14,
-          margin: [0, 20, 0, 5],
+          fontSize: 10,
         },
-
+        ...customTable,
         {
           text: `${charReverser(
             `${currentDate.year}/${currentDate.month}/${currentDate.day}`
@@ -519,6 +470,16 @@ const createPDF = () => {
           fontsize: 10,
         },
       ],
+      pageBreakBefore: function (
+        currentNode,
+        followingNodesOnPage,
+        nodesOnNextPage,
+        previousNodesOnPage
+      ) {
+        return (
+          currentNode.headlineLevel === 1 && followingNodesOnPage.length === 0
+        );
+      },
       defaultStyle: {
         alignment: "right",
         font: "Shabnam",
@@ -526,14 +487,14 @@ const createPDF = () => {
       },
       styles: {
         tableHeader: {
-          fontSize: 8,
+          fontSize: 7,
           alignment: "center",
           fillColor: "#000",
           color: "#fff",
-          margin: [0, 5, 0, 5],
+          margin: [0, 3, 0, 3],
         },
         tableContent: {
-          fontSize: 7,
+          fontSize: 6,
           alignment: "center",
           margin: [0, 1, 0, 1],
         },
@@ -565,7 +526,7 @@ const createPDF = () => {
         margin: [0, 0, 0, 5],
       },
       {
-        text: textReverser("هما توسعه و تجارت فروش اکسیر کاوش"),
+        text: textReverser("ایران اورجینال"),
         fontSize: 10,
         alignment: "center",
       },

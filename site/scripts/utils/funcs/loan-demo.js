@@ -1,4 +1,5 @@
 import { addDays, getDate } from "./date.js";
+import textReverser from "./textReverser.js";
 
 export const loanCalculation = (
   loanPrice,
@@ -37,25 +38,53 @@ export const separateNumberInput = (input) => {
   });
 };
 
-export const showPaymentMonths = (conditions) => {
-  let allConditions = [];
-  for (let i in conditions) {
-    allConditions = [...allConditions, ...conditions[i]];
-  }
+export const showPaymentMonths = (conditions, conditionType) => {
+  const allConditions = conditions[conditionType];
 
   const months = allConditions.map((condition) => condition.conditionMonths);
   let montshWithoutDuplicate = [...new Set(months)];
   const sortedMonths = montshWithoutDuplicate.sort((a, b) => a - b);
 
-  document.querySelector(".loan-installments").innerHTML = sortedMonths
-    .map(
-      (month, index) => `
-        <button data-value="${month}" class="${index === 0 ? "active" : ""}">
-          ${month} ماهه
-        </button>
+  document.querySelector(".loan-installments-swiper-wrapper").innerHTML =
+    sortedMonths
+      .map(
+        (month, index) => `
+        <div class="swiper-slide">
+          <button data-value="${month}" class="${index === 0 ? "active" : ""}">
+            ${month} ماهه
+          </button>
+        </div>
       `
-    )
-    .join("");
+      )
+      .join("");
+
+  const swiper = new Swiper(".loan-installments-swiper", {
+    loop: false,
+    slidesPerView: 1,
+
+    simulateTouch: false,
+
+    breakpoints: {
+      320: {
+        slidesPerView: 1.5,
+      },
+      450: {
+        slidesPerView: 2.5,
+      },
+      576: {
+        slidesPerView: 3.5,
+      },
+      768: {
+        slidesPerView: 4.5,
+      },
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
 
   document.querySelectorAll(".loan-installments button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -113,7 +142,9 @@ export const companyCalculation = (
   if (conditionTypeValue === "automobile") {
     if (condition.prePayments) {
       const prePayments = condition.prePayments.map((prePayment) => {
-        const prePaymentPrice = (initialIncrease * prePayment.percent) / 100;
+        const prePaymentPrice = Math.ceil(
+          (initialIncrease * prePayment.percent) / 100
+        );
         prePayment.prepaymentPrice = prePaymentPrice;
 
         return prePaymentPrice;
@@ -167,8 +198,11 @@ export const showAllPayment = (rows) => {
   );
   const maxConditionCounts = Math.max(...rowConditionCounts);
 
+  console.log(rows);
+
   allConditionsTableHeader.innerHTML = `
     <tr>
+      <th>نام شرایط</th>
       <th>ضمانت</th>
       <th>ضامن</th>
       <th>مدت اقساط</th>
@@ -195,6 +229,7 @@ export const showAllPayment = (rows) => {
     .map((row) => {
       return `
         <tr>
+        <td>${row.title}</td>
           <td>${row.guaranteeTypeTitle}</td>
           <td>
             <span
@@ -246,4 +281,47 @@ export const showAllPayment = (rows) => {
       `;
     })
     .join("");
+};
+
+export const createPdfTableHeader = (text) => {
+  return { text: textReverser(text), style: "tableHeader" };
+};
+
+export const createPdfTableBody = (text) => {
+  return { text: textReverser(text), style: "tableContent" };
+};
+
+export const createDeliveryTitle = (amount) => {
+  switch (amount) {
+    case 0: {
+      return "فوری";
+    }
+    case 3: {
+      return "72 ساعته";
+    }
+    case 21: {
+      return "21 روزه";
+    }
+    case 30: {
+      return "1 ماهه";
+    }
+    case 60: {
+      return "2 ماهه";
+    }
+    case 90: {
+      return "سه ماهه";
+    }
+    case 180: {
+      return "6 ماهه";
+    }
+    case 270: {
+      return "9 ماهه";
+    }
+    case 365: {
+      return "1 ساله";
+    }
+    default: {
+      return "نا مشخص";
+    }
+  }
 };

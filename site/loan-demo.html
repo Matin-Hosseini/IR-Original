@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>محاسبه گر اقساط ایران اورجینال</title>
 
+    <link rel="stylesheet" href="vendor/swiper/swiper.min.css" />
     <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="css/loan-demo.css" />
   </head>
@@ -12,10 +13,11 @@
     <section class="mb-5 loan-wrapper">
       <div class="container">
         <div class="bg-white shadow p-4 rounded-3 position-relative row loan">
-          <div class="col-lg-6 col-xl-7">
+          <div class="col-lg-6 col-xl-7 mb-3 mb-xl-0">
             <div class="loan-header">
               <div class="condition-types">
                 <input
+                  class="category-radio active"
                   type="radio"
                   id="iphone"
                   name="product"
@@ -25,6 +27,7 @@
                 <label for="iphone">آیفون</label>
 
                 <input
+                  class="category-radio"
                   type="radio"
                   id="samsung"
                   name="product"
@@ -33,6 +36,7 @@
                 <label for="samsung">سامسونگ</label>
 
                 <input
+                  class="category-radio"
                   type="radio"
                   id="automobile"
                   name="product"
@@ -65,7 +69,18 @@
 
               <div>
                 <h3 class="fs-5">مدت بازپرداخت:</h3>
-                <div class="loan-installments"></div>
+                <div class="installments-wrapper">
+                  <div class="loan-installments position-relative">
+                    <div class="swiper loan-installments-swiper">
+                      <div
+                        class="swiper-wrapper loan-installments-swiper-wrapper"
+                      ></div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
               </div>
               <div>
                 <div>
@@ -130,6 +145,7 @@
           <table class="condition-table">
             <thead>
               <tr>
+                <th>نام شرایط</th>
                 <th>ضمانت</th>
                 <th>ضامن</th>
                 <th>مدت اقساط</th>
@@ -148,8 +164,9 @@
         </section>
       </div>
     </section>
-    
+
     <script src="vendor/PDFMake/pdfmake.js"></script>
+    <script src="vendor/swiper/swiper.min.js"></script>
     <script src="vendor/PDFMake/vfsfonts.js"></script>
     <script src="vendor/SweetAlert/sweetalert.js"></script>
     <script src="scripts/loan-demo.js" type="module"></script>

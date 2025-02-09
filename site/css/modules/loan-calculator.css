@@ -6,6 +6,14 @@
 
 .loan-header {
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+}
+
+.loan-header > * {
+  width: 100%;
 }
 
 .loan {
@@ -51,6 +59,29 @@
   background-color: #f9fafb;
   color: #4b5563;
   padding: 0.2rem 1rem;
+  white-space: nowrap;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: var(--main-color-one);
+  color: #fff;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin: 0;
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 1rem;
 }
 
 .loan-installments button.active {
@@ -59,8 +90,8 @@
   background-color: #f5f3ff;
 }
 
-.loan-header #loan-price {
-}
+/* .loan-header #loan-price {
+} */
 
 .loan-details-header {
   display: flex;
