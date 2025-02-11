@@ -12,9 +12,11 @@ export const createPrePaymentPartsTable = (condition) => {
     ? [
         {
           text: textReverser(`شرایط ${condition.conditionMonths} ماهه`),
-          alignment: "center",
+          alignment: "right",
           fontSize: 10,
-          margin: [0, 5, 0, 5],
+          color: "#2563eb",
+          // background: "#eff6ff",
+          margin: [0, 10, 0, 5],
         },
         {
           table: {

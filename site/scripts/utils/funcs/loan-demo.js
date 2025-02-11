@@ -198,8 +198,6 @@ export const showAllPayment = (rows) => {
   );
   const maxConditionCounts = Math.max(...rowConditionCounts);
 
-  console.log(rows);
-
   allConditionsTableHeader.innerHTML = `
     <tr>
       <th>نام شرایط</th>
@@ -284,7 +282,11 @@ export const showAllPayment = (rows) => {
 };
 
 export const createPdfTableHeader = (text) => {
-  return { text: textReverser(text), style: "tableHeader" };
+  return {
+    text: textReverser(text),
+    style: "tableHeader",
+    // fillColor: "#d97706",
+  };
 };
 
 export const createPdfTableBody = (text) => {

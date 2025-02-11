@@ -17,6 +17,7 @@ import {
 } from "./utils/funcs/loan-demo.js";
 import { pdfTableLayout } from "./utils/constants/loan-demo.js";
 import { createPrePaymentPartsTable } from "./utils/funcs/pdfTableCreation.js";
+import { generateList } from "./utils/funcs/pdf/generators.js";
 
 const productPriceElem = document.querySelector("#price-input");
 const customPaymentElem = document.querySelector("#custom-prepayment");
@@ -414,11 +415,59 @@ const createPDF = () => {
     const checkWithoutGuarantorCars = allTableRows.filter(
       (item) => !item.hasGuarantor && item.guaranteeType === "check"
     );
+    const checkWithGuarantorCars = allTableRows.filter(
+      (item) => item.hasGuarantor && item.guaranteeType === "check"
+    );
 
-    
-    const customTable = checkWithoutGuarantorCars.map((item) => {
-      return createPrePaymentPartsTable(item);
-    });
+    const generatePrimaryTable = (conditions) => {
+      const withoutPrePaymentsConditions = conditions.filter(
+        (condition) => !condition.prePayments
+      );
+
+      withoutPrePaymentsConditions.sort(
+        (a, b) => a.conditionMonths - b.conditionMonths
+      );
+
+      return {
+        table: {
+          widths: [40, "*", "*", "*", 40],
+          body: [
+            [
+              createPdfTableHeader("مدت اقساط"),
+              createPdfTableHeader("پیش پرداخت"),
+              createPdfTableHeader("مبلغ قسط"),
+              createPdfTableHeader("مبلغ چک ضمانت"),
+              createPdfTableHeader("تحویل"),
+            ].reverse(),
+            ...withoutPrePaymentsConditions.map((condition) => {
+              return [
+                createPdfTableBody(`${condition.conditionMonths} ماهه`),
+                createPdfTableBody(
+                  `${condition.prePaymentPrice.toLocaleString()} تومان`
+                ),
+                createPdfTableBody(
+                  `${condition.monthlyPayment.toLocaleString()} تومان`
+                ),
+                createPdfTableBody(
+                  `${condition.guaranteePrice.toLocaleString()} تومان`
+                ),
+                createPdfTableBody(condition.deliveryTitle),
+              ].reverse();
+            }),
+          ],
+        },
+        pageBreak: "avoid",
+        layout: pdfTableLayout,
+        margin: [0, 0, 0, 5],
+      };
+    };
+
+    const checkWithoutGuarantorTable = checkWithoutGuarantorCars.map((item) =>
+      createPrePaymentPartsTable(item)
+    );
+    const checkWithGuarantorTable = checkWithGuarantorCars.map((item) =>
+      createPrePaymentPartsTable(item)
+    );
 
     const conditionTypeTitle = document.querySelector(
       ".condition-types input[type='radio']:checked"
@@ -459,7 +508,54 @@ const createPDF = () => {
           ),
           fontSize: 10,
         },
-        ...customTable,
+        {
+          text: textReverser(`شرایط خرید با چک بدون ضامن`),
+          alignment: "center",
+          fontSize: 15,
+          color: "#16a34a",
+          margin: [0, 10, 0, 10],
+        },
+        generatePrimaryTable(checkWithoutGuarantorCars),
+        ...checkWithoutGuarantorTable,
+
+        {
+          text: textReverser(`شرایط خرید با چک با ضامن`),
+          alignment: "center",
+          fontSize: 15,
+          color: "#dc2626",
+          margin: [0, 10, 0, 10],
+        },
+        generatePrimaryTable(checkWithGuarantorCars),
+        ...checkWithGuarantorTable,
+
+        ...generateList({
+          title: "توضیحات",
+          list: [
+            "تحویل های ذکر شده پس از تایید تسهیلات می باشد.",
+            "همزمان با تحویل خودرو، قیمت به روز محاسبه می شود.",
+            "در صورتی که قیمت کالا افزایش داشته باشد باقی مانده نقدی دریافت می شود",
+            "در صورتی که خریدار نتواند باقی مانده مبلغ افزایشی را پرداخت کند میتواند خودرو خود را تا قیمت قرارداد تغییر دهد.",
+            "تحویل خودرو منوط به تسویه ی اقساط سررسید شده و وصول چک های پیش پرداخت می باشد.",
+          ],
+        }),
+
+        {
+          text: [
+            {
+              text: textReverser("مراجعه کنید."),
+              fontSize: 8,
+            },
+            {
+              text: "www.iroriginal.com",
+              link: "https://iroriginal.com",
+              color: "#4338ca",
+            },
+            {
+              text: textReverser("برای کسب اطلاعات بیشتر میتوانید به"),
+              fontSize: 8,
+            },
+          ],
+        },
         {
           text: `${charReverser(
             `${currentDate.year}/${currentDate.month}/${currentDate.day}`
@@ -489,8 +585,8 @@ const createPDF = () => {
         tableHeader: {
           fontSize: 7,
           alignment: "center",
-          fillColor: "#000",
-          color: "#fff",
+          fillColor: "#dbeafe",
+          color: "#000",
           margin: [0, 3, 0, 3],
         },
         tableContent: {
@@ -532,13 +628,13 @@ const createPDF = () => {
       },
       {
         text: textReverser(
-          `جدول اقساط ${
+          `شرایط خرید محصولات ${
             document.querySelector(
               ".condition-types input[type='radio']:checked"
             ).nextElementSibling.innerHTML
-          }`
+          } به شرح زیر می باشد.`
         ),
-        fontSize: 14,
+        fontSize: 10,
         margin: [0, 20, 0, 5],
       },
       {
@@ -570,6 +666,27 @@ const createPDF = () => {
         createTableHeader(),
         checkWithGuarantorRows
       ),
+      ...generateList({
+        title: "توضیحات",
+        list: ["تحویل های ذکر شده پس از تایید تسهیلات می باشد."],
+      }),
+      {
+        text: [
+          {
+            text: textReverser("مراجعه کنید."),
+            fontSize: 8,
+          },
+          {
+            text: "www.iroriginal.com",
+            link: "https://iroriginal.com",
+            color: "#4338ca",
+          },
+          {
+            text: textReverser("برای کسب اطلاعات بیشتر میتوانید به"),
+            fontSize: 8,
+          },
+        ],
+      },
       {
         text: `${charReverser(
           `${currentDate.year}/${currentDate.month}/${currentDate.day}`
@@ -589,8 +706,8 @@ const createPDF = () => {
       tableHeader: {
         fontSize: 8,
         alignment: "center",
-        fillColor: "#000",
-        color: "#fff",
+        fillColor: "#dbeafe",
+        color: "#000",
         margin: [0, 5, 0, 5],
       },
       tableContent: {
