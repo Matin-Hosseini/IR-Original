@@ -158,6 +158,15 @@ export const companyCalculation = (
       return { initialIncrease, loanPrice, prePayment: prePaymentsSum };
     }
 
+    if (customPrepayment) {
+      const remainingPrice = initialIncrease - customPrepayment;
+
+      const loanPrice =
+        remainingPrice + (remainingPrice * condition.secondaryIncrease) / 100;
+
+      return { initialIncrease, loanPrice, prePayment: customPrepayment };
+    }
+
     const prePayment = (initialIncrease * condition.prePayment) / 100;
 
     const remainingPrice = initialIncrease - prePayment;
@@ -194,9 +203,20 @@ export const showAllPayment = (rows) => {
   const hasSecondaryIncrease = rows.some((row) => row.secondaryIncrease);
 
   const rowConditionCounts = rows.map((row) =>
-    row.prepaymentParts ? row.prepaymentParts.length : 0
+    row.prePayments ? row.prePayments.length : 0
   );
   const maxConditionCounts = Math.max(...rowConditionCounts);
+
+  rows.map((row) => {
+    if (row.prePayments) {
+      console.log(row);
+
+      const prePaymentsPercentages = row.prePayments.map(
+        (prePayment) => prePayment.percent
+      );
+      const prePaymentsSum = prePaymentsPercentages.reduce((a, b) => a + b);
+    }
+  });
 
   allConditionsTableHeader.innerHTML = `
     <tr>
@@ -240,27 +260,30 @@ export const showAllPayment = (rows) => {
           <td>${row.conditionMonths} ماهه</td>
           <td>${row.initialIncrease}%</td>
           <td>${row.initialIncreasePrice.toLocaleString()} تومان</td>
-          <td>${row.prePayment}%</td>
+          <td>${
+            row.prePayments
+              ? row.prePayments
+                  .map((prePayment) => prePayment.percent)
+                  .reduce((a, b) => a + b)
+              : row.prePayment
+          }%</td>
           <td>${row.prePaymentPrice.toLocaleString()} تومان</td>
            ${
              maxConditionCounts > 0
                ? [...Array(maxConditionCounts).keys()]
                    .map((item) =>
-                     row.prepaymentParts
-                       ? row.prepaymentParts[item]
+                     row.prePayments
+                       ? row.prePayments[item]
                          ? `
                           <td>
-                            ${row.prepaymentParts[item].percent}% 
+                            ${row.prePayments[item].percent}% 
                             <br/>
-                            ${row.prepaymentParts[
+                            ${row.prePayments[
                               item
                             ].prepaymentPrice.toLocaleString()} تومان 
                             <br/>
                             ${getDate(
-                              addDays(
-                                Date.now(),
-                                row.prepaymentParts[item].days
-                              )
+                              addDays(Date.now(), row.prePayments[item].days)
                             ).getCompleteFormat()}
                           </td>`
                          : "<td>--------</td>"

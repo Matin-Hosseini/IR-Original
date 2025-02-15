@@ -113,10 +113,33 @@ const priceCalculationHandler = () => {
     customPrepaymentPrice
   );
 
+  let loanMonths = 0;
+
+  switch (targetCondition.conditionMonths) {
+    case 40:
+      {
+        loanMonths = 40;
+      }
+      break;
+    case 50:
+      {
+        loanMonths = 50;
+      }
+      break;
+    case 60:
+      {
+        loanMonths = 60;
+      }
+      break;
+    default: {
+      loanMonths = targetCondition.conditionMonths;
+    }
+  }
+
   const { monthlyPayment, totalPayment } = loanCalculation(
     loanPrice,
     targetCondition.bankInterest,
-    targetCondition.conditionMonths - 1
+    loanMonths
   );
 
   const guaranteePrice = calculateGuaranteePrice(
@@ -156,10 +179,34 @@ const priceCalculationHandler = () => {
       condition,
       customPrepaymentPrice
     );
+
+    let loanMonths = 0;
+
+    switch (condition.conditionMonths) {
+      case 40:
+        {
+          loanMonths = 40;
+        }
+        break;
+      case 50:
+        {
+          loanMonths = 50;
+        }
+        break;
+      case 60:
+        {
+          loanMonths = 60;
+        }
+        break;
+      default: {
+        loanMonths = targetCondition.conditionMonths - 1;
+      }
+    }
+
     const { monthlyPayment, totalPayment } = loanCalculation(
       loanPrice,
       condition.bankInterest,
-      condition.conditionMonths - 1
+      loanMonths
     );
 
     const guaranteePrice = calculateGuaranteePrice(

@@ -131,3 +131,60 @@ tbody tr:hover {
   color: #1d4ed8;
   border-radius: 0.5rem;
 }
+
+/* installments starts */
+
+.installments__conditions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.installments__conditions button {
+  background-color: #e5e7eb;
+  color: #374151;
+  border: 1px solid #374151;
+  padding: 0.1rem 0.8rem;
+  border-radius: 0.3rem;
+}
+
+.installments__conditions button.active {
+  color: #ca8a04;
+  border-color: #ca8a04;
+  background-color: #fef9c3;
+}
+
+.installments__info {
+  background-color: #eff6ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #1d4ed8;
+  margin-bottom: 1rem;
+}
+.installments__info-item > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.installments__info-item > div:not(:last-child) {
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #1d4ed8;
+}
+
+.installments-calculate-btn {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 0.6rem 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: 0.2s all ease-in-out;
+}
+
+.installments-calculate-btn:hover {
+  background-color: #1d4ed8;
+}
+/* installments ends */
