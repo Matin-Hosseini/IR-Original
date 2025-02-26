@@ -93,6 +93,14 @@
                 </div>
               </div>
               <div>
+                <input
+                  type="checkbox"
+                  id="zero_delivery"
+                  name="zero_delivery"
+                  checked
+                />
+                <label for="zero_delivery">تحویل فوری</label>
+
                 <input type="checkbox" id="guarantor" name="guarantor" />
                 <label for="guarantor">با ضامن</label>
                 <input
@@ -132,6 +140,36 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="container mb-5">
+      <button class="download-pdf" disabled>دانلود نسخه PDF</button>
+      <div class="condition-table-wrapper">
+        <section class="condition-table-header">
+          <h4 class="p-3 m-0">لیست کامل شرایط بر اساس شرایط محصول انتخابی</h4>
+        </section>
+        <section class="condition-table-body">
+          <table class="condition-table">
+            <thead>
+              <tr>
+                <th>نام شرایط</th>
+                <th>ضمانت</th>
+                <th>ضامن</th>
+                <th>مدت اقساط</th>
+                <th>نرخ افزایش</th>
+                <th>مبلغ افزایش</th>
+                <th>پیش پرداخت</th>
+                <th>مبلغ پیش پرداخت</th>
+                <th>مبلغ تسهیلات</th>
+                <th>مبلغ قسط</th>
+                <th>مبلغ چک/سفته ضمانت</th>
+                <th>تحویل</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
       </div>
     </section>
 
@@ -188,36 +226,6 @@
             <button class="installments-calculate-btn">محاسبه</button>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="container mb-5">
-      <button class="download-pdf" disabled>دانلود نسخه PDF</button>
-      <div class="condition-table-wrapper">
-        <section class="condition-table-header">
-          <h4 class="p-3 m-0">لیست کامل شرایط بر اساس قیمت و محصول انتخابی</h4>
-        </section>
-        <section class="condition-table-body">
-          <table class="condition-table">
-            <thead>
-              <tr>
-                <th>نام شرایط</th>
-                <th>ضمانت</th>
-                <th>ضامن</th>
-                <th>مدت اقساط</th>
-                <th>نرخ افزایش</th>
-                <th>مبلغ افزایش</th>
-                <th>پیش پرداخت</th>
-                <th>مبلغ پیش پرداخت</th>
-                <th>مبلغ تسهیلات</th>
-                <th>مبلغ قسط</th>
-                <th>مبلغ چک/سفته ضمانت</th>
-                <th>تحویل</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </section>
       </div>
     </section>
 

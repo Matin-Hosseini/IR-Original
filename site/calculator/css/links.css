@@ -1,0 +1,36 @@
+:root {
+  --main-color-one: #eeb346;
+  --main-color-bg: #eeb34628;
+  --gray: #949494;
+  --red: #dc2626;
+}
+
+@font-face {
+  font-family: "shabnam";
+  src: url("./../assets/fonts/shabnam/Shabnam-Medium-FD.woff2");
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "shabnam";
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo {
+  width: 150px;
+  margin: 2rem auto;
+}

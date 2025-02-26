@@ -1,0 +1,220 @@
+@import "./modules/boilerplate.css";
+ul {
+  list-style: none;
+  padding: 0;
+}
+svg {
+  width: 1rem;
+}
+p {
+  margin: 0;
+}
+
+.condition-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  /* font-family: "mikhak"; */
+  justify-content: space-between;
+  border: 1px solid var(--gray);
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+/* @media (max-width: 768px) {
+  .condition-box {
+    flex-direction: column;
+  }
+} */
+
+.condition-box__option {
+  color: green;
+  font-size: 0.9rem;
+}
+
+.condition-box .warranty-icon {
+  width: 1.5rem;
+}
+
+.condition-box .condition-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--main-color-bg);
+  color: var(--main-color-one);
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.condition-box button svg {
+  width: 20px;
+}
+
+@media (max-width: 500px) {
+  .condition-box {
+    font-size: 0.9rem;
+  }
+}
+
+.condition-detail-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.condition-detail-modal__title {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.close-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-btn:hover {
+  background-color: #ccc;
+}
+
+.condition-detail-list {
+  border-top: 1px solid black;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  /* padding-inline: 2rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.condition-detail-list button {
+  border: 1px solid #9333ea;
+  background-color: #9233ea1c;
+  color: #9333ea;
+  padding: 0.5rem 0;
+  border-radius: 0.3rem;
+}
+
+.condition-detail__item {
+  border: 1px solid #a16207;
+  color: #a16207;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #fefce8;
+}
+
+.condition-detail__info-table {
+  width: 100%;
+}
+
+/* new condition-detail styles starts */
+.condition-detail__item-1 {
+  border: 1px solid #15803d;
+  color: #15803d;
+  background-color: #f0fdf4;
+  border-radius: 0.5rem;
+}
+
+.condition-detail__item-1:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.condition-detail__item-1 h4 {
+  padding: 1rem 0;
+  margin: 0;
+  border-bottom: 1px solid #15803d;
+  font-weight: bold;
+}
+
+.condition-detail__info-table tr:not(:last-child) {
+  border-bottom: 1px solid #15803d;
+}
+
+.condition-detail__info-table th,
+.condition-detail__info-table td {
+  padding: 0.5rem;
+  text-align: center;
+  width: 50%;
+}
+
+.condition-detail__info-table th {
+  border-left: 1px solid #15803d;
+}
+
+/*style for the yellow one*/
+.condition-detail__item-1--yellow {
+  background-color: #fefce8;
+  border-color: #a16207;
+  color: #a16207;
+}
+
+.condition-detail__item-1--yellow .condition-detail__info-table th,
+.condition-detail__item-1 h4,
+.condition-detail__item-1--yellow .condition-detail__info-table tr {
+  border-color: #a16207;
+}
+
+/* new condition-detail styles starts */
+
+.condition-detail__item-green {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border-color: #15803d;
+}
+
+.condition-detail__item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.condition-detail-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.condition-detail-table th,
+.condition-detail-table td {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  white-space: nowrap;
+}
+
+.condition-detail-table tr:not(:last-child) {
+  border-bottom: 1px solid #9ca3af;
+}
+
+.condition-detail-table-wrapper {
+  /* padding: 1rem; */
+  border: 1px solid #9ca3af;
+  border-radius: 0.3rem;
+  overflow-x: auto;
+}
+
+@media (max-width: 400px) {
+  .condition-detail-table th,
+  .condition-detail-table td {
+    font-size: 0.8rem;
+  }
+}
+
+.condition-detail-documents {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 0.3rem;
+}
+
+/* condition-detail-item */
+.condition-detail-item {
+  padding: 0.5rem;
+}

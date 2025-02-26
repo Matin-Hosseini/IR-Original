@@ -1,0 +1,248 @@
+:root {
+  --main-color-one: #eeb346;
+  --main-color-bg: #eeb34628;
+  --gray: #949494;
+  --red: #dc2626;
+}
+
+.btn {
+  font-size: 0.9rem !important;
+}
+
+.btn-warning {
+  background-color: var(--main-color-one) !important;
+  color: #fff !important;
+}
+
+@font-face {
+  font-family: "shabnam";
+  src: url("./../../assets/fonts/shabnam/Shabnam-Medium-FD.woff2");
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "shabnam";
+}
+
+button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+img {
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link {
+  padding: 1rem 2rem;
+  border: 2px solid var(--main-color-one);
+  border-radius: 0.5rem;
+  color: var(--main-color-one);
+  flex: 1;
+  font-size: 1.3rem;
+  transition: 0.2s all ease-in-out;
+}
+.link:hover {
+  box-shadow: 0 0.5rem 1rem var(--main-color-bg) !important;
+}
+
+.link img {
+  width: 100px;
+  margin-left: 1rem;
+}
+
+@media (max-width: 400px) {
+  .link {
+    font-size: 1rem;
+  }
+  .link img {
+    width: 50px;
+  }
+}
+
+/* custom input starts */
+.input-wrapper:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.text-field {
+  position: relative;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  border-radius: 0.3rem;
+  transition: 0.2s all cubic-bezier(0.25, -0.07, 0.79, 0.83);
+}
+
+.text-field:has(input:focus),
+.text-field:has(input:valid) {
+  border-color: var(--main-color-one);
+}
+
+.text-field input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.text-field input:focus ~ label,
+.text-field input:valid ~ label {
+  right: 0.7rem;
+  top: 0;
+  font-size: 0.8rem;
+  color: var(--main-color-one);
+}
+
+.text-field label {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: #fff;
+  transition: 0.2s all cubic-bezier(0.25, -0.07, 0.79, 0.83);
+  padding: 0 0.5rem;
+}
+
+.input-wrapper .helper-text {
+  color: var(--main-color-one);
+  font-size: 0.8rem;
+  padding-right: 0.5rem;
+  display: none;
+  visibility: hidden;
+}
+
+/* handling important input starts */
+.input-wrapper:has(input.important) label {
+  padding-left: 1rem;
+}
+.input-wrapper:has(input.important) label::after {
+  position: absolute;
+  content: "*";
+  left: 0.2rem;
+  top: 50%;
+  transform: translateY(-40%);
+}
+/* handling important input ends */
+
+/* handling errors starts */
+.input-wrapper:has(input.error) {
+  margin-bottom: 0.6rem;
+}
+.text-field:has(input.error) {
+  border-color: var(--red);
+}
+
+.text-field:has(input.error) label {
+  color: var(--red);
+}
+.text-field:has(input.error) ~ .helper-text {
+  color: var(--red);
+  visibility: visible;
+  display: block;
+}
+/* handling errors ends */
+
+/* custom input ends */
+
+.modal-item {
+  background-color: var(--main-color-bg);
+  padding: 1.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--gray);
+}
+
+.modal-bank-img {
+  width: 70px;
+}
+
+.submit-btn {
+  background-color: var(--main-color-one);
+  color: white;
+  padding: 0.4rem 2.5rem;
+  border-radius: 0.4rem;
+}
+
+.submit-btn:disabled {
+  background: #eeb34698;
+}
+
+.cancel-btn {
+  border: 1px solid var(--main-color-one);
+  padding: 0.4rem 1rem;
+  border-radius: 0.4rem;
+  color: var(--main-color-one);
+  transition: 0.2s ease-in-out;
+}
+.cancel-btn:hover {
+  background-color: var(--main-color-bg);
+}
+
+.modal-title {
+  font-size: 1rem;
+}
+
+.otp-wrapper input {
+  height: 3em;
+  width: 3em;
+  border: 2px solid #dad9df;
+  outline: none;
+  text-align: center;
+  font-size: 1.5em;
+  border-radius: 0.3em;
+  background-color: #ffffff;
+  outline: none;
+  /*Hide number field arrows*/
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input:disabled {
+  color: var(--gray);
+}
+.input:focus {
+  border: 3px solid var(--main-color-one);
+}
+
+.loader {
+  width: 30px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side, #fff 90%, transparent);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 100%;
+  animation: l7 1s infinite linear;
+}
+@keyframes l7 {
+  33% {
+    background-size: calc(100% / 3) 0%, calc(100% / 3) 100%, calc(100% / 3) 100%;
+  }
+  50% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 0%, calc(100% / 3) 100%;
+  }
+  66% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
+  }
+}

@@ -139,7 +139,9 @@ const priceCalculationHandler = () => {
   const { monthlyPayment, totalPayment } = loanCalculation(
     loanPrice,
     targetCondition.bankInterest,
-    loanMonths
+    targetCondition.conditionMonths % 2 === 0
+      ? targetCondition.conditionMonths
+      : targetCondition.conditionMonths - 1
   );
 
   const guaranteePrice = calculateGuaranteePrice(
@@ -206,7 +208,9 @@ const priceCalculationHandler = () => {
     const { monthlyPayment, totalPayment } = loanCalculation(
       loanPrice,
       condition.bankInterest,
-      loanMonths
+      condition.conditionMonths % 2 === 0
+        ? condition.conditionMonths
+        : condition.conditionMonths - 1
     );
 
     const guaranteePrice = calculateGuaranteePrice(
@@ -238,7 +242,11 @@ const priceCalculationHandler = () => {
 
   allTableRows = tableRows;
 
-  showAllPayment(tableRows);
+  const filteredData = tableRows.filter(
+    (row) => row.conditionMonths === conditionMonths
+  );
+
+  showAllPayment(filteredData);
   downloadPDFBtn.removeAttribute("disabled");
 };
 
