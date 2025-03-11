@@ -1,0 +1,63 @@
+@import "./modules/boilerplate.css";
+
+body {
+  padding: 5rem;
+}
+
+.wrapper {
+  width: 300px;
+}
+
+svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sidebar-menu {
+}
+.sidebar-menu__item {
+}
+.sidebar-menu__link {
+  padding: 0.5rem 1rem;
+  display: block;
+  background-color: oklch(0.777 0.152 181.912);
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  background: oklch(0.892 0.058 10.001);
+  margin-right: calc(1.75rem + 8px);
+}
+.menu li {
+  width: 150px;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin: 0.2rem 0;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  position: relative;
+  color: oklch(0.398 0.195 277.366);
+  transition: all 0.2s ease-in-out;
+}
+
+.menu li:hover {
+  background-color: oklch(0.87 0.065 274.039);
+}
+
+.menu li:first-child::before {
+  height: 100%;
+}
+
+.menu li::before {
+  position: absolute;
+  content: "";
+  width: 0.5rem;
+  height: 130%;
+  left: 100%;
+  bottom: 50%;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom: 2px solid blue;
+  border-right: 2px solid blue;
+}

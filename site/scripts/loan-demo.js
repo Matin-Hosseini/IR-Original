@@ -2,7 +2,7 @@ import { conditions } from "./data.js";
 
 import { shabnamFont, logoImage } from "./utils/binary-strings.js";
 import textReverser, { charReverser } from "./utils/funcs/textReverser.js";
-import { getDate, addDays, addMonths } from "./utils/funcs/date.js";
+import { getDate, addDays } from "./utils/funcs/date.js";
 
 import {
   loanCalculation,
@@ -153,6 +153,10 @@ const priceCalculationHandler = () => {
     <h6>نام شرایط انتخابی شما:</h6>
     <p>${targetCondition.title}</p>  
   `;
+
+  document.querySelector(
+    ".condition-table-title"
+  ).innerHTML = `لیست کامل شرایط موجود بر اساس شرایط ${conditionMonths} ماهه`;
 
   document.querySelector(".loan-details").innerHTML = `
     <div>
