@@ -1,11 +1,17 @@
 @import "./modules/boilerplate.css";
 
+@font-face {
+  font-family: moraba;
+  src: url(./../assets/fonts/dana/DanaNoEn-Medium.woff2);
+}
+
 body {
   padding: 5rem;
+  font-family: moraba;
 }
 
 .wrapper {
-  width: 300px;
+  width: 200px;
 }
 
 svg {
@@ -16,21 +22,43 @@ svg {
 .sidebar-menu {
 }
 .sidebar-menu__item {
-}
-.sidebar-menu__link {
   padding: 0.5rem 1rem;
   display: block;
-  background-color: oklch(0.777 0.152 181.912);
+  background-color: oklch(0.91 0.096 180.426);
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sidebar-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.menu-wrapper {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.3s;
+}
+
+.menu-wrapper > div {
+  overflow: hidden;
+}
+
+.menu-wrapper.open {
+  grid-template-rows: 1fr;
 }
 
 .menu {
-  background: oklch(0.892 0.058 10.001);
+  /* background: oklch(0.892 0.058 10.001); */
   margin-right: calc(1.75rem + 8px);
 }
 .menu li {
-  width: 150px;
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -46,8 +74,14 @@ svg {
   background-color: oklch(0.87 0.065 274.039);
 }
 
+.menu li a {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 .menu li:first-child::before {
-  height: 100%;
+  height: 50%;
 }
 
 .menu li::before {
